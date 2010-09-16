@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-envelope',
-    version='0.1.0',
+    version='0.1.1',
     description='A contact form app for Django',
     author='Zbigniew Siciarz',
     author_email='antyqjon@gmail.com',
@@ -14,7 +14,7 @@ setup(
                  'Environment :: Web Environment',
                  'Framework :: Django',
                  'Intended Audience :: Developers',
-                 'License :: OSI Approved :: BSD License',
+                 'License :: OSI Approved :: MIT License',
                  'Operating System :: OS Independent',
                  'Programming Language :: Python',
                  'Topic :: Utilities'],
