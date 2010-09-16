@@ -6,6 +6,7 @@ setup(
     description='A contact form app for Django',
     author='Zbigniew Siciarz',
     author_email='antyqjon@gmail.com',
+    url='http://github.com/zsiciarz/django-envelope',
     install_requires=['Django', 'django-honeypot'],
     packages=find_packages(),
     include_package_data=True,
