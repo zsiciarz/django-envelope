@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='django-envelope',
@@ -7,7 +7,8 @@ setup(
     author='Zbigniew Siciarz',
     author_email='antyqjon@gmail.com',
     install_requires=['django-honeypot'],
-    packages=['envelope'],
+    packages=find_packages(),
+    include_package_data=True,
     classifiers=['Development Status :: 4 - Beta',
                  'Environment :: Web Environment',
                  'Framework :: Django',
