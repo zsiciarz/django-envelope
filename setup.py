@@ -6,7 +6,7 @@ setup(
     description='A contact form app for Django',
     author='Zbigniew Siciarz',
     author_email='antyqjon@gmail.com',
-    install_requires=['django-honeypot'],
+    install_requires=['Django', 'django-honeypot'],
     packages=find_packages(),
     include_package_data=True,
     classifiers=['Development Status :: 4 - Beta',
