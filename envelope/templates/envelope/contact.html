@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% load honeypot %}
+{% block content %}
+<section id="contact">
+  <h1>Contact</h1>
+  <form action="{% url envelope-contact %}" method="post">
+  {% csrf_token %}
+  {% render_honeypot_field %}
+    <fieldset>
+      <table>
+        <tbody>
+        {{ form }}
+        </tbody>
+        <tfoot>
+         <tr>
+          <td colspan="2"><input type="submit" value="Send!" /></td>
+         </tr>
+        </tfoot>
+      </table>
+    </fieldset>
+  </form>
+</section>
+{% endblock %}
