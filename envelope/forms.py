@@ -12,7 +12,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
 
-# globalny logger dla aplikacji
+# global app logger
 logger = logging.getLogger('envelope')
 
 DEFAULT_CONTACT_CHOICES = (
