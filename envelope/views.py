@@ -21,10 +21,13 @@ logger = logging.getLogger('envelope')
 @check_honeypot
 def contact(request, 
             form_class=ContactForm,
-            template_name='envelope/contact.html'):
+            template_name='envelope/contact.html',
+            extra_context=None):
     u"""
     Contact form view.
     """
+    if extra_context is None:
+        extra_context = {}
     if request.method == 'POST':
         form = form_class(request.POST)
         #pylint: disable=E1101,E1103
@@ -49,6 +52,9 @@ def contact(request,
             form = form_class(initial=initial)
         else:
             form = form_class()
+    dictionary = {'form': form}
+    for key, value in extra_context.items():
+        dictionary[key] = callable(value) and value() or value
     return render_to_response(template_name,
-                              {'form': form},
+                              dictionary,
                               context_instance=RequestContext(request))
