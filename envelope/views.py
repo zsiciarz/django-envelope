@@ -22,9 +22,24 @@ logger = logging.getLogger('envelope')
 def contact(request, 
             form_class=ContactForm,
             template_name='envelope/contact.html',
+            redirect_to=None,
             extra_context=None):
     u"""
     Contact form view.
+    
+    **Optional arguments:**
+        * ``form_class``: Which form class to use for contact message handling.
+          The default (``ContactForm``) is often enough, but you can subclass
+          it if you want, or even replace with a totally custom class. The
+          only requirement is that your custom class has a ``send()``
+          method which should do... well, guess what :P Stick to the default,
+          or its subclasses.
+        * ``template_name``: Full name of the template which will display
+          the form. By default it is "envelope/contact.html".
+        * ``redirect_to``: URL of the page with some kind of a "thank you
+          for your feedback", displayed after the form is successfully
+          submitted. If left unset, the view redirects to itself.
+        * ``extra_context``: A dictionary of values to add to template context.
     """
     if extra_context is None:
         extra_context = {}
@@ -36,7 +51,9 @@ def contact(request,
             thank_you_message = getattr(settings, 'ENVELOPE_MESSAGE_THANKS',
                                         u"Thank you for your message.")
             messages.info(request, thank_you_message)
-            return HttpResponseRedirect(reverse('envelope-contact'))
+            if redirect_to is None:
+                redirect_to = reverse('envelope-contact')
+            return HttpResponseRedirect(redirect_to)
         else:
             error_message = getattr(settings, 'ENVELOPE_MESSAGE_ERROR',
                                     u"There was en error in the contact form.")
