@@ -1,3 +1,4 @@
+include CHANGES
 include LICENSE
 include README
 include MANIFEST.in
