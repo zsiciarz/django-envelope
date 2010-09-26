@@ -1,3 +1,6 @@
+0.1.4
+ - added a more descriptive README file
+
 0.1.3
  - added the redirect_to optional argument to view function
 
