@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name='django-envelope',
-    version='0.1.4',
+    version=__import__('envelope').__version__,
     description='A contact form app for Django',
     long_description=read('README.rst'),
     author='Zbigniew Siciarz',
