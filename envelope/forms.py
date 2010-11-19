@@ -39,7 +39,7 @@ class ContactForm(forms.Form):
                               max_length=1000, 
                               widget=forms.Textarea())
 
-    def send(self):
+    def save(self):
         u"""
         Sends the message.
         """
@@ -56,6 +56,16 @@ class ContactForm(forms.Form):
             logger.info(u"Contact form submitted and sent (from: %s)" % self.cleaned_data['email'])
         except SMTPException, e:
             logger.error(u"Contact form error (%s)" % e)
+
+    def send(self):
+        u"""
+        DEPRECATED. Sends the message.
+        
+        Kept here for backwards compatibility with versions prior to 0.2.0.
+        """
+        import warnings
+        warnings.warn(u"ContactForm.send() is deprecated, use save() instead", PendingDeprecationWarning)
+        return self.save()
 
     def get_category_display(self):
         u"""
