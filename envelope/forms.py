@@ -10,6 +10,7 @@ from django import forms
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext as _
 
 
 # global app logger
@@ -28,16 +29,11 @@ class ContactForm(forms.Form):
     u"""
     Default contact form class.
     """
-    sender = forms.CharField(label=u"From",
-                             max_length=70)
-    email = forms.EmailField(label=u"Email")
-    category = forms.ChoiceField(label=u"Category",
-                                 choices=CONTACT_CHOICES)
-    subject = forms.CharField(label=u"Subject",
-                              max_length=127)
-    message = forms.CharField(label=u"Message", 
-                              max_length=1000, 
-                              widget=forms.Textarea())
+    sender      = forms.CharField(label=_("From"), max_length=70)
+    email       = forms.EmailField(label=_("Email"))
+    category    = forms.ChoiceField(label=_("Category"), choices=CONTACT_CHOICES)
+    subject     = forms.CharField(label=_("Subject"), max_length=127)
+    message     = forms.CharField(label=_("Message"), max_length=1000, widget=forms.Textarea())
 
     def save(self):
         u"""
