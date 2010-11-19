@@ -8,3 +8,4 @@ dist/
 build/
 *.egg-info
 
+example_project/example.db
