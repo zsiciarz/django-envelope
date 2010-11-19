@@ -76,16 +76,6 @@ These values defined in ``settings.py`` affect the application:
   
   Default value: *Message from contact form:*
 
-* ``ENVELOPE_MESSAGE_THANKS``: A message sent to the user (using 
-  ``django.contrib.messages``) after successful submission. 
-  
-  Default value: *Thank you for your message.*
-
-* ``ENVELOPE_MESSAGE_ERROR``: A message sent to the user (using 
-  ``django.contrib.messages``) after an attempt to send an invalid form.
-  
-  Default value: *There was en error in the contact form.*
-
 Customization
 =============
 
