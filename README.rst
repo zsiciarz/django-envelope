@@ -87,8 +87,8 @@ the application's URLconf, hook the ``envelope.views.contact`` view into your
 * ``form_class``: Which form class to use for contact message handling.
   The default (``ContactForm``) is often enough, but you can subclass it if you
   want, or even replace with a totally custom class. The only requirement is
-  that your custom class has a ``send()`` method which should do... well,
-  guess what. Stick to the default or its subclasses.
+  that your custom class has a ``save()`` method which should send the message
+  somewhere. Stick to the default, or its subclasses.
 
 * ``template_name``: Full name of the template which will display the form. By
   default it is ``envelope/contact.html``.
