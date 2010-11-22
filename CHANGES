@@ -1,6 +1,7 @@
 0.2.0
  - deprecated the ContactForm.send() method, use save() instead for more
    consistency with Django coding style
+ - localization support
 
 0.1.4
  - added a more descriptive README file
