@@ -40,7 +40,7 @@ class ContactForm(forms.Form):
         Sends the message.
         """
         subject_intro = getattr(settings, 'ENVELOPE_SUBJECT_INTRO',
-                                u"Message from contact form: ")
+                                _("Message from contact form: "))
         subject = subject_intro + self.cleaned_data['subject']
         dictionary = self.cleaned_data.copy()
         dictionary['category'] = self.get_category_display() 
@@ -49,9 +49,9 @@ class ContactForm(forms.Form):
         to_email = [settings.DEFAULT_FROM_EMAIL]
         try:
             send_mail(subject, message, from_email, to_email)
-            logger.info(u"Contact form submitted and sent (from: %s)" % self.cleaned_data['email'])
+            logger.info(_("Contact form submitted and sent (from: %s)") % self.cleaned_data['email'])
         except SMTPException, e:
-            logger.error(u"Contact form error (%s)" % e)
+            logger.error(_("Contact form error (%s)") % e)
 
     def send(self):
         u"""
@@ -60,7 +60,7 @@ class ContactForm(forms.Form):
         Kept here for backwards compatibility with versions prior to 0.2.0.
         """
         import warnings
-        warnings.warn(u"ContactForm.send() is deprecated, use save() instead", PendingDeprecationWarning)
+        warnings.warn(_("ContactForm.send() is deprecated, use save() instead"), PendingDeprecationWarning)
         return self.save()
 
     def get_category_display(self):
