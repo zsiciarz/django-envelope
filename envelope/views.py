@@ -48,12 +48,12 @@ def contact(request,
         #pylint: disable=E1101,E1103
         if form.is_valid():
             form.save()
-            messages.info(request, _("Thank you for your message."))
+            messages.info(request, _("Thank you for your message."), fail_silently=True)
             if redirect_to is None:
                 redirect_to = reverse('envelope-contact')
             return HttpResponseRedirect(redirect_to)
         else:
-            messages.error(request, _("There was en error in the contact form."))
+            messages.error(request, _("There was en error in the contact form."), fail_silently=True)
         #pylint: enable=E1101,E1103
     else:
         if request.user.is_authenticated():
