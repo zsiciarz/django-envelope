@@ -87,6 +87,19 @@ class ContactForm(BaseContactForm):
     """
     category = forms.ChoiceField(label=_("Category"), choices=CONTACT_CHOICES)
     
+    def __init__(self, *args, **kwargs):
+        u"""
+        This does the trick with placing category choice above the subject.
+        """
+        super(ContactForm, self).__init__(*args, **kwargs)
+        self.fields.keyOrder = [
+            'sender',
+            'email',
+            'category', 
+            'subject', 
+            'message',
+        ]
+    
     def get_context(self):
         u"""
         Adds full category description to template variables in order to display
