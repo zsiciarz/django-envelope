@@ -1,4 +1,5 @@
 
+from django.conf import settings
 from django.test import TestCase
 
 class ContactViewTestCase(TestCase):
@@ -7,7 +8,8 @@ class ContactViewTestCase(TestCase):
     """
     #urls = 'envelope.urls'
     
-    honeypot = 'email2'
+    def setUp(self):
+        self.honeypot = getattr(settings, 'HONEYPOT_FIELD_NAME', 'email2')
 
     def testGetContactForm(self):
         response = self.client.get('/')
@@ -38,7 +40,7 @@ class ContactViewTestCase(TestCase):
         self._testContactFormField('message', 'Hello there!')
 
     def _testContactFormField(self, field_name, valid_value='value',
-                       expected_error="This field is required."):
+                              expected_error="This field is required."):
         u"""
         Base method for testing form fields.
         
