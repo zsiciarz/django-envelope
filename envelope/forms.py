@@ -24,14 +24,14 @@ DEFAULT_CONTACT_CHOICES = (
 CONTACT_CHOICES = getattr(settings, 'ENVELOPE_CONTACT_CHOICES',
                           DEFAULT_CONTACT_CHOICES)
 
+
 #pylint: disable=W0232,E1101
-class ContactForm(forms.Form):
+class BaseContactForm(forms.Form):
     u"""
-    Default contact form class.
+    Base contact form class.
     """
     sender      = forms.CharField(label=_("From"), max_length=70)
     email       = forms.EmailField(label=_("Email"))
-    category    = forms.ChoiceField(label=_("Category"), choices=CONTACT_CHOICES)
     subject     = forms.CharField(label=_("Subject"), max_length=127)
     message     = forms.CharField(label=_("Message"), max_length=1000, widget=forms.Textarea())
 
@@ -42,9 +42,8 @@ class ContactForm(forms.Form):
         subject_intro = getattr(settings, 'ENVELOPE_SUBJECT_INTRO',
                                 _("Message from contact form: "))
         subject = subject_intro + self.cleaned_data['subject']
-        dictionary = self.cleaned_data.copy()
-        dictionary['category'] = self.get_category_display() 
-        message = render_to_string('envelope/email_body.txt', dictionary)
+        context = self.get_context()
+        message = render_to_string('envelope/email_body.txt', context)
         from_email = settings.DEFAULT_FROM_EMAIL
         to_email = [settings.DEFAULT_FROM_EMAIL]
         try:
@@ -62,10 +61,44 @@ class ContactForm(forms.Form):
         import warnings
         warnings.warn(_("ContactForm.send() is deprecated, use save() instead"), PendingDeprecationWarning)
         return self.save()
+    
+    def get_context(self):
+        u"""
+        Returns a dictionary of values to be passed to the email body template.
+        
+        Override this method to set additional template variables.
+        """
+        return self.cleaned_data.copy()
+
+
+class ContactForm(BaseContactForm):
+    u"""
+    The default contact form class.
+    
+    This class extends the base form with a possibility to select message 
+    category. For example, user can ask a general question regarding the
+    website or a more specific one, like "ask tech support" or "I want to speak
+    to the manager". 
+    
+    The categories are controlled by configuring ``ENVELOPE_CONTACT_CHOICES`` in
+    your settings.py. The value for this setting should be a tuple of 2-element
+    tuples, as usual with Django choice fields. Keep first elements of those
+    tuples as integer values (or use None for the category "Other").
+    """
+    category = forms.ChoiceField(label=_("Category"), choices=CONTACT_CHOICES)
+    
+    def get_context(self):
+        u"""
+        Adds full category description to template variables in order to display
+        the category in email body.
+        """
+        context = super(ContactForm, self).get_context()
+        context['category'] = self.get_category_display()
+        return context
 
     def get_category_display(self):
         u"""
-        Returns the name of the selected category.
+        Returns the displayed name of the selected category.
         """
         try:
             category = int(self.cleaned_data['category'])
