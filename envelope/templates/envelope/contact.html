@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
+{% load i18n %}
+
 {% load honeypot %}
 {% block content %}
 <section id="contact">
-  <h1>Contact</h1>
+  <h1>{% trans "Contact" %}</h1>
   <form action="{% url envelope-contact %}" method="post">
   {% csrf_token %}
   {% render_honeypot_field %}
@@ -13,7 +15,7 @@
         </tbody>
         <tfoot>
          <tr>
-          <td colspan="2"><input type="submit" value="Send!" /></td>
+          <td colspan="2"><input type="submit" value="{% trans "Send!" %}" /></td>
          </tr>
         </tfoot>
       </table>

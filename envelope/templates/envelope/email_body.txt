@@ -1,10 +1,11 @@
-Message from the contact form
-Sender: {{ sender }} ({{ sender_email }})
-Category: {{ category }}
-The message follows. 
+{% load i18n %}
+{% trans "Message from the contact form" %}
+{% trans "Sender" %}: {{ sender }} ({{ sender_email }})
+{% trans "Category" %}: {{ category }}
+{% trans "The message follows." %} 
 ================================================================================
 {{ message }}
 ================================================================================
 
 -- 
-message sent with envelope - a contact form app for Django
+{% trans "message sent with envelope - a contact form app for Django" %}
