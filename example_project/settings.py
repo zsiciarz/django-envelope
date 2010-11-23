@@ -103,8 +103,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'honeypot',
     'envelope',
+    'honeypot',
 )
 
 HONEYPOT_FIELD_NAME = 'email2'
