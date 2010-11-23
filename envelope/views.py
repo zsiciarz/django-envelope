@@ -27,6 +27,9 @@ def contact(request,
     u"""
     Contact form view.
     
+    If the user is authenticated, ``sender`` and ``email`` fields are 
+    automatically filled with proper values.
+    
     **Optional arguments:**
         * ``form_class``: Which form class to use for contact message handling.
           The default (``ContactForm``) is often enough, but you can subclass
