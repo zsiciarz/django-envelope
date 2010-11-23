@@ -1,6 +1,6 @@
 {% load i18n %}
 {% trans "Message from the contact form" %}
-{% trans "Sender" %}: {{ sender }} ({{ sender_email }})
+{% trans "Sender" %}: {{ sender }} ({{ email }})
 {% trans "Category" %}: {{ category }}
 {% trans "The message follows." %} 
 ================================================================================
