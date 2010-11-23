@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-envelope 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-22 18:13+0100\n"
+"POT-Creation-Date: 2010-11-23 21:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Zbigniew Siciarz <antyqjon@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,17 +16,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\forms.py:32
+#: .\forms.py:20
+msgid "Choose"
+msgstr "Wybierz"
+
+#: .\forms.py:21
+msgid "A general question regarding the website"
+msgstr "Ogólne zapytanie dotyczące strony"
+
+#: .\forms.py:22
+msgid "Other"
+msgstr "Inne"
+
+#: .\forms.py:33
 msgid "From"
 msgstr "Od"
 
-#: .\forms.py:33
+#: .\forms.py:34
 msgid "Email"
 msgstr "Adres e-mail"
-
-#: .\forms.py:34
-msgid "Category"
-msgstr "Kategoria"
 
 #: .\forms.py:35
 msgid "Subject"
@@ -40,25 +48,55 @@ msgstr "Wiadomość"
 msgid "Message from contact form: "
 msgstr "Wiadomość z formularza kontaktowego:"
 
-#: .\forms.py:52
+#: .\forms.py:51
 #, python-format
 msgid "Contact form submitted and sent (from: %s)"
 msgstr "Formularz kontaktowy zatwierdzony i wysłany (od: %s)"
 
-#: .\forms.py:54
+#: .\forms.py:53
 #, python-format
 msgid "Contact form error (%s)"
 msgstr "Błąd formularza kontaktowego (%s)"
 
-#: .\forms.py:63
+#: .\forms.py:62
 msgid "ContactForm.send() is deprecated, use save() instead"
 msgstr "ContactForm.send() jest zdeprecjonowane, użyj save()"
 
-#: .\views.py:51
+#: .\forms.py:88
+#: .\templates\envelope\email_body.txt.py:4
+msgid "Category"
+msgstr "Kategoria"
+
+#: .\views.py:54
 msgid "Thank you for your message."
 msgstr "Dziękujemy za wiadomość."
 
-#: .\views.py:56
+#: .\views.py:59
 msgid "There was en error in the contact form."
 msgstr "Wystąpił błąd w formularzu kontaktowym."
+
+#: .\templates\envelope\contact.html.py:7
+msgid "Contact"
+msgstr "Kontakt"
+
+#: .\templates\envelope\contact.html.py:18
+msgid "Send!"
+msgstr "Wyślij!"
+
+#: .\templates\envelope\email_body.txt.py:2
+msgid "Message from the contact form"
+msgstr "Wiadomość z formularza kontaktowego:"
+
+#: .\templates\envelope\email_body.txt.py:3
+msgid "Sender"
+msgstr "Nadawca"
+
+#: .\templates\envelope\email_body.txt.py:5
+msgid "The message follows."
+msgstr "Wiadomość znajduje się poniżej."
+
+#: .\templates\envelope\email_body.txt.py:11
+msgid "message sent with envelope - a contact form app for Django"
+msgstr "wiadomość wysłana za pomocą envelope - aplikacji formularza kontaktowego dla "
+"Django"
 
