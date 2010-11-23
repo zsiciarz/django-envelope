@@ -17,9 +17,9 @@ from django.utils.translation import ugettext as _
 logger = logging.getLogger('envelope')
 
 DEFAULT_CONTACT_CHOICES = (
-    ('',    u"Choose"),
-    (10,    u"A general question regarding the website"),
-    (None,   u"Other"),
+    ('',    _("Choose")),
+    (10,    _("A general question regarding the website")),
+    (None,  _("Other")),
 )
 CONTACT_CHOICES = getattr(settings, 'ENVELOPE_CONTACT_CHOICES',
                           DEFAULT_CONTACT_CHOICES)
