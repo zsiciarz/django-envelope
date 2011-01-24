@@ -1,0 +1,84 @@
+# Finnish translations for django-envelope.
+# Copyright (C) 2011 Antti Kaihola (original author) and contributors
+# This file is distributed under the same license as the django-envelope package.
+# Antti Kaihola <akaihol+django@ambitone.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: django-envelope 0.2.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-24 16:03+0200\n"
+"PO-Revision-Date: 2011-01-24 16:10+0200\n"
+"Last-Translator: Antti Kaihola <akaihol+django@ambitone.com>\n"
+"Language-Team: Finnish <akaihol+django@ambitone.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: forms.py:20
+msgid "Choose"
+msgstr "Valitse"
+
+#: forms.py:21
+msgid "A general question regarding the website"
+msgstr "Yleisesti sivustoa koskeva kysymys"
+
+#: forms.py:22
+msgid "Other"
+msgstr "Muu"
+
+#: forms.py:33
+msgid "From"
+msgstr "Lähettäjä"
+
+#: forms.py:34
+msgid "Email"
+msgstr "Sähköposti"
+
+#: forms.py:35
+msgid "Subject"
+msgstr "Aihe"
+
+#: forms.py:36
+msgid "Message"
+msgstr "Viesti"
+
+#: forms.py:43
+msgid "Message from contact form: "
+msgstr "Viesti palautelomakkeesta: "
+
+#: forms.py:51
+#, python-format
+msgid "Contact form submitted and sent (from: %s)"
+msgstr "Lomake lähetetty (lähettäjä: %s)"
+
+#: forms.py:53
+#, python-format
+msgid "Contact form error (%s)"
+msgstr "Palautelomakkeen virhe (%s)"
+
+#: forms.py:62
+msgid "ContactForm.send() is deprecated, use save() instead"
+msgstr "ContactForm.send() poistuu käytöstä, käytä sen sijaan save()"
+
+#: forms.py:88
+msgid "Category"
+msgstr "Kategoria"
+
+#: views.py:54
+msgid "Thank you for your message."
+msgstr "Kiitos viestistäsi."
+
+#: views.py:59
+msgid "There was en error in the contact form."
+msgstr "Palautelomake aiheutti virheen."
+
+#: templates/envelope/contact.html:7
+msgid "Contact"
+msgstr "Palaute"
+
+#: templates/envelope/contact.html:18
+msgid "Send!"
+msgstr "Lähetä!"
