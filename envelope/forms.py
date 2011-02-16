@@ -48,9 +48,9 @@ class BaseContactForm(forms.Form):
         to_email = [settings.DEFAULT_FROM_EMAIL]
         try:
             send_mail(subject, message, from_email, to_email)
-            logger.info(_("Contact form submitted and sent (from: %s)") % self.cleaned_data['email'])
-        except SMTPException, e:
-            logger.error(_("Contact form error (%s)") % e)
+            logger.info(_("Contact form submitted and sent (from: %s)"), self.cleaned_data['email'])
+        except SMTPException:
+            logger.exception(_("An error occured while sending the email"))
 
     def send(self):
         u"""
