@@ -59,7 +59,7 @@ class BaseContactForm(forms.Form):
         Kept here for backwards compatibility with versions prior to 0.2.0.
         """
         import warnings
-        warnings.warn(_("ContactForm.send() is deprecated, use save() instead"), PendingDeprecationWarning)
+        warnings.warn(_("ContactForm.send() is deprecated, use save() instead"), DeprecationWarning)
         return self.save()
     
     def get_context(self):
