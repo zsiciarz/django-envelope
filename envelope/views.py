@@ -6,9 +6,7 @@ The envelope contactform view.
 
 import logging
 from django.contrib import messages
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from honeypot.decorators import check_honeypot
@@ -53,8 +51,8 @@ def contact(request,
             form.save()
             messages.info(request, _("Thank you for your message."), fail_silently=True)
             if redirect_to is None:
-                redirect_to = reverse('envelope.views.contact')
-            return HttpResponseRedirect(redirect_to)
+                redirect_to = 'envelope.views.contact'
+            return redirect(redirect_to)
         else:
             messages.error(request, _("There was en error in the contact form."), fail_silently=True)
         #pylint: enable=E1101,E1103
