@@ -93,9 +93,9 @@ the application's URLconf, hook the ``envelope.views.contact`` view into your
 * ``template_name``: Full name of the template which will display the form. By
   default it is ``envelope/contact.html``.
 
-* ``redirect_to``: URL of the page with some kind of a "thank you for your
-  feedback", displayed after the form is successfully submitted. If left unset,
-  the view redirects to itself.
+* ``redirect_to``: View name or a hardcoded URL of the page with some kind of a
+  "thank you for your feedback", displayed after the form is successfully 
+  submitted. If left unset, the view redirects to itself.
 
 * ``extra_context``: A dictionary of values to add to template context.
 
