@@ -1,5 +1,6 @@
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.test import TestCase
 
 class ContactViewTestCase(TestCase):
@@ -18,6 +19,15 @@ class ContactViewTestCase(TestCase):
         form = response.context['form']
         self.assertFalse(form.is_bound)
         
+    def testAuthenticatedUserPrefilled(self):
+        user = User.objects.create_user('test', 'test@example.org', 'password')
+        logged_in = self.client.login(username='test', password='password')
+        self.assertTrue(logged_in)
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "envelope/contact.html")
+        self.assertContains(response, 'value="test@example.org"')
+
     def testPostContactFormAntispamHoneypotField(self):
         response = self.client.post('/', {self.honeypot: 'some value'})
         self.assertEqual(response.status_code, 400)
@@ -80,3 +90,4 @@ class ContactViewTestCase(TestCase):
         self.assertEquals(len(response.redirect_chain), 1)
         self.assertNotContains(response, "There was en error in the contact form.")
         self.assertContains(response, "Thank you for your message.")
+

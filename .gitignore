@@ -10,5 +10,8 @@ build/
 docs/_*
 docs/Makefile
 docs/make.bat
+.coverage*
+*,cover
+htmlcov
 
 example_project/example.db
