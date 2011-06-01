@@ -17,24 +17,24 @@ from envelope.forms import ContactForm
 logger = logging.getLogger('envelope')
 
 @check_honeypot
-def contact(request, 
+def contact(request,
             form_class=ContactForm,
             template_name='envelope/contact.html',
             redirect_to=None,
             extra_context=None):
     u"""
     Contact form view.
-    
-    If the user is authenticated, ``sender`` and ``email`` fields are 
+
+    If the user is authenticated, ``sender`` and ``email`` fields are
     automatically filled with proper values.
-    
+
     **Optional arguments:**
         * ``form_class``: Which form class to use for contact message handling.
-          The default (``ContactForm``) is often enough, but you can subclass
-          it if you want, or even replace with a totally custom class. The
-          only requirement is that your custom class has a ``save()``
-          method which should send the message somewhere. Stick to the default,
-          or its subclasses.
+          The default (:class:`envelope.forms.ContactForm`) is often enough,
+          but you can subclass it if you want, or even replace with a totally
+          custom class. The only requirement is that your custom class has a
+          ``save()`` method which should send the message somewhere. Stick to
+          the default, or its subclasses.
         * ``template_name``: Full name of the template which will display
           the form. By default it is "envelope/contact.html".
         * ``redirect_to``: URL of the page with some kind of a "thank you

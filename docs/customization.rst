@@ -4,12 +4,12 @@ Customization
 
 If you want some more fine-grained control over the contact form, you can
 supply additional optional arguments to the view function. Instead of including
-the application's URLconf, hook the ``envelope.views.contact`` view into your
+the application's URLconf, hook the :func:`envelope.views.contact` view into your
 ``urls.py``. The following optional arguments are recognized by the view function:
 
 * ``form_class``: Which form class to use for contact message handling.
-  The default (``ContactForm``) is often enough, but you can subclass it if you
-  want, or even replace with a totally custom class. The only requirement is
+  The default (:class:`envelope.forms.ContactForm`) is often enough, but you can subclass it
+  if you want, or even replace with a totally custom class. The only requirement is
   that your custom class has a ``save()`` method which should send the message
   somewhere. Stick to the default, or its subclasses.
 
@@ -42,6 +42,5 @@ Example::
     )
 
 To customize the email message sent to you, create a template called 
-``envelope/email_body.txt``. You can use any of the ``ContactForm`` field names
-as template variables. 
+``envelope/email_body.txt``. You can use any of the :class:`envelope.forms.ContactForm` field names as template variables. 
 
