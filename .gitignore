@@ -7,5 +7,8 @@
 dist/
 build/
 *.egg-info
+docs/_*
+docs/Makefile
+docs/make.bat
 
 example_project/example.db
