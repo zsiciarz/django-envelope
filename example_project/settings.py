@@ -107,4 +107,7 @@ INSTALLED_APPS = (
     'honeypot',
 )
 
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
 HONEYPOT_FIELD_NAME = 'email2'
+
