@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.test import TestCase
+from django.utils.translation import ugettext_lazy as _
 
 
 class ContactViewTestCase(TestCase):
@@ -52,7 +53,7 @@ class ContactViewTestCase(TestCase):
         self._testContactFormField('message', 'Hello there!')
 
     def _testContactFormField(self, field_name, valid_value='value',
-                              expected_error="This field is required."):
+                              expected_error=_("This field is required.")):
         u"""
         Base method for testing form fields.
 
@@ -68,7 +69,8 @@ class ContactViewTestCase(TestCase):
             self.honeypot: '',
         })
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "There was en error in the contact form.")
+        flash_error_message = _("There was en error in the contact form.")
+        self.assertContains(response, flash_error_message)
         self.assertFormError(response, 'form', field_name, expected_error)
         # submit the form again, this time with correct field value
         response = self.client.post(self.url, {
@@ -90,6 +92,8 @@ class ContactViewTestCase(TestCase):
         }, follow=True)
         self.assertRedirects(response, self.url)
         self.assertEquals(len(response.redirect_chain), 1)
-        self.assertNotContains(response, "There was en error in the contact form.")
-        self.assertContains(response, "Thank you for your message.")
+        flash_error_message = _("There was en error in the contact form.")
+        self.assertNotContains(response, flash_error_message)
+        flash_success_message = _("Thank you for your message.")
+        self.assertContains(response, flash_success_message)
 

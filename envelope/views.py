@@ -8,7 +8,7 @@ import logging
 from django.contrib import messages
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from honeypot.decorators import check_honeypot
 from envelope.forms import ContactForm
 
