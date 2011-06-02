@@ -5,6 +5,7 @@ Unit tests for ``django-envelope`` views.
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils.translation import ugettext_lazy as _
 
@@ -15,7 +16,7 @@ class ContactViewTestCase(TestCase):
     """
 
     def setUp(self):
-        self.url = '/'
+        self.url = reverse('envelope-contact')
         self.honeypot = getattr(settings, 'HONEYPOT_FIELD_NAME', 'email2')
 
     def testGetContactForm(self):
