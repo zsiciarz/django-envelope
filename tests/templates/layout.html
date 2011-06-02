@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Contact me!</title>
+</head>
+
+<body>
+  <div>
+    <header>
+      <h1>Contact me!</h1>
+      <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    </header>
+
+    <div>
+      {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+     <p>&copy; Copyright 2011 Zbigniew Siciarz.</p>
+    </footer>
+  </div>
+</body>
+</html>
