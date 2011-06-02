@@ -26,9 +26,9 @@ if not settings.configured:
             'honeypot',
         ),
         TEMPLATE_DIRS = (
-            make_absolute_path('tests/templates'),
+            make_absolute_path('envelope/tests/templates'),
         ),
-        ROOT_URLCONF = 'example_project.urls',
+        ROOT_URLCONF = 'envelope.tests.urls',
         TEST_RUNNER = 'django_nose.NoseTestSuiteRunner',
         NOSE_ARGS = ['--stop'],
         HONEYPOT_FIELD_NAME = 'email2',

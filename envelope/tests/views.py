@@ -1,3 +1,7 @@
+u"""
+Unit tests for ``django-envelope`` views.
+"""
+
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -9,8 +13,7 @@ class ContactViewTestCase(TestCase):
     u"""
     Unit tests for ``envelope.views.contact`` view function.
     """
-    urls = 'envelope.urls'
-    
+
     def setUp(self):
         self.url = '/'
         self.honeypot = getattr(settings, 'HONEYPOT_FIELD_NAME', 'email2')
@@ -61,7 +64,7 @@ class ContactViewTestCase(TestCase):
         if the form has an expected error associated with the field.
 
         Later, the form is submitted with a valid value for the field. As Django
-        test case lacks a way to check if the form *doesn't* have specific 
+        test case lacks a way to check if the form *doesn't* have specific
         errors, that check is implemented here.
         """
         response = self.client.post(self.url, {
