@@ -51,6 +51,9 @@ class BaseContactForm(forms.Form):
             logger.info(_("Contact form submitted and sent (from: %s)") % self.cleaned_data['email'])
         except SMTPException:
             logger.exception(_("An error occured while sending the email"))
+            return False
+        else:
+            return True
 
     def send(self):
         u"""

@@ -74,7 +74,8 @@ class BaseContactFormTestCase(TestCase):
         """
         form = BaseContactForm(self.form_data)
         self.assertTrue(form.is_valid())
-        form.save()
+        result = form.save()
+        self.assertTrue(result)
         self.assertEqual(len(mail.outbox), 1)
         self.assertIn(self.form_data['subject'], mail.outbox[0].subject)
 
@@ -86,8 +87,9 @@ class BaseContactFormTestCase(TestCase):
         self.assertTrue(form.is_valid())
         with warnings.catch_warnings(record=True) as warns:
             warnings.filterwarnings("always", category=DeprecationWarning)
-            form.send()
+            result = form.send()
             self.assertEqual(len(warns), 1)
+        self.assertTrue(result)
         self.assertEqual(len(mail.outbox), 1)
         self.assertIn(self.form_data['subject'], mail.outbox[0].subject)
 
