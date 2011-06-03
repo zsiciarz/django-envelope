@@ -2,6 +2,13 @@
 Customization
 =============
 
+TODO: Write docs about class-based approach.
+
+.. note::
+    The function-based view :func:`envelope.views.contact` is **deprecated**
+    since django-envelope 0.3.0. New projects should use
+    :class:`envelope.views.ContactView` instead.
+
 If you want some more fine-grained control over the contact form, you can
 supply additional optional arguments to the view function. Instead of including
 the application's URLconf, hook the :func:`envelope.views.contact` view into your
