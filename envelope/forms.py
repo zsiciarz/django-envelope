@@ -8,7 +8,7 @@ import logging
 from smtplib import SMTPException
 from django import forms
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
@@ -47,7 +47,7 @@ class BaseContactForm(forms.Form):
         from_email = settings.DEFAULT_FROM_EMAIL
         to_email = [settings.DEFAULT_FROM_EMAIL]
         try:
-            send_mail(subject, message, from_email, to_email)
+            mail.send_mail(subject, message, from_email, to_email)
             logger.info(_("Contact form submitted and sent (from: %s)") % self.cleaned_data['email'])
         except SMTPException:
             logger.exception(_("An error occured while sending the email"))

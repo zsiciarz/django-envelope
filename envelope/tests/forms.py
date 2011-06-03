@@ -3,6 +3,7 @@ Unit tests for ``django-envelope`` forms.
 """
 
 import warnings
+from smtplib import SMTPException
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -78,6 +79,23 @@ class BaseContactFormTestCase(TestCase):
         self.assertTrue(result)
         self.assertEqual(len(mail.outbox), 1)
         self.assertIn(self.form_data['subject'], mail.outbox[0].subject)
+
+    def test_save_smtp_error(self):
+        u"""
+        If the email backend raised an error, the message is not sent.
+        """
+        form = BaseContactForm(self.form_data)
+        self.assertTrue(form.is_valid())
+        old_send_mail = mail.send_mail
+        def new_send_mail(*args):
+            raise SMTPException
+        try:
+            mail.send_mail = new_send_mail
+            result = form.save()
+            self.assertFalse(result)
+            self.assertEqual(len(mail.outbox), 0)
+        finally:
+            mail.send_mail = old_send_mail
 
     def test_send(self):
         u"""
