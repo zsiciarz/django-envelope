@@ -23,6 +23,14 @@ class BaseContactViewTestCase(TestCase):
 
     def setUp(self):
         self.honeypot = getattr(settings, 'HONEYPOT_FIELD_NAME', 'email2')
+        self.form_data = {
+            'sender':   'zbyszek',
+            'email':    'test@example.com',
+            'category': 10,
+            'subject':  'A subject',
+            'message':  'Hello there!',
+            self.honeypot: '',
+        }
 
     def test_response_data(self):
         u"""
@@ -58,14 +66,7 @@ class BaseContactViewTestCase(TestCase):
         u"""
         If the data is correct, a message is sent and the user is redirected.
         """
-        response = self.client.post(self.url, {
-            'sender':   'zbyszek',
-            'email':    'test@example.com',
-            'category': 10,
-            'subject':  'A subject',
-            'message':  'Hello there!',
-            self.honeypot: '',
-        }, follow=True)
+        response = self.client.post(self.url, self.form_data, follow=True)
         self.assertRedirects(response, self.url)
         self.assertEquals(len(response.redirect_chain), 1)
         flash_error_message = _("There was en error in the contact form.")
@@ -87,6 +88,13 @@ class ClassContactViewTestCase(BaseContactViewTestCase):
         """
         response = self.client.get(self.customized_url)
         self.assertTemplateUsed(response, "contact.html")
+
+    def test_custom_success_url(self):
+        u"""
+        The view redirects to a custom success_url when the form is valid.
+        """
+        response = self.client.post(self.customized_url, self.form_data)
+        self.assertRedirects(response, self.customized_url)
 
 
 class FunctionContactViewTestCase(BaseContactViewTestCase):
