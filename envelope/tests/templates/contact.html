@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% load i18n %}
+
+{% load honeypot %}
+{% block content %}
+<section id="contact">
+  <h1>{% trans "Contact" %}</h1>
+  <form action="{% url customized_class_contact %}" method="post">
+  {% csrf_token %}
+  {% render_honeypot_field %}
+    <fieldset>
+      <table>
+        <tbody>
+        {{ form }}
+        </tbody>
+        <tfoot>
+         <tr>
+          <td colspan="2"><input type="submit" value="{% trans "Send!" %}" /></td>
+         </tr>
+        </tfoot>
+      </table>
+    </fieldset>
+  </form>
+</section>
+{% endblock %}
+

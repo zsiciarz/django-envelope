@@ -2,6 +2,10 @@
 
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('envelope.views',
-    url(r'^$',         'contact',    name='envelope-contact'),
+from envelope.views import ContactView
+
+
+urlpatterns = patterns('',
+    url(r'^$', ContactView.as_view(), name='envelope-contact'),
 )
+

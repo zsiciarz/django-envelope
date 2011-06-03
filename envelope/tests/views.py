@@ -2,6 +2,7 @@ u"""
 Unit tests for ``django-envelope`` views.
 """
 
+import warnings
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -10,14 +11,17 @@ from django.test import TestCase
 from django.utils.translation import ugettext_lazy as _
 
 
-class ContactViewTestCase(TestCase):
+class BaseContactViewTestCase(TestCase):
     u"""
-    Unit tests for ``envelope.views.contact`` view function.
+    Base unit tests for contact form view.
+
+    These test cases are common to both class-based and function-based views.
+    Only the specific subclasses are imported in tests/__init__.py in order
+    not to duplicate tests.
     """
+    url = reverse('envelope-contact')
 
     def setUp(self):
-        self.url = reverse('envelope-contact')
-        self.customized_url = reverse('customized_contact')
         self.honeypot = getattr(settings, 'HONEYPOT_FIELD_NAME', 'email2')
 
     def test_response_data(self):
@@ -68,6 +72,38 @@ class ContactViewTestCase(TestCase):
         self.assertNotContains(response, flash_error_message)
         flash_success_message = _("Thank you for your message.")
         self.assertContains(response, flash_success_message)
+
+
+class ClassContactViewTestCase(BaseContactViewTestCase):
+    u"""
+    Unit tests for class-based contact form view (the default one).
+    """
+    url = reverse('class_contact')
+    customized_url = reverse('customized_class_contact')
+
+    def test_custom_template(self):
+        u"""
+        You can change the default template used to render the form.
+        """
+        response = self.client.get(self.customized_url)
+        self.assertTemplateUsed(response, "contact.html")
+
+
+class FunctionContactViewTestCase(BaseContactViewTestCase):
+    u"""
+    Unit tests for old-style contact form view (function-based, deprecated).
+    """
+    url = reverse('func_contact')
+    customized_url = reverse('customized_func_contact')
+
+    def test_deprecation(self):
+        u"""
+        Function-based view is deprecated since 0.3.0.
+        """
+        with warnings.catch_warnings(record=True) as warns:
+            warnings.filterwarnings("always", category=PendingDeprecationWarning)
+            self.client.get(self.url)
+            self.assertEqual(len(warns), 1)
 
     def test_extra_context(self):
         u"""
