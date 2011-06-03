@@ -13,51 +13,61 @@ from django.utils.translation import ugettext_lazy as _
 class ContactViewTestCase(TestCase):
     u"""
     Unit tests for ``envelope.views.contact`` view function.
+
+    TODO: move some of these tests to a form class test case.
     """
 
     def setUp(self):
         self.url = reverse('envelope-contact')
         self.honeypot = getattr(settings, 'HONEYPOT_FIELD_NAME', 'email2')
 
-    def testGetContactForm(self):
+    def test_response_data(self):
+        u"""
+        A GET request displays the contact form.
+        """
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "envelope/contact.html")
         form = response.context['form']
         self.assertFalse(form.is_bound)
 
-    def testAuthenticatedUserPrefilled(self):
+    def test_prefilled_form(self):
+        u"""
+        When an authenticated user hits the form view, his email is
+        automatically filled in the email field.
+        """
         user = User.objects.create_user('test', 'test@example.org', 'password')
         logged_in = self.client.login(username='test', password='password')
         self.assertTrue(logged_in)
         response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "envelope/contact.html")
         self.assertContains(response, 'value="test@example.org"')
 
-    def testPostContactFormAntispamHoneypotField(self):
+    def test_honeypot(self):
+        u"""
+        If the honeypot field is not empty, keep the spammer off the page.
+        """
         response = self.client.post(self.url, {self.honeypot: 'some value'})
         self.assertEqual(response.status_code, 400)
         response = self.client.post(self.url, {self.honeypot: ''})
         self.assertEqual(response.status_code, 200)
 
-    def testPostContactFormSenderField(self):
-        self._testContactFormField('sender', 'zbyszek')
+    def test_sender_field(self):
+        self._test_form_field('sender', 'zbyszek')
 
-    def testPostContactFormEmailField(self):
-        self._testContactFormField('email', 'test@example.com')
+    def test_email_field(self):
+        self._test_form_field('email', 'test@example.com')
 
-    def testPostContactFormCategoryField(self):
-        self._testContactFormField('category', 10)
+    def test_category_field(self):
+        self._test_form_field('category', 10)
 
-    def testPostContactFormSubjectField(self):
-        self._testContactFormField('subject', 'A subject')
+    def test_subject_field(self):
+        self._test_form_field('subject', 'A subject')
 
-    def testPostContactFormMessageField(self):
-        self._testContactFormField('message', 'Hello there!')
+    def test_message_field(self):
+        self._test_form_field('message', 'Hello there!')
 
-    def _testContactFormField(self, field_name, valid_value='value',
-                              expected_error=_("This field is required.")):
+    def _test_form_field(self, field_name, valid_value='value',
+                         expected_error=_("This field is required.")):
         u"""
         Base method for testing form fields.
 
@@ -85,7 +95,10 @@ class ContactViewTestCase(TestCase):
         form = response.context['form']
         self.assertTrue(field_name not in form.errors)
 
-    def testPostContactFormSuccessful(self):
+    def test_form_successful(self):
+        u"""
+        If the data is correct, a message is sent and the user is redirected.
+        """
         response = self.client.post(self.url, {
             'sender':   'zbyszek',
             'email':    'test@example.com',
