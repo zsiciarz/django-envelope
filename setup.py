@@ -17,7 +17,7 @@ setup(
     install_requires=['Django', 'django-honeypot'],
     packages=find_packages(),
     include_package_data=True,
-    classifiers=['Development Status :: 4 - Beta',
+    classifiers=['Development Status :: 5 - Production/Stable',
                  'Environment :: Web Environment',
                  'Framework :: Django',
                  'Intended Audience :: Developers',
