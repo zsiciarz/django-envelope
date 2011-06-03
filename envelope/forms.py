@@ -48,7 +48,7 @@ class BaseContactForm(forms.Form):
         to_email = [settings.DEFAULT_FROM_EMAIL]
         try:
             send_mail(subject, message, from_email, to_email)
-            logger.info(_("Contact form submitted and sent (from: %s)"), self.cleaned_data['email'])
+            logger.info(_("Contact form submitted and sent (from: %s)") % self.cleaned_data['email'])
         except SMTPException:
             logger.exception(_("An error occured while sending the email"))
 
@@ -59,7 +59,7 @@ class BaseContactForm(forms.Form):
         Kept here for backwards compatibility with versions prior to 0.2.0.
         """
         import warnings
-        warnings.warn(_("ContactForm.send() is deprecated, use save() instead"), DeprecationWarning)
+        warnings.warn("ContactForm.send() is deprecated, use save() instead", DeprecationWarning)
         return self.save()
     
     def get_context(self):
@@ -115,6 +115,7 @@ class ContactForm(BaseContactForm):
         """
         try:
             category = int(self.cleaned_data['category'])
-        except ValueError:
+        except (AttributeError, ValueError):
             category = None
         return dict(CONTACT_CHOICES).get(category)
+

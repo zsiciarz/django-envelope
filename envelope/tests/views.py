@@ -13,12 +13,11 @@ from django.utils.translation import ugettext_lazy as _
 class ContactViewTestCase(TestCase):
     u"""
     Unit tests for ``envelope.views.contact`` view function.
-
-    TODO: move some of these tests to a form class test case.
     """
 
     def setUp(self):
         self.url = reverse('envelope-contact')
+        self.customized_url = reverse('customized_contact')
         self.honeypot = getattr(settings, 'HONEYPOT_FIELD_NAME', 'email2')
 
     def test_response_data(self):
@@ -51,50 +50,6 @@ class ContactViewTestCase(TestCase):
         response = self.client.post(self.url, {self.honeypot: ''})
         self.assertEqual(response.status_code, 200)
 
-    def test_sender_field(self):
-        self._test_form_field('sender', 'zbyszek')
-
-    def test_email_field(self):
-        self._test_form_field('email', 'test@example.com')
-
-    def test_category_field(self):
-        self._test_form_field('category', 10)
-
-    def test_subject_field(self):
-        self._test_form_field('subject', 'A subject')
-
-    def test_message_field(self):
-        self._test_form_field('message', 'Hello there!')
-
-    def _test_form_field(self, field_name, valid_value='value',
-                         expected_error=_("This field is required.")):
-        u"""
-        Base method for testing form fields.
-
-        First, submit the form with an empty value for the field. Then check
-        if the form has an expected error associated with the field.
-
-        Later, the form is submitted with a valid value for the field. As Django
-        test case lacks a way to check if the form *doesn't* have specific
-        errors, that check is implemented here.
-        """
-        response = self.client.post(self.url, {
-            field_name: '',
-            self.honeypot: '',
-        })
-        self.assertEqual(response.status_code, 200)
-        flash_error_message = _("There was en error in the contact form.")
-        self.assertContains(response, flash_error_message)
-        self.assertFormError(response, 'form', field_name, expected_error)
-        # submit the form again, this time with correct field value
-        response = self.client.post(self.url, {
-            field_name: valid_value,
-            self.honeypot: '',
-        })
-        self.assertEqual(response.status_code, 200)
-        form = response.context['form']
-        self.assertTrue(field_name not in form.errors)
-
     def test_form_successful(self):
         u"""
         If the data is correct, a message is sent and the user is redirected.
@@ -113,4 +68,15 @@ class ContactViewTestCase(TestCase):
         self.assertNotContains(response, flash_error_message)
         flash_success_message = _("Thank you for your message.")
         self.assertContains(response, flash_success_message)
+
+    def test_extra_context(self):
+        u"""
+        Custom context variables can be supplied to the view.
+        """
+        response = self.client.get(self.customized_url)
+        self.assertIn('foo', response.context)
+        self.assertEqual(response.context['foo'], 'bar')
+        # evaluate callables
+        self.assertIn('spam', response.context)
+        self.assertEqual(response.context['spam'], 'eggs')
 
