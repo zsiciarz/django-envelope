@@ -23,7 +23,8 @@ DEFAULT_CONTACT_CHOICES = (
 )
 CONTACT_CHOICES = getattr(settings, 'ENVELOPE_CONTACT_CHOICES',
                           DEFAULT_CONTACT_CHOICES)
-
+EMAIL_RECIPIENTS = getattr(settings, 'ENVELOPE_EMAIL_RECIPIENTS',
+                           [settings.DEFAULT_FROM_EMAIL])
 
 #pylint: disable=W0232,E1101
 class BaseContactForm(forms.Form):
@@ -45,9 +46,8 @@ class BaseContactForm(forms.Form):
         context = self.get_context()
         message = render_to_string('envelope/email_body.txt', context)
         from_email = settings.DEFAULT_FROM_EMAIL
-        to_email = [settings.DEFAULT_FROM_EMAIL]
         try:
-            mail.send_mail(subject, message, from_email, to_email)
+            mail.send_mail(subject, message, from_email, EMAIL_RECIPIENTS)
             logger.info(_("Contact form submitted and sent (from: %s)") % self.cleaned_data['email'])
         except SMTPException:
             logger.exception(_("An error occured while sending the email"))

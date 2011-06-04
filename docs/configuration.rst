@@ -4,10 +4,16 @@ Configuration
 
 These values defined in ``settings.py`` affect the application:
 
-* ``DEFAULT_FROM_EMAIL``: This is both the sender **and** the recipient of
-  the email sent with your contact form. Some web servers do not allow
-  sending messages from an address that is different than the one used for
-  SMTP authentication.
+* ``DEFAULT_FROM_EMAIL``: This is the sender of the email sent with your
+  contact form.
+
+  .. note::
+      (Some mail servers do not allow sending messages from an
+      address that is different than the one used for SMTP authentication.)
+
+* ``ENVELOPE_EMAIL_RECIPIENTS``: A list of e-mail addresses of people who will
+  receive the message. For backwards compatibility reasons, the default value
+  is a list where the only element is ``DEFAULT_FROM_EMAIL``.
 
 * ``ENVELOPE_CONTACT_CHOICES``: A tuple of pairs describing possible choices
   for message type. The default is defined as follows::
