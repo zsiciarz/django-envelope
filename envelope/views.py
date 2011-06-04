@@ -5,6 +5,7 @@ Views used to process the contact form.
 """
 
 import logging
+
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render_to_response
@@ -18,8 +19,7 @@ from honeypot.decorators import check_honeypot
 from envelope.forms import ContactForm
 
 
-# global app logger
-logger = logging.getLogger('envelope')
+logger = logging.getLogger('envelope.views')
 
 
 class ContactView(FormView):

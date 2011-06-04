@@ -6,6 +6,7 @@ Envelope contact form.
 
 import logging
 from smtplib import SMTPException
+
 from django import forms
 from django.conf import settings
 from django.core import mail
@@ -13,20 +14,21 @@ from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
 
-# global app logger
-logger = logging.getLogger('envelope')
+logger = logging.getLogger('envelope.forms')
 
 DEFAULT_CONTACT_CHOICES = (
     ('',    _("Choose")),
     (10,    _("A general question regarding the website")),
     (None,  _("Other")),
 )
+
 CONTACT_CHOICES = getattr(settings, 'ENVELOPE_CONTACT_CHOICES',
                           DEFAULT_CONTACT_CHOICES)
+
 EMAIL_RECIPIENTS = getattr(settings, 'ENVELOPE_EMAIL_RECIPIENTS',
                            [settings.DEFAULT_FROM_EMAIL])
 
-#pylint: disable=W0232,E1101
+
 class BaseContactForm(forms.Form):
     u"""
     Base contact form class.
@@ -58,13 +60,13 @@ class BaseContactForm(forms.Form):
     def send(self):
         u"""
         DEPRECATED. Sends the message.
-        
+
         Kept here for backwards compatibility with versions prior to 0.2.0.
         """
         import warnings
         warnings.warn("ContactForm.send() is deprecated, use save() instead", DeprecationWarning)
         return self.save()
-    
+
     def get_context(self):
         u"""
         Returns a dictionary of values to be passed to the email body template.
@@ -82,14 +84,14 @@ class ContactForm(BaseContactForm):
     category. For example, user can ask a general question regarding the
     website or a more specific one, like "ask tech support" or "I want to speak
     to the manager". 
-    
+
     The categories are controlled by configuring ``ENVELOPE_CONTACT_CHOICES`` in
     your settings.py. The value for this setting should be a tuple of 2-element
     tuples, as usual with Django choice fields. Keep first elements of those
     tuples as integer values (or use None for the category "Other").
     """
     category = forms.ChoiceField(label=_("Category"), choices=CONTACT_CHOICES)
-    
+
     def __init__(self, *args, **kwargs):
         u"""
         This does the trick with placing category choice above the subject.
@@ -102,7 +104,7 @@ class ContactForm(BaseContactForm):
             'subject', 
             'message',
         ]
-    
+
     def get_context(self):
         u"""
         Adds full category description to template variables in order to display

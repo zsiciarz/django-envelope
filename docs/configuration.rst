@@ -15,6 +15,8 @@ These values defined in ``settings.py`` affect the application:
   receive the message. For backwards compatibility reasons, the default value
   is a list where the only element is ``DEFAULT_FROM_EMAIL``.
 
+  .. versionadded:: 0.3.1
+
 * ``ENVELOPE_CONTACT_CHOICES``: A tuple of pairs describing possible choices
   for message type. The default is defined as follows::
   
