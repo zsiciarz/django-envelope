@@ -47,7 +47,7 @@ class BaseContactViewTestCase(TestCase):
         When an authenticated user hits the form view, his email is
         automatically filled in the email field.
         """
-        user = User.objects.create_user('test', 'test@example.org', 'password')
+        User.objects.create_user('test', 'test@example.org', 'password')
         logged_in = self.client.login(username='test', password='password')
         self.assertTrue(logged_in)
         response = self.client.get(self.url)
@@ -109,7 +109,8 @@ class FunctionContactViewTestCase(BaseContactViewTestCase):
         Function-based view is deprecated since 0.3.0.
         """
         with warnings.catch_warnings(record=True) as warns:
-            warnings.filterwarnings("always", category=PendingDeprecationWarning)
+            warnings.filterwarnings("always",
+                                    category=PendingDeprecationWarning)
             self.client.get(self.url)
             self.assertEqual(len(warns), 1)
 

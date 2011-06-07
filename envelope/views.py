@@ -7,7 +7,6 @@ Views used to process the contact form.
 import logging
 
 from django.contrib import messages
-from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
@@ -84,7 +83,9 @@ class ContactView(FormView):
         Sends the message and redirects the user somewhere.
         """
         form.save()
-        messages.info(self.request, _("Thank you for your message."), fail_silently=True)
+        messages.info(self.request,
+                      _("Thank you for your message."),
+                      fail_silently=True)
         return redirect(self.get_success_url())
 
     def form_invalid(self, form):
@@ -135,16 +136,18 @@ def contact(request,
         extra_context = {}
     if request.method == 'POST':
         form = form_class(request.POST)
-        #pylint: disable=E1101,E1103
         if form.is_valid():
             form.save()
-            messages.info(request, _("Thank you for your message."), fail_silently=True)
+            messages.info(request,
+                          _("Thank you for your message."),
+                          fail_silently=True)
             if redirect_to is None:
                 redirect_to = request.get_full_path()
             return redirect(redirect_to)
         else:
-            messages.error(request, _("There was en error in the contact form."), fail_silently=True)
-        #pylint: enable=E1101,E1103
+            messages.error(request,
+                           _("There was en error in the contact form."),
+                           fail_silently=True)
     else:
         if request.user.is_authenticated():
             initial = {

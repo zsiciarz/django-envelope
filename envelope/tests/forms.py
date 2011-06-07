@@ -5,10 +5,7 @@ Unit tests for ``django-envelope`` forms.
 import warnings
 from smtplib import SMTPException
 
-from django.conf import settings
-from django.contrib.auth.models import User
 from django.core import mail
-from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils.translation import ugettext_lazy as _
 
@@ -87,8 +84,10 @@ class BaseContactFormTestCase(TestCase):
         form = BaseContactForm(self.form_data)
         self.assertTrue(form.is_valid())
         old_send_mail = mail.send_mail
+
         def new_send_mail(*args):
             raise SMTPException
+
         try:
             mail.send_mail = new_send_mail
             result = form.save()
@@ -112,6 +111,9 @@ class BaseContactFormTestCase(TestCase):
         self.assertIn(self.form_data['subject'], mail.outbox[0].subject)
 
     def _test_required_field(self, field_name):
+        u"""
+        Check that the form does not validate without a given field.
+        """
         del self.form_data[field_name]
         form = BaseContactForm(self.form_data)
         self.assertFalse(form.is_valid())

@@ -33,10 +33,11 @@ class BaseContactForm(forms.Form):
     u"""
     Base contact form class.
     """
-    sender      = forms.CharField(label=_("From"), max_length=70)
-    email       = forms.EmailField(label=_("Email"))
-    subject     = forms.CharField(label=_("Subject"), max_length=127)
-    message     = forms.CharField(label=_("Message"), max_length=1000, widget=forms.Textarea())
+    sender = forms.CharField(label=_("From"), max_length=70)
+    email = forms.EmailField(label=_("Email"))
+    subject = forms.CharField(label=_("Subject"), max_length=127)
+    message = forms.CharField(label=_("Message"), max_length=1000,
+                              widget=forms.Textarea())
 
     def save(self):
         u"""
@@ -50,7 +51,8 @@ class BaseContactForm(forms.Form):
         from_email = settings.DEFAULT_FROM_EMAIL
         try:
             mail.send_mail(subject, message, from_email, EMAIL_RECIPIENTS)
-            logger.info(_("Contact form submitted and sent (from: %s)") % self.cleaned_data['email'])
+            logger.info(_("Contact form submitted and sent (from: %s)") %
+                        self.cleaned_data['email'])
         except SMTPException:
             logger.exception(_("An error occured while sending the email"))
             return False
@@ -64,13 +66,14 @@ class BaseContactForm(forms.Form):
         Kept here for backwards compatibility with versions prior to 0.2.0.
         """
         import warnings
-        warnings.warn("ContactForm.send() is deprecated, use save() instead", DeprecationWarning)
+        warnings.warn("ContactForm.send() is deprecated, use save() instead",
+                      DeprecationWarning)
         return self.save()
 
     def get_context(self):
         u"""
         Returns a dictionary of values to be passed to the email body template.
-        
+
         Override this method to set additional template variables.
         """
         return self.cleaned_data.copy()
@@ -79,11 +82,11 @@ class BaseContactForm(forms.Form):
 class ContactForm(BaseContactForm):
     u"""
     The default contact form class.
-    
-    This class extends the base form with a possibility to select message 
+
+    This class extends the base form with a possibility to select message
     category. For example, user can ask a general question regarding the
     website or a more specific one, like "ask tech support" or "I want to speak
-    to the manager". 
+    to the manager".
 
     The categories are controlled by configuring ``ENVELOPE_CONTACT_CHOICES`` in
     your settings.py. The value for this setting should be a tuple of 2-element
@@ -100,8 +103,8 @@ class ContactForm(BaseContactForm):
         self.fields.keyOrder = [
             'sender',
             'email',
-            'category', 
-            'subject', 
+            'category',
+            'subject',
             'message',
         ]
 

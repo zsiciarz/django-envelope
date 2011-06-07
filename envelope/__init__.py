@@ -1,5 +1,6 @@
 __version_info__ = (0, 3, 1, 'dev', 0)
 
+
 def get_version():
     version = '%s.%s' % (__version_info__[0], __version_info__[1])
     if __version_info__[2]:
@@ -9,6 +10,7 @@ def get_version():
         if __version_info__[4]:
             version = '%s%s' % (version, __version_info__[4])
     return version
+
 
 __version__ = get_version()
 
