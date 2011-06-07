@@ -1,3 +1,8 @@
+0.3.1
+ - configurable recipients
+ - better logging hierarchy
+ - the code is more PEP-8 compliant
+
 0.3.0
  - introduced a class-based envelope.views.ContactView (requires Django >= 1.3)
  - deprecated the function-based view envelope.views.contact
