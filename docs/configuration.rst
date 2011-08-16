@@ -20,7 +20,7 @@ These values defined in ``settings.py`` affect the application:
 * ``ENVELOPE_CONTACT_CHOICES``: A tuple of pairs describing possible choices
   for message type. The default is defined as follows::
   
-    DEFAULT_CONTACT_CHOICES = (
+    ENVELOPE_CONTACT_CHOICES = (
         ('',    u"Choose"),
         (10,    u"A general question regarding the website"),
         (None,   u"Other"),
