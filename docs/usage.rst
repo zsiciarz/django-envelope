@@ -2,7 +2,7 @@
 Usage
 =====
 
-Add ``envelope`` to your ``INSTALLED_APPS`` in ``settings.py``. The application
+Add ``envelope`` and ``honeypot`` to your ``INSTALLED_APPS`` in ``settings.py``. The application
 does not define any models, so a ``manage.py syncdb`` is *not needed*. 
 
 For a quick start, simply include the app's ``urls.py`` in your main URLconf, like
