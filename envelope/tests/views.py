@@ -44,14 +44,30 @@ class BaseContactViewTestCase(TestCase):
 
     def test_prefilled_form(self):
         u"""
-        When an authenticated user hits the form view, his email is
-        automatically filled in the email field.
+        When an authenticated user hits the form view, his username, full name
+        and email address are automatically filled in.
         """
-        User.objects.create_user('test', 'test@example.org', 'password')
+        user = User.objects.create_user('test', 'test@example.org', 'password')
+        user.first_name = 'John'
+        user.last_name = 'Doe'
+        user.save()
         logged_in = self.client.login(username='test', password='password')
         self.assertTrue(logged_in)
         response = self.client.get(self.url)
+        self.assertContains(response, 'value="test (John Doe)"')
         self.assertContains(response, 'value="test@example.org"')
+
+    def test_prefilled_form_no_full_name(self):
+        u"""
+        In case the user is authenticated, but doesn't have his first and last
+        name set (depends on the registration process), only his username is
+        prefilled in the "From" field.
+        """
+        user = User.objects.create_user('test', 'test@example.org', 'password')
+        logged_in = self.client.login(username='test', password='password')
+        self.assertTrue(logged_in)
+        response = self.client.get(self.url)
+        self.assertContains(response, 'value="test"')
 
     def test_honeypot(self):
         u"""
@@ -113,6 +129,12 @@ class FunctionContactViewTestCase(BaseContactViewTestCase):
                                     category=PendingDeprecationWarning)
             self.client.get(self.url)
             self.assertEqual(len(warns), 1)
+
+    def test_prefilled_form_no_full_name(self):
+        u"""
+        No new features in function-based view - this isn't implemented.
+        """
+        pass
 
     def test_extra_context(self):
         u"""

@@ -72,8 +72,14 @@ class ContactView(FormView):
         initial = super(ContactView, self).get_initial()
         user = self.request.user
         if user.is_authenticated():
+            # the user might not have a full name, depends on the registration
+            print user.get_full_name(), bool(user.get_full_name())
+            if user.get_full_name():
+                sender = '%s (%s)' % (user.username, user.get_full_name())
+            else:
+                sender = user.username
             initial.update({
-                'sender': '%s (%s)' % (user.username, user.get_full_name()),
+                'sender': sender,
                 'email': user.email,
             })
         return initial
