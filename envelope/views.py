@@ -73,7 +73,6 @@ class ContactView(FormView):
         user = self.request.user
         if user.is_authenticated():
             # the user might not have a full name, depends on the registration
-            print user.get_full_name(), bool(user.get_full_name())
             if user.get_full_name():
                 sender = '%s (%s)' % (user.username, user.get_full_name())
             else:
