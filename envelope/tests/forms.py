@@ -96,20 +96,6 @@ class BaseContactFormTestCase(TestCase):
         finally:
             mail.send_mail = old_send_mail
 
-    def test_send(self):
-        u"""
-        send() is deprecated, but still sends the message.
-        """
-        form = BaseContactForm(self.form_data)
-        self.assertTrue(form.is_valid())
-        with warnings.catch_warnings(record=True) as warns:
-            warnings.filterwarnings("always", category=DeprecationWarning)
-            result = form.send()
-            self.assertEqual(len(warns), 1)
-        self.assertTrue(result)
-        self.assertEqual(len(mail.outbox), 1)
-        self.assertIn(self.form_data['subject'], mail.outbox[0].subject)
-
     def _test_required_field(self, field_name):
         u"""
         Check that the form does not validate without a given field.

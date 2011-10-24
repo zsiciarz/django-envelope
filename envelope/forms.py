@@ -59,17 +59,6 @@ class BaseContactForm(forms.Form):
         else:
             return True
 
-    def send(self):
-        u"""
-        DEPRECATED. Sends the message.
-
-        Kept here for backwards compatibility with versions prior to 0.2.0.
-        """
-        import warnings
-        warnings.warn("ContactForm.send() is deprecated, use save() instead",
-                      DeprecationWarning)
-        return self.save()
-
     def get_context(self):
         u"""
         Returns a dictionary of values to be passed to the email body template.
