@@ -2,17 +2,57 @@
 Customization
 =============
 
-TODO: Write docs about class-based approach.
+Most of the time, including ``envelope.urls`` is just fine. But if you want more 
+control over the contact form, you need to hook the view into your URLconf
+yourself. Just import :class:`envelope.views.ContactView`, and call the
+``as_view`` classmethod when defining URL patterns.
 
-.. note::
-    The function-based view :func:`envelope.views.contact` is **deprecated**
-    since django-envelope 0.3.0. New projects should use
-    :class:`envelope.views.ContactView` instead.
+Example::
+
+    # urls.py
+    from django.conf.urls import patterns, url
+    from envelope.views import ContactView
+
+    urlpatterns = patterns('',
+        url(r'^contact/', ContactView.as_view()),
+    )
 
 If you want some more fine-grained control over the contact form, you can
-supply additional optional arguments to the view function. Instead of including
-the application's URLconf, hook the :func:`envelope.views.contact` view into your
-``urls.py``. The following optional arguments are recognized by the view function:
+customize the view class. You can inherit from :class:`envelope.views.ContactView`
+and set class attributes in your derived view class, or simply pass
+the values for these attributes when calling ``as_view`` in your URLconf.
+
+Example (using a subclass)::
+
+    # some_app/views.py
+    from envelope.views import ContactView
+
+    class MyContactView(ContactView):
+        template_name = "my_contact.html"
+        success_url = "/thank/you/kind/sir/"
+
+    # urls.py
+    from django.conf.urls import patterns, url
+    from some_app.views import MyContactView
+
+    urlpatterns = patterns('',
+        url(r'^contact/', MyContactView.as_view()),
+    )
+
+Example (setting attributes in place)::
+
+    # urls.py
+    from django.conf.urls import patterns, url
+    from envelope.views import ContactView
+
+    urlpatterns = patterns('',
+        url(r'^contact/', ContactView.as_view(
+            template_name="my_contact.html",
+            success_url="/thank/you/kind/sir/"
+        )),
+    )
+
+The following options are recognized by the view:
 
 * ``form_class``: Which form class to use for contact message handling.
   The default (:class:`envelope.forms.ContactForm`) is often enough, but you can subclass it
@@ -23,30 +63,9 @@ the application's URLconf, hook the :func:`envelope.views.contact` view into you
 * ``template_name``: Full name of the template which will display the form. By
   default it is ``envelope/contact.html``.
 
-* ``redirect_to``: View name or a hardcoded URL of the page with some kind of a
+* ``success_url``: View name or a hardcoded URL of the page with some kind of a
   "thank you for your feedback", displayed after the form is successfully 
   submitted. If left unset, the view redirects to itself.
-
-* ``extra_context``: A dictionary of values to add to template context.
-
-Example::
-
-    from my_app.forms import MyContactForm
-    
-    contact_info = {
-        'form_class':       MyContactForm,
-        'template_name':    'my_contact.html',
-        'redirect_to':      '/thanks/',
-    }
-    urlpatterns = patterns('',
-        #...
-        url(r'^contact/', 
-            'envelope.views.contact',
-            kwargs=contact_info,
-            name='envelope-contact'
-        ),
-        #...
-    )
 
 To customize the email message sent to you, create a template called 
 ``envelope/email_body.txt``. You can use any of the :class:`envelope.forms.ContactForm` field names as template variables. 
