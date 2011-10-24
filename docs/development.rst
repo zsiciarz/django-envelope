@@ -28,8 +28,8 @@ Tests can be run when ``django-envelope`` and its dependencies are installed
 into your site-packages, either with ``pip``, ``setup.py install``,
 ``setup.py develop`` or any other way.
 
-To run tests, some additional packages are required. These are specified in
-file ``test_requirements.txt``.
+All dependencies required for running tests and building documentation are
+specified in the file ``pip-requirements.txt``.
 
 To get the tests up and running, follow these commands::
 
@@ -39,7 +39,7 @@ To get the tests up and running, follow these commands::
     git clone git://github.com/zsiciarz/django-envelope.git
     cd django-envelope
     python setup.py develop
-    pip install -r test_requirements.txt
+    pip install -r pip-requirements.txt
     python runtests.py
 
 .. note::
