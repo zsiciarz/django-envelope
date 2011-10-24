@@ -14,7 +14,7 @@ setup(
     url='http://github.com/zsiciarz/django-envelope',
     download_url='http://pypi.python.org/pypi/django-envelope',
     license='MIT',
-    install_requires=['Django', 'django-honeypot'],
+    install_requires=['Django>=1.3', 'django-honeypot'],
     packages=find_packages(),
     include_package_data=True,
     classifiers=['Development Status :: 5 - Production/Stable',
