@@ -68,9 +68,11 @@ class ContactViewTestCase(TestCase):
         u"""
         If the honeypot field is not empty, keep the spammer off the page.
         """
-        response = self.client.post(self.url, {self.honeypot: 'some value'})
+        self.form_data.update({self.honeypot: 'some value'})
+        response = self.client.post(self.url, self.form_data)
         self.assertEqual(response.status_code, 400)
-        response = self.client.post(self.url, {self.honeypot: ''})
+        self.form_data.update({self.honeypot: ''})
+        response = self.client.post(self.url, self.form_data, follow=True)
         self.assertEqual(response.status_code, 200)
 
     def test_form_successful(self):

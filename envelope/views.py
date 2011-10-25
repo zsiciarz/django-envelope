@@ -7,13 +7,14 @@ Views used to process the contact form.
 import logging
 
 from django.contrib import messages
+from django.http import HttpResponseBadRequest
 from django.shortcuts import redirect
-from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 
-from honeypot.decorators import check_honeypot
+from honeypot.decorators import verify_honeypot_value
 
+from envelope import signals
 from envelope.forms import ContactForm
 
 
@@ -86,6 +87,13 @@ class ContactView(FormView):
         u"""
         Sends the message and redirects the user somewhere.
         """
+        responses = signals.before_send.send(sender=self.__class__,
+                                             request=self.request,
+                                             form=form)
+        for (receiver, response) in responses:
+            if not response:
+                return HttpResponseBadRequest(_("Rejected by %s") %
+                                                receiver.__name__)
         form.save()
         messages.info(self.request,
                       _("Thank you for your message."),
@@ -98,9 +106,12 @@ class ContactView(FormView):
         """
         return self.render_to_response(self.get_context_data(form=form))
 
-    @method_decorator(check_honeypot)
-    def dispatch(self, *args, **kwargs):
-        u"""
-        Overridden here to make decorators work.
-        """
-        return super(ContactView, self).dispatch(*args, **kwargs)
+
+def check_honeypot(sender, request, form, **kwargs):
+    u"""
+    ``verify_honeypot_value`` returns ``None`` when everything is OK.
+    """
+    return verify_honeypot_value(request, '') is None
+
+signals.before_send.connect(check_honeypot, sender=ContactView,
+                            dispatch_uid='envelope.views')
