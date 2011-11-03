@@ -12,8 +12,6 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 
-from honeypot.decorators import verify_honeypot_value
-
 from envelope import signals
 from envelope.forms import ContactForm
 
@@ -107,11 +105,13 @@ class ContactView(FormView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-def check_honeypot(sender, request, form, **kwargs):
+def filter_spam(sender, request, form, **kwargs):
     u"""
-    ``verify_honeypot_value`` returns ``None`` when everything is OK.
+    Handle spam filtering.
     """
-    return verify_honeypot_value(request, '') is None
+    from envelope.spam_filters import check_honeypot
+    return check_honeypot(request, form)
 
-signals.before_send.connect(check_honeypot, sender=ContactView,
-                            dispatch_uid='envelope.views')
+
+signals.before_send.connect(filter_spam, sender=ContactView,
+                            dispatch_uid='envelope.views.filter_spam')
