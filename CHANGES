@@ -1,6 +1,7 @@
 0.4.0
  - removed the function-based view
  - removed ContactForm.send() method
+ - application signals (before_send)
 
 0.3.2
  - omit the brackets if the user doesn't have a full name
