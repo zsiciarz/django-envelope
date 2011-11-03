@@ -14,3 +14,8 @@ Forms
 .. automodule:: envelope.forms
    :members:
 
+Spam filters
+============
+
+.. automodule:: envelope.spam_filters
+   :members:
