@@ -75,6 +75,16 @@ class ContactViewTestCase(TestCase):
         response = self.client.post(self.url, self.form_data, follow=True)
         self.assertEqual(response.status_code, 200)
 
+    def test_form_invalid(self):
+        u"""
+        If the POST data is incorrect, the form is invalid.
+        """
+        self.form_data.update({'sender': ''})
+        response = self.client.post(self.url, self.form_data)
+        self.assertEqual(response.status_code, 200)
+        flash_error_message = _("There was en error in the contact form.")
+        self.assertContains(response, flash_error_message)
+
     def test_form_successful(self):
         u"""
         If the data is correct, a message is sent and the user is redirected.
