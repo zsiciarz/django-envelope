@@ -8,25 +8,14 @@ import logging
 from smtplib import SMTPException
 
 from django import forms
-from django.conf import settings
 from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
+from envelope import settings
+
 
 logger = logging.getLogger('envelope.forms')
-
-DEFAULT_CONTACT_CHOICES = (
-    ('',    _("Choose")),
-    (10,    _("A general question regarding the website")),
-    (None,  _("Other")),
-)
-
-CONTACT_CHOICES = getattr(settings, 'ENVELOPE_CONTACT_CHOICES',
-                          DEFAULT_CONTACT_CHOICES)
-
-EMAIL_RECIPIENTS = getattr(settings, 'ENVELOPE_EMAIL_RECIPIENTS',
-                           [settings.DEFAULT_FROM_EMAIL])
 
 
 class BaseContactForm(forms.Form):
@@ -43,14 +32,12 @@ class BaseContactForm(forms.Form):
         u"""
         Sends the message.
         """
-        subject_intro = getattr(settings, 'ENVELOPE_SUBJECT_INTRO',
-                                _("Message from contact form: "))
-        subject = subject_intro + self.cleaned_data['subject']
+        subject = settings.ENVELOPE_SUBJECT_INTRO + self.cleaned_data['subject']
         context = self.get_context()
         message = render_to_string('envelope/email_body.txt', context)
-        from_email = settings.DEFAULT_FROM_EMAIL
         try:
-            mail.send_mail(subject, message, from_email, EMAIL_RECIPIENTS)
+            mail.send_mail(subject, message, settings.ENVELOPE_FROM_EMAIL,
+                           settings.ENVELOPE_EMAIL_RECIPIENTS)
             logger.info(_("Contact form submitted and sent (from: %s)") %
                         self.cleaned_data['email'])
         except SMTPException:
@@ -82,7 +69,8 @@ class ContactForm(BaseContactForm):
     tuples, as usual with Django choice fields. Keep first elements of those
     tuples as integer values (or use None for the category "Other").
     """
-    category = forms.ChoiceField(label=_("Category"), choices=CONTACT_CHOICES)
+    category = forms.ChoiceField(label=_("Category"),
+                                 choices=settings.ENVELOPE_CONTACT_CHOICES)
 
     def __init__(self, *args, **kwargs):
         u"""
@@ -114,5 +102,4 @@ class ContactForm(BaseContactForm):
             category = int(self.cleaned_data['category'])
         except (AttributeError, ValueError):
             category = None
-        return dict(CONTACT_CHOICES).get(category)
-
+        return dict(settings.ENVELOPE_CONTACT_CHOICES).get(category)
