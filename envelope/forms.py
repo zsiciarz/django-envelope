@@ -92,8 +92,9 @@ class ContactForm(BaseContactForm):
     tuples, as usual with Django choice fields. Keep first elements of those
     tuples as integer values (or use None for the category "Other").
     """
+    category_choices = settings.ENVELOPE_CONTACT_CHOICES
     category = forms.ChoiceField(label=_("Category"),
-                                 choices=settings.ENVELOPE_CONTACT_CHOICES)
+                                 choices=category_choices)
 
     def __init__(self, *args, **kwargs):
         u"""
@@ -107,6 +108,7 @@ class ContactForm(BaseContactForm):
             'subject',
             'message',
         ]
+        self.fields['category'].choices = self.get_category_choices()
 
     def get_context(self):
         u"""
@@ -117,6 +119,12 @@ class ContactForm(BaseContactForm):
         context['category'] = self.get_category_display()
         return context
 
+    def get_category_choices(self):
+        u"""
+        Returns a tuple of 2-element category tuples.
+        """
+        return self.category_choices
+
     def get_category_display(self):
         u"""
         Returns the displayed name of the selected category.
@@ -125,4 +133,4 @@ class ContactForm(BaseContactForm):
             category = int(self.cleaned_data['category'])
         except (AttributeError, ValueError):
             category = None
-        return dict(settings.ENVELOPE_CONTACT_CHOICES).get(category)
+        return dict(self.get_category_choices()).get(category)
