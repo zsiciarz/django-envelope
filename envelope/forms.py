@@ -28,16 +28,23 @@ class BaseContactForm(forms.Form):
     message = forms.CharField(label=_("Message"), max_length=1000,
                               widget=forms.Textarea())
 
+    subject_intro = settings.ENVELOPE_SUBJECT_INTRO
+    from_email = settings.ENVELOPE_FROM_EMAIL
+    email_recipients = settings.ENVELOPE_EMAIL_RECIPIENTS
+    template_name = 'envelope/email_body.txt'
+
     def save(self):
         u"""
         Sends the message.
         """
-        subject = settings.ENVELOPE_SUBJECT_INTRO + self.cleaned_data['subject']
+        subject = self.get_subject()
+        from_email = self.get_from_email()
+        email_recipients = self.get_email_recipients()
         context = self.get_context()
-        message = render_to_string('envelope/email_body.txt', context)
+
+        message = render_to_string(self.get_template_names(), context)
         try:
-            mail.send_mail(subject, message, settings.ENVELOPE_FROM_EMAIL,
-                           settings.ENVELOPE_EMAIL_RECIPIENTS)
+            mail.send_mail(subject, message, from_email, email_recipients)
             logger.info(_("Contact form submitted and sent (from: %s)") %
                         self.cleaned_data['email'])
         except SMTPException:
@@ -53,6 +60,22 @@ class BaseContactForm(forms.Form):
         Override this method to set additional template variables.
         """
         return self.cleaned_data.copy()
+
+    def get_subject(self):
+        u"""Returns a string to be used as the email subject."""
+        return self.subject_intro + self.cleaned_data['subject']
+
+    def get_from_email(self):
+        u"""Returns a string to be used as the email from."""
+        return self.from_email
+
+    def get_email_recipients(self):
+        u"""Returns a list of recipients for the message."""
+        return self.email_recipients
+
+    def get_template_names(self):
+        u"""Returns a list of recipients for the message."""
+        return self.template_name
 
 
 class ContactForm(BaseContactForm):
