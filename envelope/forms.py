@@ -33,6 +33,12 @@ class BaseContactForm(forms.Form):
     email_recipients = settings.ENVELOPE_EMAIL_RECIPIENTS
     template_name = 'envelope/email_body.txt'
 
+    def __init__(self, *args, **kwargs):
+        for kwarg in kwargs.keys():
+            if hasattr(self, kwarg):
+                setattr(self, kwarg, kwargs.pop(kwarg))
+        super(BaseContactForm, self).__init__(*args, **kwargs)
+
     def save(self):
         u"""
         Sends the message.
