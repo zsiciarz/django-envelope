@@ -67,7 +67,7 @@ class ContactView(FormView):
         u"""
         Automatically fills form fields for authenticated users.
         """
-        initial = super(ContactView, self).get_initial()
+        initial = super(ContactView, self).get_initial().copy()
         user = self.request.user
         if user.is_authenticated():
             # the user might not have a full name, depends on the registration
