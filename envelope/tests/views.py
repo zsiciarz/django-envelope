@@ -3,6 +3,7 @@ Unit tests for ``django-envelope`` views.
 """
 
 from django.conf import settings
+from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
@@ -51,6 +52,11 @@ class ContactViewTestCase(TestCase):
         response = self.client.get(self.url)
         self.assertContains(response, 'value="test (John Doe)"')
         self.assertContains(response, 'value="test@example.org"')
+
+        self.client.logout()
+        response = self.client.get(self.url)
+        self.assertNotContains(response, 'value="test (John Doe)"')
+        self.assertNotContains(response, 'value="test@example.org"')
 
     def test_prefilled_form_no_full_name(self):
         u"""
