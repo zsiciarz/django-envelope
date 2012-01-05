@@ -51,6 +51,7 @@ class ContactView(FormView):
     .. versionadded:: 0.3.0
     """
     form_class = ContactForm
+    form_kwargs = {}
     template_name = 'envelope/contact.html'
     success_url = None
 
@@ -80,6 +81,11 @@ class ContactView(FormView):
                 'email': user.email,
             })
         return initial
+
+    def get_form_kwargs(self):
+        kwargs = super(ContactView, self).get_form_kwargs()
+        kwargs.update(self.form_kwargs)
+        return kwargs
 
     def form_valid(self, form):
         u"""
