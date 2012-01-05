@@ -21,6 +21,23 @@ logger = logging.getLogger('envelope.forms')
 class BaseContactForm(forms.Form):
     u"""
     Base contact form class.
+
+    The following form attributes can be overridden when creating the form or in a subclass.
+    If you need more flexibility, you can instead override the
+    associated methods such as `get_from_email()` (see below).
+
+    ``subject_intro``
+        Prefix used to create the subject line. Default is ENVELOPE_SUBJECT_INTRO.
+
+    ``from_email``
+        Used in the email from. Defaults to ENVELOPE_FROM_EMAIL.
+
+    ``email_recipients``
+        List of email addresses to send the email to. Defaults to ENVELOPE_EMAIL_RECIPIENTS.
+
+    ``template_name``
+        Template used to render the email message. Defaults to `'envelope/email_body.txt'`.
+
     """
     sender = forms.CharField(label=_("From"), max_length=70)
     email = forms.EmailField(label=_("Email"))
@@ -68,19 +85,36 @@ class BaseContactForm(forms.Form):
         return self.cleaned_data.copy()
 
     def get_subject(self):
-        u"""Returns a string to be used as the email subject."""
+        u"""
+        Returns a string to be used as the email subject.
+
+        Override this method to customize the display of the subject.
+        """
         return self.subject_intro + self.cleaned_data['subject']
 
     def get_from_email(self):
-        u"""Returns a string to be used as the email from."""
+        u"""
+        Returns the from email address.
+
+        Override to customize how the from email address is determined.
+        """
         return self.from_email
 
     def get_email_recipients(self):
-        u"""Returns a list of recipients for the message."""
+        u"""
+        Returns a list of recipients for the message.
+
+        Override to customize how the email recipients are determined.
+        """
         return self.email_recipients
 
     def get_template_names(self):
-        u"""Returns a list of recipients for the message."""
+        u"""
+        Returns a template_name (or list of template_names) to be used
+        for the email message.
+
+        Override to use your own method choosing a template name.
+        """
         return self.template_name
 
 
@@ -97,6 +131,9 @@ class ContactForm(BaseContactForm):
     your settings.py. The value for this setting should be a tuple of 2-element
     tuples, as usual with Django choice fields. Keep first elements of those
     tuples as integer values (or use None for the category "Other").
+
+    You can additionally override `category_choices` or `get_category_choices()`
+    in a subclass.
     """
     category_choices = settings.ENVELOPE_CONTACT_CHOICES
     category = forms.ChoiceField(label=_("Category"),
@@ -128,6 +165,8 @@ class ContactForm(BaseContactForm):
     def get_category_choices(self):
         u"""
         Returns a tuple of 2-element category tuples.
+
+        Override this method to customize the generation of categories.
         """
         return self.category_choices
 
