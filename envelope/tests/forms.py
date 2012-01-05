@@ -77,6 +77,22 @@ class BaseContactFormTestCase(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         self.assertIn(self.form_data['subject'], mail.outbox[0].subject)
 
+    def test_init_attr_override(self):
+        u"""
+        Attributes can be overridden on __init__()
+        """
+        overrides = {
+            'subject_intro': 'New subject style: ',
+            'from_email': 'new@example.com',
+            'email_recipients': ['new_to@example.com'],
+        }
+        form = BaseContactForm(self.form_data, **overrides)
+        form.is_valid()
+        form.save()
+        self.assertIn(overrides['subject_intro'], mail.outbox[0].subject)
+        self.assertIn(overrides['from_email'], mail.outbox[0].from_email)
+        self.assertIn(overrides['email_recipients'][0], mail.outbox[0].recipients())
+
     def test_save_smtp_error(self):
         u"""
         If the email backend raised an error, the message is not sent.

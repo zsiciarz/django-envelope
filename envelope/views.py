@@ -39,6 +39,11 @@ class ContactView(FormView):
         ``save()`` method which should send the message somewhere. Stick to
         the default, or its subclasses.
 
+    ``form_kwargs``
+        Additional kwargs to be used in the creation of the form. Use with
+        :class:`envelope.forms.BaseContactForm` form arguments for dynamic
+        customization of the form.
+
     ``template_name``
         Full name of the template which will display
         the form. By default it is "envelope/contact.html".
@@ -51,6 +56,7 @@ class ContactView(FormView):
     .. versionadded:: 0.3.0
     """
     form_class = ContactForm
+    form_kwargs = {}
     template_name = 'envelope/contact.html'
     success_url = None
 
@@ -80,6 +86,11 @@ class ContactView(FormView):
                 'email': user.email,
             })
         return initial
+
+    def get_form_kwargs(self):
+        kwargs = super(ContactView, self).get_form_kwargs()
+        kwargs.update(self.form_kwargs)
+        return kwargs
 
     def form_valid(self, form):
         u"""

@@ -17,3 +17,4 @@ Authors
 * Giorgos Logiotatidis
 * Mark Lavin
 * Tomasz Wysocki
+* Erik Simmler

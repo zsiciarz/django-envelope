@@ -21,6 +21,23 @@ logger = logging.getLogger('envelope.forms')
 class BaseContactForm(forms.Form):
     u"""
     Base contact form class.
+
+    The following form attributes can be overridden when creating the form or in a subclass.
+    If you need more flexibility, you can instead override the
+    associated methods such as `get_from_email()` (see below).
+
+    ``subject_intro``
+        Prefix used to create the subject line. Default is ENVELOPE_SUBJECT_INTRO.
+
+    ``from_email``
+        Used in the email from. Defaults to ENVELOPE_FROM_EMAIL.
+
+    ``email_recipients``
+        List of email addresses to send the email to. Defaults to ENVELOPE_EMAIL_RECIPIENTS.
+
+    ``template_name``
+        Template used to render the email message. Defaults to `'envelope/email_body.txt'`.
+
     """
     sender = forms.CharField(label=_("From"), max_length=70)
     email = forms.EmailField(label=_("Email"))
@@ -28,16 +45,29 @@ class BaseContactForm(forms.Form):
     message = forms.CharField(label=_("Message"), max_length=1000,
                               widget=forms.Textarea())
 
+    subject_intro = settings.ENVELOPE_SUBJECT_INTRO
+    from_email = settings.ENVELOPE_FROM_EMAIL
+    email_recipients = settings.ENVELOPE_EMAIL_RECIPIENTS
+    template_name = 'envelope/email_body.txt'
+
+    def __init__(self, *args, **kwargs):
+        for kwarg in kwargs.keys():
+            if hasattr(self, kwarg):
+                setattr(self, kwarg, kwargs.pop(kwarg))
+        super(BaseContactForm, self).__init__(*args, **kwargs)
+
     def save(self):
         u"""
         Sends the message.
         """
-        subject = settings.ENVELOPE_SUBJECT_INTRO + self.cleaned_data['subject']
+        subject = self.get_subject()
+        from_email = self.get_from_email()
+        email_recipients = self.get_email_recipients()
         context = self.get_context()
-        message = render_to_string('envelope/email_body.txt', context)
+
+        message = render_to_string(self.get_template_names(), context)
         try:
-            mail.send_mail(subject, message, settings.ENVELOPE_FROM_EMAIL,
-                           settings.ENVELOPE_EMAIL_RECIPIENTS)
+            mail.send_mail(subject, message, from_email, email_recipients)
             logger.info(_("Contact form submitted and sent (from: %s)") %
                         self.cleaned_data['email'])
         except SMTPException:
@@ -54,6 +84,39 @@ class BaseContactForm(forms.Form):
         """
         return self.cleaned_data.copy()
 
+    def get_subject(self):
+        u"""
+        Returns a string to be used as the email subject.
+
+        Override this method to customize the display of the subject.
+        """
+        return self.subject_intro + self.cleaned_data['subject']
+
+    def get_from_email(self):
+        u"""
+        Returns the from email address.
+
+        Override to customize how the from email address is determined.
+        """
+        return self.from_email
+
+    def get_email_recipients(self):
+        u"""
+        Returns a list of recipients for the message.
+
+        Override to customize how the email recipients are determined.
+        """
+        return self.email_recipients
+
+    def get_template_names(self):
+        u"""
+        Returns a template_name (or list of template_names) to be used
+        for the email message.
+
+        Override to use your own method choosing a template name.
+        """
+        return self.template_name
+
 
 class ContactForm(BaseContactForm):
     u"""
@@ -68,9 +131,13 @@ class ContactForm(BaseContactForm):
     your settings.py. The value for this setting should be a tuple of 2-element
     tuples, as usual with Django choice fields. Keep first elements of those
     tuples as integer values (or use None for the category "Other").
+
+    You can additionally override `category_choices` or `get_category_choices()`
+    in a subclass.
     """
+    category_choices = settings.ENVELOPE_CONTACT_CHOICES
     category = forms.ChoiceField(label=_("Category"),
-                                 choices=settings.ENVELOPE_CONTACT_CHOICES)
+                                 choices=category_choices)
 
     def __init__(self, *args, **kwargs):
         u"""
@@ -84,6 +151,7 @@ class ContactForm(BaseContactForm):
             'subject',
             'message',
         ]
+        self.fields['category'].choices = self.get_category_choices()
 
     def get_context(self):
         u"""
@@ -94,6 +162,14 @@ class ContactForm(BaseContactForm):
         context['category'] = self.get_category_display()
         return context
 
+    def get_category_choices(self):
+        u"""
+        Returns a tuple of 2-element category tuples.
+
+        Override this method to customize the generation of categories.
+        """
+        return self.category_choices
+
     def get_category_display(self):
         u"""
         Returns the displayed name of the selected category.
@@ -102,4 +178,4 @@ class ContactForm(BaseContactForm):
             category = int(self.cleaned_data['category'])
         except (AttributeError, ValueError):
             category = None
-        return dict(settings.ENVELOPE_CONTACT_CHOICES).get(category)
+        return dict(self.get_category_choices()).get(category)
