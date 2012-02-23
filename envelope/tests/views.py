@@ -14,10 +14,11 @@ class ContactViewTestCase(TestCase):
     u"""
     Unit tests for contact form view.
     """
-    url = reverse('envelope-contact')
-    customized_url = reverse('customized_class_contact')
+    urls = 'envelope.tests.urls'
 
     def setUp(self):
+        self.url = reverse('envelope-contact')
+        self.customized_url = reverse('customized_class_contact')
         self.honeypot = getattr(settings, 'HONEYPOT_FIELD_NAME', 'email2')
         self.form_data = {
             'sender':   'zbyszek',
