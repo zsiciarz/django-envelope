@@ -28,13 +28,17 @@ class BaseContactForm(forms.Form):
     message = forms.CharField(label=_("Message"), max_length=1000,
                               widget=forms.Textarea())
 
+    def __init__(self, *args, **kwargs):
+        self.email_template = kwargs.pop('email_template')
+        super(BaseContactForm, self).__init__(*args, **kwargs)
+
     def save(self):
         u"""
         Sends the message.
         """
         subject = settings.ENVELOPE_SUBJECT_INTRO + self.cleaned_data['subject']
         context = self.get_context()
-        message = render_to_string('envelope/email_body.txt', context)
+        message = render_to_string(self.email_template, context)
         try:
             mail.send_mail(subject, message, settings.ENVELOPE_FROM_EMAIL,
                            settings.ENVELOPE_EMAIL_RECIPIENTS)
