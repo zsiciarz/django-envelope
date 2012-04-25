@@ -52,6 +52,7 @@ class ContactView(FormView):
     """
     form_class = ContactForm
     template_name = 'envelope/contact.html'
+    email_template = 'envelope/email_body.txt'
     success_url = None
 
     def get_success_url(self):
@@ -80,6 +81,11 @@ class ContactView(FormView):
                 'email': user.email,
             })
         return initial
+
+    def get_form(self, form_class):
+        kwargs = self.get_form_kwargs()
+        kwargs['email_template'] = self.email_template
+        return form_class(**kwargs)
 
     def form_valid(self, form):
         u"""
