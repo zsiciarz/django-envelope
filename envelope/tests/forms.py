@@ -53,14 +53,14 @@ class BaseContactFormTestCase(TestCase):
         u"""
         When all required fields are supplied, the form is valid.
         """
-        form = BaseContactForm(self.form_data)
+        form = BaseContactForm(self.form_data, email_template='envelope/email_body.txt')
         self.assertTrue(form.is_valid())
 
     def test_get_context(self):
         u"""
         get_context() returns a copy of form's cleaned_data.
         """
-        form = BaseContactForm(self.form_data)
+        form = BaseContactForm(self.form_data, email_template='envelope/email_body.txt')
         self.assertTrue(form.is_valid())
         context = form.get_context()
         self.assertEqual(context, form.cleaned_data)
@@ -70,7 +70,8 @@ class BaseContactFormTestCase(TestCase):
         u"""
         A call to save() on a valid form sends the message.
         """
-        form = BaseContactForm(self.form_data)
+        form = BaseContactForm(self.form_data, email_template='envelope/email_body.txt')
+
         self.assertTrue(form.is_valid())
         result = form.save()
         self.assertTrue(result)
@@ -81,27 +82,27 @@ class BaseContactFormTestCase(TestCase):
         u"""
         If the email backend raised an error, the message is not sent.
         """
-        form = BaseContactForm(self.form_data)
+        form = BaseContactForm(self.form_data, email_template='envelope/email_body.txt')
         self.assertTrue(form.is_valid())
-        old_send_mail = mail.send_mail
+        old_send_mail = mail.EmailMessage
 
-        def new_send_mail(*args):
+        def new_send_mail(*args, **kwargs):
             raise SMTPException
 
         try:
-            mail.send_mail = new_send_mail
+            mail.EmailMessage = new_send_mail
             result = form.save()
             self.assertFalse(result)
             self.assertEqual(len(mail.outbox), 0)
         finally:
-            mail.send_mail = old_send_mail
+            mail.EmailMessage = old_send_mail
 
     def _test_required_field(self, field_name):
         u"""
         Check that the form does not validate without a given field.
         """
         del self.form_data[field_name]
-        form = BaseContactForm(self.form_data)
+        form = BaseContactForm(self.form_data, email_template='envelope/email_body.txt')
         self.assertFalse(form.is_valid())
         self.assertIn(field_name, form.errors)
 
@@ -125,7 +126,7 @@ class ContactFormTestCase(TestCase):
         Message field is required.
         """
         del self.form_data['category']
-        form = ContactForm(self.form_data)
+        form = ContactForm(self.form_data, email_template='envelope/email_body.txt')
         self.assertFalse(form.is_valid())
         self.assertIn('category', form.errors)
 
@@ -133,7 +134,7 @@ class ContactFormTestCase(TestCase):
         u"""
         get_context() is overridden and adds a 'category' variable.
         """
-        form = ContactForm(self.form_data)
+        form = ContactForm(self.form_data, email_template='envelope/email_body.txt')
         self.assertTrue(form.is_valid())
         context = form.get_context()
         self.assertIn('category', context)
@@ -143,7 +144,7 @@ class ContactFormTestCase(TestCase):
         A non-integer field value selects a category labeled "Other".
         """
         self.form_data['category'] = 'not-an-integer'
-        form = ContactForm(self.form_data)
+        form = ContactForm(self.form_data, email_template='envelope/email_body.txt')
         self.assertFalse(form.is_valid())
         self.assertEqual(form.get_category_display(), _("Other"))
 
