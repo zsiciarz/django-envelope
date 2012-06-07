@@ -40,8 +40,9 @@ class BaseContactForm(forms.Form):
         context = self.get_context()
         message = render_to_string(self.email_template, context)
         try:
-            mail.send_mail(subject, message, settings.ENVELOPE_FROM_EMAIL,
-                           settings.ENVELOPE_EMAIL_RECIPIENTS)
+            mail.EmailMessage(subject, message, settings.ENVELOPE_FROM_EMAIL,
+                settings.ENVELOPE_EMAIL_RECIPIENTS,
+                headers = {'Reply-To': self.cleaned_data['email']}).send()
             logger.info(_("Contact form submitted and sent (from: %s)") %
                         self.cleaned_data['email'])
         except SMTPException:
