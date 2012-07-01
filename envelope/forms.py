@@ -45,9 +45,9 @@ class BaseContactForm(forms.Form):
     message = forms.CharField(label=_("Message"), max_length=1000,
                               widget=forms.Textarea())
 
-    subject_intro = settings.ENVELOPE_SUBJECT_INTRO
-    from_email = settings.ENVELOPE_FROM_EMAIL
-    email_recipients = settings.ENVELOPE_EMAIL_RECIPIENTS
+    subject_intro = settings.SUBJECT_INTRO
+    from_email = settings.FROM_EMAIL
+    email_recipients = settings.EMAIL_RECIPIENTS
     template_name = 'envelope/email_body.txt'
 
     def __init__(self, *args, **kwargs):
@@ -143,7 +143,7 @@ class ContactForm(BaseContactForm):
     You can additionally override `category_choices` or `get_category_choices()`
     in a subclass.
     """
-    category_choices = settings.ENVELOPE_CONTACT_CHOICES
+    category_choices = settings.CONTACT_CHOICES
     category = forms.ChoiceField(label=_("Category"),
                                  choices=category_choices)
 

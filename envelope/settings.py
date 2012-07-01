@@ -14,13 +14,13 @@ DEFAULT_CONTACT_CHOICES = (
     (None,  _("Other")),
 )
 
-ENVELOPE_FROM_EMAIL = settings.DEFAULT_FROM_EMAIL
+FROM_EMAIL = settings.DEFAULT_FROM_EMAIL
 
-ENVELOPE_CONTACT_CHOICES = getattr(settings, 'ENVELOPE_CONTACT_CHOICES',
+CONTACT_CHOICES = getattr(settings, 'ENVELOPE_CONTACT_CHOICES',
                                    DEFAULT_CONTACT_CHOICES)
 
-ENVELOPE_EMAIL_RECIPIENTS = getattr(settings, 'ENVELOPE_EMAIL_RECIPIENTS',
+EMAIL_RECIPIENTS = getattr(settings, 'ENVELOPE_EMAIL_RECIPIENTS',
                            [settings.DEFAULT_FROM_EMAIL])
 
-ENVELOPE_SUBJECT_INTRO = getattr(settings, 'ENVELOPE_SUBJECT_INTRO',
+SUBJECT_INTRO = getattr(settings, 'ENVELOPE_SUBJECT_INTRO',
                                  _("Message from contact form: "))
