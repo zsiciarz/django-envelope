@@ -64,10 +64,18 @@ class BaseContactForm(forms.Form):
         from_email = self.get_from_email()
         email_recipients = self.get_email_recipients()
         context = self.get_context()
-
-        message = render_to_string(self.get_template_names(), context)
+        message_body = render_to_string(self.get_template_names(), context)
         try:
-            mail.send_mail(subject, message, from_email, email_recipients)
+            message = mail.EmailMessage(
+                subject=subject,
+                body=message_body,
+                from_email=from_email,
+                to=email_recipients,
+                headers={
+                    'Reply-To': self.cleaned_data['email']
+                }
+            )
+            message.send()
             logger.info(_("Contact form submitted and sent (from: %s)") %
                         self.cleaned_data['email'])
         except SMTPException:
