@@ -2,7 +2,6 @@ u"""
 Unit tests for ``django-envelope`` forms.
 """
 
-import warnings
 from smtplib import SMTPException
 
 from django.core import mail

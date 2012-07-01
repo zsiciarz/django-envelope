@@ -3,7 +3,6 @@ Unit tests for ``django-envelope`` views.
 """
 
 from django.conf import settings
-from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
