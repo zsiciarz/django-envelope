@@ -69,8 +69,35 @@ The following options (as well as those already in Django's `FormView`_) are rec
 
 * ``form_kwargs``: Additional kwargs to be used in the creation of the form. Use with :class:`envelope.forms.BaseContactForm` form arguments for dynamic customization of the form.
 
-To customize the email message sent to you, create a template called
-``envelope/email_body.txt``. You can use any of the :class:`envelope.forms.ContactForm` field names as template variables.
+You can also subclass :class:`envelope.forms.BaseContactForm` or
+:class:`envelope.forms.ContactForm` to further customize your form processing.
+Either set the following options as keyword arguments to ``__init__``, or override
+class attributes.
+
+* ``subject_intro``: Prefix used to create the subject line. Default is ``settings.ENVELOPE_SUBJECT_INTRO``.
+
+* ``from_email``: Used in the email from. Defaults to ``settings.DEFAULT_FROM_EMAIL``.
+
+* ``email_recipients``: List of email addresses to send the email to. Defaults to ``settings.ENVELOPE_EMAIL_RECIPIENTS``.
+
+* ``template_name``: Template used to render the email message. Defaults to ``envelope/email_body.txt``. You can use any of the form field names as template variables.
+
+Example of a custom form::
+
+    # forms.py
+    from envelope.forms import ContactForm
+    class MyContactForm(ContactForm):
+        subject_intro = "URGENT: "
+        template_name = "contact_email.html"
+
+    # urls.py
+    from django.conf.urls import patterns, url
+    from envelope.views import ContactView
+    from forms import MyContactForm
+
+    urlpatterns = patterns('',
+        url(r'^contact/', ContactView.as_view(form_class=MyContactForm)),
+    )
 
 
 .. _`FormView`: https://docs.djangoproject.com/en/dev/ref/class-based-views/#django.views.generic.edit.FormView
