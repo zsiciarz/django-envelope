@@ -18,3 +18,4 @@ Authors
 * Mark Lavin
 * Tomasz Wysocki
 * Erik Simmler
+* Vitaly Babiy
