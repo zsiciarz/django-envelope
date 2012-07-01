@@ -8,6 +8,8 @@ from django.core import mail
 from django.test import TestCase
 from django.utils.translation import ugettext_lazy as _
 
+from mock import patch
+
 from envelope.forms import BaseContactForm, ContactForm
 
 
@@ -98,18 +100,10 @@ class BaseContactFormTestCase(TestCase):
         """
         form = BaseContactForm(self.form_data)
         self.assertTrue(form.is_valid())
-        old_send_mail = mail.EmailMessage
-
-        def new_send_mail(*args, **kwargs):
-            raise SMTPException
-
-        try:
-            mail.EmailMessage = new_send_mail
+        with patch.object(mail.EmailMessage, 'send', side_effect=SMTPException):
             result = form.save()
             self.assertFalse(result)
             self.assertEqual(len(mail.outbox), 0)
-        finally:
-            mail.EmailMessage = old_send_mail
 
     def _test_required_field(self, field_name):
         u"""
