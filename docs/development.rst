@@ -46,7 +46,14 @@ To get a coverage report, replace the last command with::
     coverage run runtests.py && coverage html
 
 
+CI Server
+=========
+
+A `Jenkins instance`_ is running at `ShiningPanda`_.
+
+
 .. _`issue tracker`: https://github.com/zsiciarz/django-envelope/issues
 .. _virtualenv: http://www.virtualenv.org/
 .. _virtualenvwrapper: http://www.doughellmann.com/projects/virtualenvwrapper/
-
+.. _`Jenkins instance`: https://jenkins.shiningpanda.com/django-envelope/
+.. _`ShiningPanda`: https://www.shiningpanda.com/
