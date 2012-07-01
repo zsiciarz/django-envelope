@@ -24,10 +24,6 @@ Running tests
 .. note::
    It is recommended to work in a virtualenv_.
 
-Tests can be run when ``django-envelope`` and its dependencies are installed
-into your site-packages, either with ``pip``, ``setup.py install``,
-``setup.py develop`` or any other way.
-
 All dependencies required for running tests and building documentation are
 specified in the file ``pip-requirements.txt``.
 
