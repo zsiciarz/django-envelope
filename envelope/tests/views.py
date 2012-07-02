@@ -8,6 +8,8 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils.translation import ugettext_lazy as _
 
+from envelope import signals
+
 
 class ContactViewTestCase(TestCase):
     u"""
@@ -102,6 +104,29 @@ class ContactViewTestCase(TestCase):
         self.assertNotContains(response, flash_error_message)
         flash_success_message = _("Thank you for your message.")
         self.assertContains(response, flash_success_message)
+
+    def test_signal_before_send(self):
+        u"""
+        A ``before_send`` signal is emitted before sending the message.
+        """
+        # ugly trick to access the variable from inner scope
+        params = {}
+        def handle_before_send(sender, request, form, **kwargs):
+            params['form'] = form
+        signals.before_send.connect(handle_before_send)
+        self.client.post(self.url, self.form_data, follow=True)
+        self.assertEqual(params['form'].cleaned_data['email'], self.form_data['email'])
+
+    def test_signal_after_send(self):
+        u"""
+        An ``after_send`` signal is sent after succesfully sending the message.
+        """
+        params = {}
+        def handle_after_send(sender, message, form, **kwargs):
+            params['message'] = message
+        signals.after_send.connect(handle_after_send)
+        self.client.post(self.url, self.form_data, follow=True)
+        self.assertIn(self.form_data['subject'], params['message'].subject)
 
     def test_custom_template(self):
         u"""

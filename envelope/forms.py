@@ -12,7 +12,7 @@ from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
-from envelope import settings
+from envelope import settings, signals
 
 
 logger = logging.getLogger('envelope.forms')
@@ -76,6 +76,8 @@ class BaseContactForm(forms.Form):
                 }
             )
             message.send()
+            signals.after_send.send(sender=self.__class__, message=message,
+                                    form=self)
             logger.info(_("Contact form submitted and sent (from: %s)") %
                         self.cleaned_data['email'])
         except SMTPException:
