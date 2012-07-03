@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 u"""
-Envelope contact form.
+Contact form class definitions.
 """
 
 import logging

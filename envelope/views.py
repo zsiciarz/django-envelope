@@ -122,6 +122,12 @@ class ContactView(FormView):
 def filter_spam(sender, request, form, **kwargs):
     u"""
     Handle spam filtering.
+
+    This function is called when the ``before_send`` signal fires, passing the
+    current request and form object to the function. With that information in
+    hand, all available spam filters are called.
+
+    TODO: more spam filters
     """
     from envelope.spam_filters import check_honeypot
     return check_honeypot(request, form)
