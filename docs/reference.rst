@@ -19,3 +19,9 @@ Spam filters
 
 .. automodule:: envelope.spam_filters
    :members:
+
+Signals
+=======
+
+.. automodule:: envelope.signals
+   :members:
