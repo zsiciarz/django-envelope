@@ -30,7 +30,7 @@ Signals sent by the application.
         Form class.
 
     ``message``
-        An instance of ``EmailMessage`` that was used to send the message.
+        An instance of :class:`EmailMessage <django.core.mail.EmailMessage>` that was used to send the message.
 
     ``form``
         The form object.
