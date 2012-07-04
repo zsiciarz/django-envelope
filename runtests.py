@@ -2,12 +2,28 @@ import os
 
 from django.conf import settings
 
+try:
+    import honeypot
+except ImportError:
+    honeypot = None
+
 
 def make_absolute_path(path):
     return os.path.join(os.path.realpath(os.path.dirname(__file__)), path)
 
 
 if not settings.configured:
+    INSTALLED_APPS = (
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.sites',
+        'django.contrib.messages',
+        'django_nose',
+        'envelope',
+    )
+    if honeypot:
+        INSTALLED_APPS += ('honeypot',)
     settings.configure(
         DATABASES = {
             'default': {
@@ -15,17 +31,8 @@ if not settings.configured:
                 'NAME': ':memory:',
             }
         },
+        INSTALLED_APPS = INSTALLED_APPS,
         SITE_ID = 1,
-        INSTALLED_APPS = (
-            'django.contrib.auth',
-            'django.contrib.contenttypes',
-            'django.contrib.sessions',
-            'django.contrib.sites',
-            'django.contrib.messages',
-            'django_nose',
-            'envelope',
-            'honeypot',
-        ),
         TEMPLATE_DIRS = (
             make_absolute_path('envelope/tests/templates'),
         ),

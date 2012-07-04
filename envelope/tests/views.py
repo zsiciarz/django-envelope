@@ -6,7 +6,13 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+from django.utils import unittest
 from django.utils.translation import ugettext_lazy as _
+
+try:
+    import honeypot
+except ImportError:
+    honeypot = None
 
 from envelope import signals
 
@@ -72,6 +78,7 @@ class ContactViewTestCase(TestCase):
         response = self.client.get(self.url)
         self.assertContains(response, 'value="test"')
 
+    @unittest.skipIf(honeypot is None, u"django-honeypot is not installed")
     def test_honeypot(self):
         u"""
         If the honeypot field is not empty, keep the spammer off the page.
