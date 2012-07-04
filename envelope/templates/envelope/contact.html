@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% load i18n %}
 
-{% load honeypot %}
+{% load envelope_tags %}
 {% block content %}
 <section id="contact">
   <h1>{% trans "Contact" %}</h1>
   <form action="{% url envelope-contact %}" method="post">
   {% csrf_token %}
-  {% render_honeypot_field %}
+  {% antispam_fields %}
     <fieldset>
       <table>
         <tbody>
