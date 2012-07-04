@@ -1,3 +1,10 @@
+0.5.0
+ - contact form class is more customizable
+ - the Reply-To header in the message is set to whatever the submitted email was
+ - added after_send signal
+ - django-honeypot is now just an optional dependency
+ - example_project is no longer incorrectly distributed with the application
+
 0.4.1
  - security bugfix regarding initial form values
 
