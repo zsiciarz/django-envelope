@@ -131,5 +131,6 @@ def filter_spam(sender, request, form, **kwargs):
     return check_honeypot(request, form)
 
 
-signals.before_send.connect(filter_spam, sender=ContactView,
+signals.before_send.connect(filter_spam,
+                            sender=ContactView,
                             dispatch_uid='envelope.views.filter_spam')

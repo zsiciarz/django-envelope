@@ -12,7 +12,8 @@ from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
-from envelope import settings, signals
+from envelope import settings
+from envelope.signals import after_send
 
 
 logger = logging.getLogger('envelope.forms')
@@ -80,8 +81,7 @@ class BaseContactForm(forms.Form):
                 }
             )
             message.send()
-            signals.after_send.send(sender=self.__class__, message=message,
-                                    form=self)
+            after_send.send(sender=self.__class__, message=message, form=self)
             logger.info(_("Contact form submitted and sent (from: %s)") %
                         self.cleaned_data['email'])
         except SMTPException:
@@ -153,8 +153,7 @@ class ContactForm(BaseContactForm):
     ``get_category_choices()`` in a subclass.
     """
     category_choices = settings.CONTACT_CHOICES
-    category = forms.ChoiceField(label=_("Category"),
-                                 choices=category_choices)
+    category = forms.ChoiceField(label=_("Category"), choices=category_choices)
 
     def __init__(self, *args, **kwargs):
         u"""
