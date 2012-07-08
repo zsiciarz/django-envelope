@@ -24,25 +24,25 @@ class ContactView(FormView):
     Contact form view (class-based).
 
     Displays the contact form upon a GET request. If the current user is
-    authenticated, ``sender`` and ``email`` fields are automatically filled
-    with proper values.
+    authenticated, ``sender`` and ``email`` fields are automatically
+    filled with proper values.
 
-    When the form is submitted and valid, a message is sent and afterwards
-    the user is redirected to a "thank you" page (by default it is the page
-    with the form).
+    When the form is submitted and valid, a message is sent and
+    afterwards the user is redirected to a "thank you" page (by default
+    it is the page with the form).
 
     ``form_class``
         Which form class to use for contact message handling.
-        The default (:class:`envelope.forms.ContactForm`) is often enough,
-        but you can subclass it if you want, or even replace with a totally
-        custom class. The only requirement is that your custom class has a
-        ``save()`` method which should send the message somewhere. Stick to
-        the default, or its subclasses.
+        The default (:class:`envelope.forms.ContactForm`) is often
+        enough, but you can subclass it if you want, or even replace
+        with a totally custom class. The only requirement is that your
+        custom class has a ``save()`` method which should send the
+        message somewhere. Stick to the default, or its subclasses.
 
     ``form_kwargs``
-        Additional kwargs to be used in the creation of the form. Use with
-        :class:`envelope.forms.BaseContactForm` form arguments for dynamic
-        customization of the form.
+        Additional kwargs to be used in the creation of the form. Use
+        with :class:`envelope.forms.BaseContactForm` form arguments for
+        dynamic customization of the form.
 
     ``template_name``
         Full name of the template which will display
@@ -52,8 +52,6 @@ class ContactView(FormView):
         URL of the page with some kind of a "thank you
         for your feedback", displayed after the form is successfully
         submitted. If left unset, the view redirects to itself.
-
-    .. versionadded:: 0.3.0
     """
     form_class = ContactForm
     form_kwargs = {}
@@ -76,7 +74,7 @@ class ContactView(FormView):
         initial = super(ContactView, self).get_initial().copy()
         user = self.request.user
         if user.is_authenticated():
-            # the user might not have a full name, depends on the registration
+            # the user might not have a full name set in the model
             if user.get_full_name():
                 sender = '%s (%s)' % (user.username, user.get_full_name())
             else:
@@ -123,9 +121,9 @@ def filter_spam(sender, request, form, **kwargs):
     u"""
     Handle spam filtering.
 
-    This function is called when the ``before_send`` signal fires, passing the
-    current request and form object to the function. With that information in
-    hand, all available spam filters are called.
+    This function is called when the ``before_send`` signal fires,
+    passing the current request and form object to the function.
+    With that information in hand, all available spam filters are called.
 
     TODO: more spam filters
     """
@@ -133,5 +131,6 @@ def filter_spam(sender, request, form, **kwargs):
     return check_honeypot(request, form)
 
 
-signals.before_send.connect(filter_spam, sender=ContactView,
+signals.before_send.connect(filter_spam,
+                            sender=ContactView,
                             dispatch_uid='envelope.views.filter_spam')

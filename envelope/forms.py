@@ -12,7 +12,8 @@ from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
-from envelope import settings, signals
+from envelope import settings
+from envelope.signals import after_send
 
 
 logger = logging.getLogger('envelope.forms')
@@ -22,21 +23,25 @@ class BaseContactForm(forms.Form):
     u"""
     Base contact form class.
 
-    The following form attributes can be overridden when creating the form or in a subclass.
-    If you need more flexibility, you can instead override the
-    associated methods such as `get_from_email()` (see below).
+    The following form attributes can be overridden when creating the
+    form or in a subclass. If you need more flexibility, you can instead
+    override the associated methods such as `get_from_email()` (see below).
 
     ``subject_intro``
-        Prefix used to create the subject line. Default is ENVELOPE_SUBJECT_INTRO.
+        Prefix used to create the subject line. Default is
+        ``settings.ENVELOPE_SUBJECT_INTRO``.
 
     ``from_email``
-        Used in the email from. Defaults to ENVELOPE_FROM_EMAIL.
+        Used in the email from. Defaults to
+        ``settings.ENVELOPE_FROM_EMAIL``.
 
     ``email_recipients``
-        List of email addresses to send the email to. Defaults to ENVELOPE_EMAIL_RECIPIENTS.
+        List of email addresses to send the email to. Defaults to
+        ``settings.ENVELOPE_EMAIL_RECIPIENTS``.
 
     ``template_name``
-        Template used to render the email message. Defaults to `'envelope/email_body.txt'`.
+        Template used to render the email message. Defaults to
+        ``envelope/email_body.txt``.
 
     """
     sender = forms.CharField(label=_("From"), max_length=70)
@@ -76,8 +81,7 @@ class BaseContactForm(forms.Form):
                 }
             )
             message.send()
-            signals.after_send.send(sender=self.__class__, message=message,
-                                    form=self)
+            after_send.send(sender=self.__class__, message=message, form=self)
             logger.info(_("Contact form submitted and sent (from: %s)") %
                         self.cleaned_data['email'])
         except SMTPException:
@@ -88,9 +92,11 @@ class BaseContactForm(forms.Form):
 
     def get_context(self):
         u"""
-        Returns a dictionary of values to be passed to the email body template.
+        Returns context dictionary for the email body template.
 
-        Override this method to set additional template variables.
+        By default, the template has access to all form fields' values
+        stored in ``self.cleaned_data``. Override this method to set
+        additional template variables.
         """
         return self.cleaned_data.copy()
 
@@ -132,26 +138,26 @@ class ContactForm(BaseContactForm):
     u"""
     The default contact form class.
 
-    This class extends the base form with a possibility to select message
-    category. For example, user can ask a general question regarding the
-    website or a more specific one, like "ask tech support" or "I want to speak
-    to the manager".
+    This class extends the base form with a possibility to select
+    message category. For example, user can ask a general question
+    regarding the website or a more specific one, like "ask tech
+    support" or "I want to speak to the manager".
 
-    The categories are controlled by configuring ``ENVELOPE_CONTACT_CHOICES`` in
-    your settings.py. The value for this setting should be a tuple of 2-element
-    tuples, as usual with Django choice fields. Keep first elements of those
-    tuples as integer values (or use None for the category "Other").
+    The categories are controlled by configuring
+    ``ENVELOPE_CONTACT_CHOICES`` in your settings.py. The value for this
+    setting should be a tuple of 2-element tuples, as usual with Django
+    choice fields. Keep first elements of those tuples as integer values
+    (or use None for the category "Other").
 
-    You can additionally override `category_choices` or `get_category_choices()`
-    in a subclass.
+    You can additionally override ``category_choices`` or
+    ``get_category_choices()`` in a subclass.
     """
     category_choices = settings.CONTACT_CHOICES
-    category = forms.ChoiceField(label=_("Category"),
-                                 choices=category_choices)
+    category = forms.ChoiceField(label=_("Category"), choices=category_choices)
 
     def __init__(self, *args, **kwargs):
         u"""
-        This does the trick with placing category choice above the subject.
+        Category choice will be rendered above the subject field.
         """
         super(ContactForm, self).__init__(*args, **kwargs)
         self.fields.keyOrder = [
@@ -165,8 +171,8 @@ class ContactForm(BaseContactForm):
 
     def get_context(self):
         u"""
-        Adds full category description to template variables in order to display
-        the category in email body.
+        Adds full category description to template variables in order
+        to display the category in email body.
         """
         context = super(ContactForm, self).get_context()
         context['category'] = self.get_category_display()
