@@ -33,9 +33,6 @@ if not settings.configured:
         },
         INSTALLED_APPS = INSTALLED_APPS,
         SITE_ID = 1,
-        TEMPLATE_DIRS = (
-            make_absolute_path('envelope/tests/templates'),
-        ),
         ROOT_URLCONF = 'envelope.tests.urls',
         TEST_RUNNER = 'django_nose.NoseTestSuiteRunner',
         NOSE_ARGS = ['--stop'],
