@@ -1,3 +1,6 @@
+0.5.1
+ - fixed template loading in tests
+
 0.5.0
  - contact form class is more customizable
  - the Reply-To header in the message is set to whatever the submitted email was
