@@ -19,3 +19,4 @@ Authors
 * Tomasz Wysocki
 * Erik Simmler
 * Vitaly Babiy
+* Jacek Tomaszewski
