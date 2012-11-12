@@ -49,9 +49,9 @@ copyright = u'2011-2012, Zbigniew Siciarz'
 # built documents.
 #
 # The short X.Y version.
-version = '0.5.0'
+version = '0.5.1'
 # The full version, including alpha/beta/rc tags.
-release = '0.5.0'
+release = '0.5.1'
 
 intersphinx_mapping = {
     'django': ('https://docs.djangoproject.com/en/dev/', 'http://docs.djangoproject.com/en/dev/_objects/')
