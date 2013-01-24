@@ -10,7 +10,7 @@ build/
 docs/_*
 docs/Makefile
 docs/make.bat
-.coverage*
+.coverage
 *,cover
 htmlcov
 

@@ -1,0 +1,7 @@
+[report]
+omit =
+    envelope/__init__.py
+    ../src/*
+    ../lib/*
+    */test*
+    runtests.py
