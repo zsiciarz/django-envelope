@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-u"""
+from __future__ import unicode_literals
+
+"""
 Views used to process the contact form.
 """
 
@@ -20,7 +22,7 @@ logger = logging.getLogger('envelope.views')
 
 
 class ContactView(FormView):
-    u"""
+    """
     Contact form view (class-based).
 
     Displays the contact form upon a GET request. If the current user is
@@ -59,7 +61,7 @@ class ContactView(FormView):
     success_url = None
 
     def get_success_url(self):
-        u"""
+        """
         Returns the URL where the view will redirect after submission.
         """
         if self.success_url:
@@ -68,7 +70,7 @@ class ContactView(FormView):
             return self.request.get_full_path()
 
     def get_initial(self):
-        u"""
+        """
         Automatically fills form fields for authenticated users.
         """
         initial = super(ContactView, self).get_initial().copy()
@@ -91,7 +93,7 @@ class ContactView(FormView):
         return kwargs
 
     def form_valid(self, form):
-        u"""
+        """
         Sends the message and redirects the user somewhere.
         """
         responses = signals.before_send.send(sender=self.__class__,
@@ -108,7 +110,7 @@ class ContactView(FormView):
         return redirect(self.get_success_url())
 
     def form_invalid(self, form):
-        u"""
+        """
         When the form has errors, display it again.
         """
         messages.error(self.request,
@@ -118,7 +120,7 @@ class ContactView(FormView):
 
 
 def filter_spam(sender, request, form, **kwargs):
-    u"""
+    """
     Handle spam filtering.
 
     This function is called when the ``before_send`` signal fires,

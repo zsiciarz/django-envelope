@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-u"""
+from __future__ import unicode_literals
+
+"""
 Signals sent by the application.
 
 ``before_send``
