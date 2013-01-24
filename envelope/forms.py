@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-u"""
+from __future__ import unicode_literals
+
+"""
 Contact form class definitions.
 """
 
@@ -20,7 +22,7 @@ logger = logging.getLogger('envelope.forms')
 
 
 class BaseContactForm(forms.Form):
-    u"""
+    """
     Base contact form class.
 
     The following form attributes can be overridden when creating the
@@ -62,7 +64,7 @@ class BaseContactForm(forms.Form):
         super(BaseContactForm, self).__init__(*args, **kwargs)
 
     def save(self):
-        u"""
+        """
         Sends the message.
         """
         subject = self.get_subject()
@@ -91,7 +93,7 @@ class BaseContactForm(forms.Form):
             return True
 
     def get_context(self):
-        u"""
+        """
         Returns context dictionary for the email body template.
 
         By default, the template has access to all form fields' values
@@ -101,7 +103,7 @@ class BaseContactForm(forms.Form):
         return self.cleaned_data.copy()
 
     def get_subject(self):
-        u"""
+        """
         Returns a string to be used as the email subject.
 
         Override this method to customize the display of the subject.
@@ -109,7 +111,7 @@ class BaseContactForm(forms.Form):
         return self.subject_intro + self.cleaned_data['subject']
 
     def get_from_email(self):
-        u"""
+        """
         Returns the from email address.
 
         Override to customize how the from email address is determined.
@@ -117,7 +119,7 @@ class BaseContactForm(forms.Form):
         return self.from_email
 
     def get_email_recipients(self):
-        u"""
+        """
         Returns a list of recipients for the message.
 
         Override to customize how the email recipients are determined.
@@ -125,7 +127,7 @@ class BaseContactForm(forms.Form):
         return self.email_recipients
 
     def get_template_names(self):
-        u"""
+        """
         Returns a template_name (or list of template_names) to be used
         for the email message.
 
@@ -135,7 +137,7 @@ class BaseContactForm(forms.Form):
 
 
 class ContactForm(BaseContactForm):
-    u"""
+    """
     The default contact form class.
 
     This class extends the base form with a possibility to select
@@ -156,7 +158,7 @@ class ContactForm(BaseContactForm):
     category = forms.ChoiceField(label=_("Category"), choices=category_choices)
 
     def __init__(self, *args, **kwargs):
-        u"""
+        """
         Category choice will be rendered above the subject field.
         """
         super(ContactForm, self).__init__(*args, **kwargs)
@@ -170,7 +172,7 @@ class ContactForm(BaseContactForm):
         self.fields['category'].choices = self.get_category_choices()
 
     def get_context(self):
-        u"""
+        """
         Adds full category description to template variables in order
         to display the category in email body.
         """
@@ -179,7 +181,7 @@ class ContactForm(BaseContactForm):
         return context
 
     def get_category_choices(self):
-        u"""
+        """
         Returns a tuple of 2-element category tuples.
 
         Override this method to customize the generation of categories.
@@ -187,7 +189,7 @@ class ContactForm(BaseContactForm):
         return self.category_choices
 
     def get_category_display(self):
-        u"""
+        """
         Returns the displayed name of the selected category.
         """
         try:

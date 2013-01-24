@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
-u"""
+from __future__ import unicode_literals
+
+"""
 Functions that reject the message if it is considered spam.
 """
 
 
 def check_honeypot(request, form):
-    u"""
+    """
     Make sure that the hidden form field is empty, using django-honeypot.
     """
     try:

@@ -1,4 +1,8 @@
-u"""
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+
+"""
 Unit tests for ``django-envelope`` forms.
 """
 
@@ -14,7 +18,7 @@ from envelope.forms import BaseContactForm, ContactForm
 
 
 class BaseContactFormTestCase(TestCase):
-    u"""
+    """
     Unit tests for ``BaseContactForm`` class.
     """
 
@@ -27,38 +31,38 @@ class BaseContactFormTestCase(TestCase):
         }
 
     def test_sender_field(self):
-        u"""
+        """
         Sender field is required.
         """
         self._test_required_field('sender')
 
     def test_email_field(self):
-        u"""
+        """
         E-mail field is required.
         """
         self._test_required_field('email')
 
     def test_subject_field(self):
-        u"""
+        """
         Subject field is required.
         """
         self._test_required_field('subject')
 
     def test_message_field(self):
-        u"""
+        """
         Message field is required.
         """
         self._test_required_field('message')
 
     def test_all_fields_valid(self):
-        u"""
+        """
         When all required fields are supplied, the form is valid.
         """
         form = BaseContactForm(self.form_data)
         self.assertTrue(form.is_valid())
 
     def test_get_context(self):
-        u"""
+        """
         get_context() returns a copy of form's cleaned_data.
         """
         form = BaseContactForm(self.form_data)
@@ -68,7 +72,7 @@ class BaseContactFormTestCase(TestCase):
         self.assertFalse(context is form.cleaned_data)
 
     def test_save(self):
-        u"""
+        """
         A call to save() on a valid form sends the message.
         """
         form = BaseContactForm(self.form_data)
@@ -79,7 +83,7 @@ class BaseContactFormTestCase(TestCase):
         self.assertIn(self.form_data['subject'], mail.outbox[0].subject)
 
     def test_init_attr_override(self):
-        u"""
+        """
         Attributes can be overridden on __init__()
         """
         overrides = {
@@ -95,7 +99,7 @@ class BaseContactFormTestCase(TestCase):
         self.assertIn(overrides['email_recipients'][0], mail.outbox[0].recipients())
 
     def test_save_smtp_error(self):
-        u"""
+        """
         If the email backend raised an error, the message is not sent.
         """
         form = BaseContactForm(self.form_data)
@@ -106,7 +110,7 @@ class BaseContactFormTestCase(TestCase):
             self.assertEqual(len(mail.outbox), 0)
 
     def _test_required_field(self, field_name):
-        u"""
+        """
         Check that the form does not validate without a given field.
         """
         del self.form_data[field_name]
@@ -116,7 +120,7 @@ class BaseContactFormTestCase(TestCase):
 
 
 class ContactFormTestCase(TestCase):
-    u"""
+    """
     Unit tests for ``ContactForm`` class.
     """
 
@@ -130,7 +134,7 @@ class ContactFormTestCase(TestCase):
         }
 
     def test_category_field(self):
-        u"""
+        """
         Message field is required.
         """
         del self.form_data['category']
@@ -139,7 +143,7 @@ class ContactFormTestCase(TestCase):
         self.assertIn('category', form.errors)
 
     def test_get_context(self):
-        u"""
+        """
         get_context() is overridden and adds a 'category' variable.
         """
         form = ContactForm(self.form_data)
@@ -148,7 +152,7 @@ class ContactFormTestCase(TestCase):
         self.assertIn('category', context)
 
     def test_get_category_display(self):
-        u"""
+        """
         A non-integer field value selects a category labeled "Other".
         """
         self.form_data['category'] = 'not-an-integer'

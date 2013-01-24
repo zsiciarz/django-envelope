@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-u"""
+from __future__ import unicode_literals
+
+"""
 Templatetags related to the contact form.
 """
 
@@ -17,7 +19,7 @@ register = template.Library()
 
 @register.simple_tag
 def antispam_fields():
-    u"""
+    """
     Returns the HTML for any spam filters available.
     """
     content = ''

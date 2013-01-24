@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-u"""
+from __future__ import unicode_literals
+
+"""
 Defaults and overrides for envelope-related settings.
 """
 

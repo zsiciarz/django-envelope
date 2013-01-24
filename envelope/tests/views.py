@@ -1,4 +1,8 @@
-u"""
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+
+"""
 Unit tests for ``django-envelope`` views.
 """
 
@@ -26,7 +30,7 @@ test_templates = (
 )
 @override_settings(TEMPLATE_DIRS=test_templates)
 class ContactViewTestCase(TestCase):
-    u"""
+    """
     Unit tests for contact form view.
     """
     urls = 'envelope.tests.urls'
@@ -45,7 +49,7 @@ class ContactViewTestCase(TestCase):
         }
 
     def test_response_data(self):
-        u"""
+        """
         A GET request displays the contact form.
         """
         response = self.client.get(self.url)
@@ -55,7 +59,7 @@ class ContactViewTestCase(TestCase):
         self.assertFalse(form.is_bound)
 
     def test_prefilled_form(self):
-        u"""
+        """
         When an authenticated user hits the form view, his username, full name
         and email address are automatically filled in.
         """
@@ -75,7 +79,7 @@ class ContactViewTestCase(TestCase):
         self.assertNotContains(response, 'value="test@example.org"')
 
     def test_prefilled_form_no_full_name(self):
-        u"""
+        """
         In case the user is authenticated, but doesn't have his first and last
         name set (depends on the registration process), only his username is
         prefilled in the "From" field.
@@ -86,9 +90,9 @@ class ContactViewTestCase(TestCase):
         response = self.client.get(self.url)
         self.assertContains(response, 'value="test"')
 
-    @unittest.skipIf(honeypot is None, u"django-honeypot is not installed")
+    @unittest.skipIf(honeypot is None, "django-honeypot is not installed")
     def test_honeypot(self):
-        u"""
+        """
         If the honeypot field is not empty, keep the spammer off the page.
         """
         self.form_data.update({self.honeypot: 'some value'})
@@ -99,7 +103,7 @@ class ContactViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_form_invalid(self):
-        u"""
+        """
         If the POST data is incorrect, the form is invalid.
         """
         self.form_data.update({'sender': ''})
@@ -109,7 +113,7 @@ class ContactViewTestCase(TestCase):
         self.assertContains(response, flash_error_message)
 
     def test_form_successful(self):
-        u"""
+        """
         If the data is correct, a message is sent and the user is redirected.
         """
         response = self.client.post(self.url, self.form_data, follow=True)
@@ -121,7 +125,7 @@ class ContactViewTestCase(TestCase):
         self.assertContains(response, flash_success_message)
 
     def test_signal_before_send(self):
-        u"""
+        """
         A ``before_send`` signal is emitted before sending the message.
         """
         # ugly trick to access the variable from inner scope
@@ -133,7 +137,7 @@ class ContactViewTestCase(TestCase):
         self.assertEqual(params['form'].cleaned_data['email'], self.form_data['email'])
 
     def test_signal_after_send(self):
-        u"""
+        """
         An ``after_send`` signal is sent after succesfully sending the message.
         """
         params = {}
@@ -144,14 +148,14 @@ class ContactViewTestCase(TestCase):
         self.assertIn(self.form_data['subject'], params['message'].subject)
 
     def test_custom_template(self):
-        u"""
+        """
         You can change the default template used to render the form.
         """
         response = self.client.get(self.customized_url)
         self.assertTemplateUsed(response, "contact.html")
 
     def test_custom_success_url(self):
-        u"""
+        """
         The view redirects to a custom success_url when the form is valid.
         """
         response = self.client.post(self.customized_url, self.form_data)
