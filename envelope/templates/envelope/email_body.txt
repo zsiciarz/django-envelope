@@ -2,10 +2,10 @@
 {% trans "Message from the contact form" %}
 {% trans "Sender" %}: {{ sender }} ({{ email }})
 {% trans "Category" %}: {{ category }}
-{% trans "The message follows." %} 
+{% trans "The message follows." %}
 ================================================================================
 {{ message }}
 ================================================================================
 
--- 
+--
 {% trans "message sent with envelope - a contact form app for Django" %}
