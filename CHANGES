@@ -1,3 +1,6 @@
+0.6.0
+ - Python 3 compatibility!
+
 0.5.1
  - fixed template loading in tests
 
