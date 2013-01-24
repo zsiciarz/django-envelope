@@ -194,6 +194,6 @@ class ContactForm(BaseContactForm):
         """
         try:
             category = int(self.cleaned_data['category'])
-        except (AttributeError, ValueError):
+        except (AttributeError, ValueError, KeyError):
             category = None
         return dict(self.get_category_choices()).get(category)
