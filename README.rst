@@ -20,3 +20,4 @@ Authors
 * Erik Simmler
 * Vitaly Babiy
 * Jacek Tomaszewski
+* Anders Petersson
