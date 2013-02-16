@@ -129,10 +129,10 @@ def filter_spam(sender, request, form, **kwargs):
 
     TODO: more spam filters
     """
-    from envelope.spam_filters import check_honeypot
-    return check_honeypot(request, form)
+    if issubclass(sender, ContactView):
+        from envelope.spam_filters import check_honeypot
+        return check_honeypot(request, form)
 
 
 signals.before_send.connect(filter_spam,
-                            sender=ContactView,
                             dispatch_uid='envelope.views.filter_spam')
