@@ -163,7 +163,7 @@ class ContactViewTestCase(TestCase):
         self.assertRedirects(response, self.customized_url)
 
     def test_issue_18(self):
-        u"""
+        """
         ContactView subclasses should also trigger spam filtering.
 
         See: https://github.com/zsiciarz/django-envelope/issues/18
