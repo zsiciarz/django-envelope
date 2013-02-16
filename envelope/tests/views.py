@@ -38,6 +38,7 @@ class ContactViewTestCase(TestCase):
     def setUp(self):
         self.url = reverse('envelope-contact')
         self.customized_url = reverse('customized_class_contact')
+        self.subclassed_url = reverse('subclassed_class_contact')
         self.honeypot = getattr(settings, 'HONEYPOT_FIELD_NAME', 'email2')
         self.form_data = {
             'sender':   'zbyszek',
@@ -160,3 +161,14 @@ class ContactViewTestCase(TestCase):
         """
         response = self.client.post(self.customized_url, self.form_data)
         self.assertRedirects(response, self.customized_url)
+
+    def test_issue_18(self):
+        u"""
+        ContactView subclasses should also trigger spam filtering.
+
+        See: https://github.com/zsiciarz/django-envelope/issues/18
+        """
+        self.form_data.update({self.honeypot: 'some value'})
+        response = self.client.post(self.subclassed_url, self.form_data, follow=True)
+        self.assertEqual(response.status_code, 400)
+

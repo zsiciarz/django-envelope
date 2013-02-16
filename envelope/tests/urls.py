@@ -8,6 +8,10 @@ except ImportError:
 from envelope.views import ContactView
 
 
+class SubclassedContactView(ContactView):
+    pass
+
+
 urlpatterns = patterns('',
     (r'', include('envelope.urls')),
     url(r'^class_contact/', ContactView.as_view(), name='class_contact'),
@@ -18,5 +22,10 @@ urlpatterns = patterns('',
             template_name='contact.html'
         ),
         name='customized_class_contact'
+    ),
+
+    url(r'^subclassed_class_contact/',
+        SubclassedContactView.as_view(),
+        name='subclassed_class_contact'
     ),
 )
