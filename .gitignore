@@ -13,5 +13,6 @@ docs/make.bat
 .coverage
 *,cover
 htmlcov
+.tox/
 
 example_project/example.db
