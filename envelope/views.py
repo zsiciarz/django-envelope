@@ -101,8 +101,8 @@ class ContactView(FormView):
                                              form=form)
         for (receiver, response) in responses:
             if not response:
-                return HttpResponseBadRequest(_("Rejected by %s") %
-                                                receiver.__name__)
+                error_message = _("Rejected by %s") % receiver.__name__
+                return HttpResponseBadRequest(error_message)
         form.save()
         messages.info(self.request,
                       _("Thank you for your message."),
