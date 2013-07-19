@@ -119,7 +119,7 @@ class ContactViewTestCase(TestCase):
         """
         response = self.client.post(self.url, self.form_data, follow=True)
         self.assertRedirects(response, self.url)
-        self.assertEquals(len(response.redirect_chain), 1)
+        self.assertEqual(len(response.redirect_chain), 1)
         flash_error_message = _("There was en error in the contact form.")
         self.assertNotContains(response, flash_error_message)
         flash_success_message = _("Thank you for your message.")
