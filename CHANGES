@@ -1,3 +1,7 @@
+0.7.0
+ - fixed deprecation warnings when running tests
+ - settled on 3.3 as the minimum supported Python 3 version
+
 0.6.1
  - fixed NameError in example project
 
