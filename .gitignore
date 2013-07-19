@@ -8,8 +8,6 @@ dist/
 build/
 *.egg-info
 docs/_*
-docs/Makefile
-docs/make.bat
 .coverage
 *,cover
 htmlcov
