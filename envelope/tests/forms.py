@@ -24,10 +24,10 @@ class BaseContactFormTestCase(TestCase):
 
     def setUp(self):
         self.form_data = {
-            'sender':   'me',
-            'email':    'test@example.com',
-            'subject':  'A subject',
-            'message':  'Hello there!'
+            'sender': 'me',
+            'email': 'test@example.com',
+            'subject': 'A subject',
+            'message': 'Hello there!',
         }
 
     def test_sender_field(self):
@@ -126,11 +126,11 @@ class ContactFormTestCase(TestCase):
 
     def setUp(self):
         self.form_data = {
-            'sender':   'me',
-            'email':    'test@example.com',
+            'sender': 'me',
+            'email': 'test@example.com',
             'category': 10,
-            'subject':  'A subject',
-            'message':  'Hello there!'
+            'subject': 'A subject',
+            'message': 'Hello there!',
         }
 
     def test_category_field(self):
@@ -159,4 +159,3 @@ class ContactFormTestCase(TestCase):
         form = ContactForm(self.form_data)
         self.assertFalse(form.is_valid())
         self.assertEqual(form.get_category_display(), _("Other"))
-

@@ -28,6 +28,8 @@ test_templates = (
     os.path.join(os.path.dirname(__file__), 'templates'),
     os.path.join(os.path.dirname(__file__), '../templates'),
 )
+
+
 @override_settings(TEMPLATE_DIRS=test_templates)
 class ContactViewTestCase(TestCase):
     """
@@ -41,11 +43,11 @@ class ContactViewTestCase(TestCase):
         self.subclassed_url = reverse('subclassed_class_contact')
         self.honeypot = getattr(settings, 'HONEYPOT_FIELD_NAME', 'email2')
         self.form_data = {
-            'sender':   'zbyszek',
-            'email':    'test@example.com',
+            'sender': 'zbyszek',
+            'email': 'test@example.com',
             'category': 10,
-            'subject':  'A subject',
-            'message':  'Hello there!',
+            'subject': 'A subject',
+            'message': 'Hello there!',
             self.honeypot: '',
         }
 
@@ -85,7 +87,7 @@ class ContactViewTestCase(TestCase):
         name set (depends on the registration process), only his username is
         prefilled in the "From" field.
         """
-        user = User.objects.create_user('test', 'test@example.org', 'password')
+        User.objects.create_user('test', 'test@example.org', 'password')
         logged_in = self.client.login(username='test', password='password')
         self.assertTrue(logged_in)
         response = self.client.get(self.url)
@@ -131,8 +133,10 @@ class ContactViewTestCase(TestCase):
         """
         # ugly trick to access the variable from inner scope
         params = {}
+
         def handle_before_send(sender, request, form, **kwargs):
             params['form'] = form
+
         signals.before_send.connect(handle_before_send)
         self.client.post(self.url, self.form_data, follow=True)
         self.assertEqual(params['form'].cleaned_data['email'], self.form_data['email'])
@@ -142,8 +146,10 @@ class ContactViewTestCase(TestCase):
         An ``after_send`` signal is sent after succesfully sending the message.
         """
         params = {}
+
         def handle_after_send(sender, message, form, **kwargs):
             params['message'] = message
+
         signals.after_send.connect(handle_after_send)
         self.client.post(self.url, self.form_data, follow=True)
         self.assertIn(self.form_data['subject'], params['message'].subject)
@@ -171,4 +177,3 @@ class ContactViewTestCase(TestCase):
         self.form_data.update({self.honeypot: 'some value'})
         response = self.client.post(self.subclassed_url, self.form_data, follow=True)
         self.assertEqual(response.status_code, 400)
-
