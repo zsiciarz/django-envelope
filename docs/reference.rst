@@ -23,5 +23,32 @@ Spam filters
 Signals
 =======
 
-.. automodule:: envelope.signals
-   :members:
+``before_send``
+
+    Sent after the form is submitted and valid, but before sending the message.
+
+    Arguments:
+
+    ``sender``
+        View class.
+
+    ``request``
+        The current request object.
+
+    ``form``
+        The form object (already valid, so ``cleaned_data`` is available).
+
+``after_send``
+
+    This signal is sent after sending the message.
+
+    Arguments:
+
+    ``sender``
+        Form class.
+
+    ``message``
+        An instance of :class:`EmailMessage <django.core.mail.EmailMessage>` that was used to send the message.
+
+    ``form``
+        The form object.
