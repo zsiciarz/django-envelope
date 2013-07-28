@@ -6,7 +6,7 @@ django-envelope
     :target: https://crate.io/packages/django-envelope/
     :alt: Latest PyPI version
 
-.. image:: https://pypip.in/d/django-envelop/badge.png
+.. image:: https://pypip.in/d/django-envelope/badge.png
     :target: https://crate.io/packages/django-envelope/
     :alt: Number of PyPI downloads
 
