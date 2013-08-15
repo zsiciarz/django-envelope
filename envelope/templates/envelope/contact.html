@@ -1,26 +1,10 @@
 {% extends "layout.html" %}
-{% load url from future %}
 {% load i18n %}
 
 {% load envelope_tags %}
 {% block content %}
 <section id="contact">
   <h1>{% trans "Contact" %}</h1>
-  <form action="{% url 'envelope-contact' %}" method="post">
-  {% csrf_token %}
-  {% antispam_fields %}
-    <fieldset>
-      <table>
-        <tbody>
-        {{ form }}
-        </tbody>
-        <tfoot>
-         <tr>
-          <td colspan="2"><input type="submit" value="{% trans "Send!" %}" /></td>
-         </tr>
-        </tfoot>
-      </table>
-    </fieldset>
-  </form>
+  {% render_contact_form %}
 </section>
 {% endblock %}
