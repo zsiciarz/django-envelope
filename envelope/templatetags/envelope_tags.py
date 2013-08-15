@@ -17,6 +17,17 @@ except ImportError:
 register = template.Library()
 
 
+@register.inclusion_tag('envelope/contact_form.html', takes_context=True)
+def render_contact_form(context):
+    """
+    Renders the contact form which must be in the template context.
+    """
+    form = context['form']
+    return {
+        'form': form,
+    }
+
+
 @register.simple_tag
 def antispam_fields():
     """
