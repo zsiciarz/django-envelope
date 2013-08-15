@@ -13,6 +13,25 @@ django-envelope
 
 ``django-envelope`` is a simple contact form app for Django web framework.
 
+Basic usage
+-----------
+
+1. Add ``envelope`` to your ``INSTALLED_APPS``.
+2. Create a template ``envelope/contact.html`` that contains somewhere
+   a call to ``{% render_contact_form %}`` template tag. This tag can be
+   imported by placing ``{% load envelope_tags %}`` at the top of your
+   template.
+3. Hook the app's URLconf in your ``urls.py`` like this::
+
+    urlpatterns = patterns('',
+        #...
+        (r'^contact/',    include('envelope.urls')),
+        #...
+    )
+
+See the `docs <http://django-envelope.rtfd.org>`_ for more customization
+options.
+
 Resources
 ---------
 
