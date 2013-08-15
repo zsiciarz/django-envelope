@@ -4,7 +4,7 @@ AUTHORS
 Project Lead
 ------------
 
- * Zbigniew Siciarz (zbigniew at siciarz dot net)
+* Zbigniew Siciarz (zbigniew at siciarz dot net)
 
 Contributors
 ------------
