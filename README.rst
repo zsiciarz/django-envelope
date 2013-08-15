@@ -17,6 +17,7 @@ Resources
 ---------
 
  * `Documentation <http://django-envelope.rtfd.org>`_
+ * `Issue tracker <https://github.com/zsiciarz/django-envelope/issues>`_
  * `CI server <https://jenkins.shiningpanda.com/django-envelope/>`_
 
 Authors
