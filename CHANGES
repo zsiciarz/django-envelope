@@ -1,4 +1,5 @@
 0.7.0
+ - added {% render_contact_form %} template tag
  - fixed deprecation warnings when running tests
  - settled on 3.3 as the minimum supported Python 3 version
 
