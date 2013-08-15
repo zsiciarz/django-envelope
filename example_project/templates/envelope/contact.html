@@ -1,3 +1,4 @@
+{% load envelope_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,15 +12,15 @@
       <h1>Contact me!</h1>
       <ul class="messages">
         {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
         {% endfor %}
       </ul>
     </header>
-
     <div>
-      {% block content %}{% endblock %}
+        <section id="contact">
+        {% render_contact_form %}
+        </section>
     </div>
-
     <footer>
      <p>&copy; Copyright 2010-2013 Zbigniew Siciarz.</p>
     </footer>
