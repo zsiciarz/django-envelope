@@ -25,7 +25,7 @@ Running tests
    It is recommended to work in a virtualenv_.
 
 All dependencies required for running tests and building documentation are
-specified in the file ``pip-requirements.txt``.
+specified in the file ``requirements.txt``.
 
 To get the tests up and running, follow these commands::
 
@@ -35,7 +35,7 @@ To get the tests up and running, follow these commands::
     git clone git://github.com/zsiciarz/django-envelope.git
     cd django-envelope
     python setup.py develop
-    pip install -r pip-requirements.txt
+    pip install -r requirements.txt
     python runtests.py
 
 .. note::
