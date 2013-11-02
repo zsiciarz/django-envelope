@@ -10,6 +10,9 @@ django-envelope
     :target: https://crate.io/packages/django-envelope/
     :alt: Number of PyPI downloads
 
+.. image:: https://travis-ci.org/zsiciarz/django-envelope.png?branch=develop
+    :target: https://travis-ci.org/zsiciarz/django-envelope
+
 
 ``django-envelope`` is a simple contact form app for Django web framework.
 
