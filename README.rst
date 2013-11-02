@@ -13,6 +13,9 @@ django-envelope
 .. image:: https://travis-ci.org/zsiciarz/django-envelope.png?branch=develop
     :target: https://travis-ci.org/zsiciarz/django-envelope
 
+.. image:: https://coveralls.io/repos/zsiciarz/django-envelope/badge.png
+    :target: https://coveralls.io/r/zsiciarz/django-envelope
+
 
 ``django-envelope`` is a simple contact form app for Django web framework.
 
