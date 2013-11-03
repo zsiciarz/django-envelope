@@ -14,6 +14,12 @@ Forms
 .. automodule:: envelope.forms
    :members:
 
+Template tags
+=============
+
+.. automodule:: envelope.templatetags.envelope_tags
+   :members:
+
 Spam filters
 ============
 
