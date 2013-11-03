@@ -49,11 +49,10 @@ To get a coverage report, replace the last command with::
 CI Server
 =========
 
-A `Jenkins instance`_ is running at `ShiningPanda`_.
+The GitHub repository is hooked to `Travis CI`_.
 
 
 .. _`issue tracker`: https://github.com/zsiciarz/django-envelope/issues
 .. _virtualenv: http://www.virtualenv.org/
 .. _virtualenvwrapper: http://www.doughellmann.com/projects/virtualenvwrapper/
-.. _`Jenkins instance`: https://jenkins.shiningpanda.com/django-envelope/
-.. _`ShiningPanda`: https://www.shiningpanda.com/
+.. _`Travis CI`: https://travis-ci.org/zsiciarz/django-envelope
