@@ -6,3 +6,4 @@ omit =
     ../lib/*
     */test*
     runtests.py
+    /home/travis/virtualenv/*
