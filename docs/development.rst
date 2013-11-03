@@ -49,10 +49,12 @@ To get a coverage report, replace the last command with::
 CI Server
 =========
 
-The GitHub repository is hooked to `Travis CI`_.
+The GitHub repository is hooked to `Travis CI`_. Travis worker pushes code
+coverage to `coveralls.io`_ after each successful build.
 
 
 .. _`issue tracker`: https://github.com/zsiciarz/django-envelope/issues
 .. _virtualenv: http://www.virtualenv.org/
 .. _virtualenvwrapper: http://www.doughellmann.com/projects/virtualenvwrapper/
 .. _`Travis CI`: https://travis-ci.org/zsiciarz/django-envelope
+.. _`coveralls.io`: https://coveralls.io/r/zsiciarz/django-envelope
