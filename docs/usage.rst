@@ -20,6 +20,12 @@ The view that you just hooked into your URLconf will try to render a
 where Django would be able to find it (see the `Django template docs`_
 for details).
 
+.. warning::
+   .. deprecated:: 0.7.0
+      django-envelope ships with one such template by default, however it
+      makes too opinionated assumptions about your templates and site layout.
+      Therefore we recommend using the template tag described below.
+
 This template file can (and possibly should) extend your base site template.
 The view will pass to the context a ``form`` variable, which is an instance
 of :class:`~envelope.forms.ContactForm`. You can write your own HTML code
