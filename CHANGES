@@ -2,6 +2,7 @@
  - added {% render_contact_form %} template tag
  - fixed deprecation warnings when running tests
  - settled on 3.3 as the minimum supported Python 3 version
+ - moved to Travis CI as the continuous integration solution
 
 0.6.1
  - fixed NameError in example project
