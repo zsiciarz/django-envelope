@@ -21,6 +21,8 @@ register = template.Library()
 def render_contact_form(context):
     """
     Renders the contact form which must be in the template context.
+
+    .. versionadded:: 0.7.0
     """
     form = context['form']
     return {
