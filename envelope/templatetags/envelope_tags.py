@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 """
-Templatetags related to the contact form.
+Template tags related to the contact form.
 """
 
 from django import template
