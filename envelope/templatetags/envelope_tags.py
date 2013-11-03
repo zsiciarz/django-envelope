@@ -22,6 +22,10 @@ def render_contact_form(context):
     """
     Renders the contact form which must be in the template context.
 
+    The most common use case for this template tag is to call it in the
+    template rendered by :class:`~envelope.views.ContactView`. The template
+    tag will then render a sub-template ``envelope/contact_form.html``.
+
     .. versionadded:: 0.7.0
     """
     form = context['form']
