@@ -34,8 +34,8 @@ for simplicity. For example (assuming ``base.html`` is your main template):
 
 .. code-block:: html+django
 
-    {% load envelope_tags %}
     {% extends "base.html" %}
+    {% load envelope_tags %}
 
     {% block content %}
         {% render_contact_form %}
