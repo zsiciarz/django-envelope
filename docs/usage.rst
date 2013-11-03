@@ -15,5 +15,27 @@ this::
         #...
     )
 
+The view that you just hooked into your URLconf will try to render a
+``envelope/contact.html`` template. Create that file in some location
+where Django would be able to find it (see the `Django template docs`_
+for details).
+
+This template file can (and possibly should) extend your base site template.
+The view will pass to the context a ``form`` variable, which is an instance
+of :class:`~envelope.forms.ContactForm`. You can write your own HTML code
+for the form or use the provided ``{% render_contact_form %}`` template tag
+for simplicity. For example (assuming ``base.html`` is your main template):
+
+.. code-block:: html+django
+
+    {% load envelope_tags %}
+    {% extends "base.html" %}
+
+    {% block content %}
+        {% render_contact_form %}
+    {% endblock %}
+
 That's basically it. Navigate to the given URL and see the contact form in
 action. See :doc:`customization` for more customization options.
+
+.. _`Django template docs`: https://docs.djangoproject.com/en/dev/ref/templates/api/#loading-templates
