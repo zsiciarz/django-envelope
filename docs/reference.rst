@@ -17,6 +17,8 @@ Forms
 Template tags
 =============
 
+Add ``{% load envelope_tags %}`` to your template before using any of these.
+
 .. automodule:: envelope.templatetags.envelope_tags
    :members:
 
