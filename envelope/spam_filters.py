@@ -14,5 +14,5 @@ def check_honeypot(request, form):
     try:
         from honeypot.decorators import verify_honeypot_value
         return verify_honeypot_value(request, '') is None
-    except ImportError:
+    except ImportError:  # pragma: no cover
         return True

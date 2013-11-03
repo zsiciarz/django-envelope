@@ -10,7 +10,7 @@ from django import template
 
 try:
     import honeypot
-except ImportError:
+except ImportError:  # pragma: no cover
     honeypot = None
 
 
