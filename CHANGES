@@ -1,6 +1,6 @@
 0.7.0
  - added {% render_contact_form %} template tag
- - fixed deprecation warnings when running tests
+ - Django 1.6 compatibility
  - settled on 3.3 as the minimum supported Python 3 version
  - moved to Travis CI as the continuous integration solution
 
