@@ -1,15 +1,9 @@
-import os
-
 from django.conf import settings
 
 try:
     import honeypot
 except ImportError:
     honeypot = None
-
-
-def make_absolute_path(path):
-    return os.path.join(os.path.realpath(os.path.dirname(__file__)), path)
 
 
 if not settings.configured:
@@ -43,4 +37,3 @@ if not settings.configured:
 from django.core.management import call_command
 
 call_command('test', 'envelope')
-
