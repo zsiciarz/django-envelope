@@ -28,12 +28,11 @@ if not settings.configured:
         INSTALLED_APPS = INSTALLED_APPS,
         SITE_ID = 1,
         ROOT_URLCONF = 'envelope.tests.urls',
-        TEST_RUNNER = 'django_nose.NoseTestSuiteRunner',
-        NOSE_ARGS = ['--stop'],
         HONEYPOT_FIELD_NAME = 'email2',
     )
 
 
-from django.core.management import call_command
+from django_nose import NoseTestSuiteRunner
 
-call_command('test', 'envelope')
+test_runner = NoseTestSuiteRunner()
+test_runner.run_tests(['envelope'])
