@@ -46,11 +46,10 @@ class BaseContactForm(forms.Form):
         ``envelope/email_body.txt``.
 
     """
-    sender = forms.CharField(label=_("From"), max_length=70)
+    sender = forms.CharField(label=_("From"))
     email = forms.EmailField(label=_("Email"))
-    subject = forms.CharField(label=_("Subject"), max_length=127)
-    message = forms.CharField(label=_("Message"), max_length=1000,
-                              widget=forms.Textarea())
+    subject = forms.CharField(label=_("Subject"))
+    message = forms.CharField(label=_("Message"), widget=forms.Textarea())
 
     subject_intro = settings.SUBJECT_INTRO
     from_email = settings.FROM_EMAIL
