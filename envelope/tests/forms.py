@@ -81,7 +81,7 @@ class BaseContactFormTestCase(unittest.TestCase):
             result = form.save()
             self.assertTrue(result)
             args, kwargs = mock_message.call_args
-            self.assertIn(self.form_data['subject'], kwargs['subject'])
+            self.assertTrue(self.form_data['subject'] in kwargs['subject'])
 
     def test_init_attr_override(self):
         """
@@ -98,9 +98,9 @@ class BaseContactFormTestCase(unittest.TestCase):
             mock_message.return_value.send.return_value = True
             form.save()
             args, kwargs = mock_message.call_args
-            self.assertIn(overrides['subject_intro'], kwargs['subject'])
-            self.assertIn(overrides['from_email'], kwargs['from_email'])
-            self.assertIn(overrides['email_recipients'][0], kwargs['to'])
+            self.assertTrue(overrides['subject_intro'] in kwargs['subject'])
+            self.assertTrue(overrides['from_email'] in kwargs['from_email'])
+            self.assertTrue(overrides['email_recipients'][0] in kwargs['to'])
 
     def test_save_smtp_error(self):
         """
@@ -120,7 +120,7 @@ class BaseContactFormTestCase(unittest.TestCase):
         del self.form_data[field_name]
         form = BaseContactForm(self.form_data)
         self.assertFalse(form.is_valid())
-        self.assertIn(field_name, form.errors)
+        self.assertTrue(field_name in form.errors)
 
 
 class ContactFormTestCase(unittest.TestCase):
@@ -144,7 +144,7 @@ class ContactFormTestCase(unittest.TestCase):
         del self.form_data['category']
         form = ContactForm(self.form_data)
         self.assertFalse(form.is_valid())
-        self.assertIn('category', form.errors)
+        self.assertTrue('category' in form.errors)
 
     def test_get_context(self):
         """
@@ -153,7 +153,7 @@ class ContactFormTestCase(unittest.TestCase):
         form = ContactForm(self.form_data)
         self.assertTrue(form.is_valid())
         context = form.get_context()
-        self.assertIn('category', context)
+        self.assertTrue('category' in context)
 
     def test_get_category_display(self):
         """
