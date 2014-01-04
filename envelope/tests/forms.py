@@ -6,10 +6,9 @@ from __future__ import unicode_literals
 Unit tests for ``django-envelope`` forms.
 """
 
+import unittest
 from smtplib import SMTPException
 
-from django.core import mail
-from django.test import TestCase
 from django.utils.translation import ugettext_lazy as _
 
 from mock import patch
@@ -17,7 +16,7 @@ from mock import patch
 from envelope.forms import BaseContactForm, ContactForm
 
 
-class BaseContactFormTestCase(TestCase):
+class BaseContactFormTestCase(unittest.TestCase):
     """
     Unit tests for ``BaseContactForm`` class.
     """
@@ -77,10 +76,12 @@ class BaseContactFormTestCase(TestCase):
         """
         form = BaseContactForm(self.form_data)
         self.assertTrue(form.is_valid())
-        result = form.save()
-        self.assertTrue(result)
-        self.assertEqual(len(mail.outbox), 1)
-        self.assertIn(self.form_data['subject'], mail.outbox[0].subject)
+        with patch('django.core.mail.EmailMessage') as mock_message:
+            mock_message.return_value.send.return_value = True
+            result = form.save()
+            self.assertTrue(result)
+            args, kwargs = mock_message.call_args
+            self.assertIn(self.form_data['subject'], kwargs['subject'])
 
     def test_init_attr_override(self):
         """
@@ -93,10 +94,13 @@ class BaseContactFormTestCase(TestCase):
         }
         form = BaseContactForm(self.form_data, **overrides)
         form.is_valid()
-        form.save()
-        self.assertIn(overrides['subject_intro'], mail.outbox[0].subject)
-        self.assertIn(overrides['from_email'], mail.outbox[0].from_email)
-        self.assertIn(overrides['email_recipients'][0], mail.outbox[0].recipients())
+        with patch('django.core.mail.EmailMessage') as mock_message:
+            mock_message.return_value.send.return_value = True
+            form.save()
+            args, kwargs = mock_message.call_args
+            self.assertIn(overrides['subject_intro'], kwargs['subject'])
+            self.assertIn(overrides['from_email'], kwargs['from_email'])
+            self.assertIn(overrides['email_recipients'][0], kwargs['to'])
 
     def test_save_smtp_error(self):
         """
@@ -104,10 +108,10 @@ class BaseContactFormTestCase(TestCase):
         """
         form = BaseContactForm(self.form_data)
         self.assertTrue(form.is_valid())
-        with patch.object(mail.EmailMessage, 'send', side_effect=SMTPException):
+        with patch('django.core.mail.EmailMessage') as mock_message:
+            mock_message.return_value.send.side_effect = SMTPException
             result = form.save()
             self.assertFalse(result)
-            self.assertEqual(len(mail.outbox), 0)
 
     def _test_required_field(self, field_name):
         """
@@ -119,7 +123,7 @@ class BaseContactFormTestCase(TestCase):
         self.assertIn(field_name, form.errors)
 
 
-class ContactFormTestCase(TestCase):
+class ContactFormTestCase(unittest.TestCase):
     """
     Unit tests for ``ContactForm`` class.
     """
