@@ -13,8 +13,9 @@ from django.http import HttpResponseBadRequest
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
+from django.conf import settings
 
-from envelope import signals
+from envelope import signals, settings as envelope_settings
 from envelope.forms import ContactForm
 
 
@@ -60,6 +61,11 @@ class ContactView(FormView):
     template_name = 'envelope/contact.html'
     success_url = None
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(ContactView, self).get_context_data(*args, **kwargs)
+        context["base_template"] = envelope_settings.BASE_TEMPLATE
+        return context
+
     def get_success_url(self):
         """
         Returns the URL where the view will redirect after submission.
@@ -77,10 +83,11 @@ class ContactView(FormView):
         user = self.request.user
         if user.is_authenticated():
             # the user might not have a full name set in the model
+            username = user.get_username() if getattr(settings, 'AUTH_USER_MODEL', None) is not None else user.username
             if user.get_full_name():
-                sender = '%s (%s)' % (user.username, user.get_full_name())
+                sender = '%s (%s)' % (username, user.get_full_name())
             else:
-                sender = user.username
+                sender = username
             initial.update({
                 'sender': sender,
                 'email': user.email,
