@@ -19,7 +19,7 @@ Contents
 
 .. toctree::
    :maxdepth: 2
-   
+
    install
    usage
    configuration
@@ -32,6 +32,14 @@ License
 =======
 django-envelope is free software, licensed under the MIT/X11 License. A copy of
 the license is provided with the application in the LICENSE file.
+
+
+Gittip
+======
+
+Like this project? You can support it via `Gittip`_!
+
+.. _`Gittip`: https://www.gittip.com/zsiciarz
 
 
 Author
