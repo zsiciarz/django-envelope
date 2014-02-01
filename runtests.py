@@ -32,6 +32,12 @@ if not settings.configured:
     )
 
 
+import django
+try:
+    django.setup()  # Django 1.7+
+except AttributeError:
+    pass
+
 from django_nose import NoseTestSuiteRunner
 
 test_runner = NoseTestSuiteRunner()
