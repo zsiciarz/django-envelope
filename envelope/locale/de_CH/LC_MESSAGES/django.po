@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-25 22:44+0100\n"
+"POT-Creation-Date: 2014-03-02 12:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,20 +61,21 @@ msgstr ""
 msgid "Message from contact form: "
 msgstr ""
 
-#: views.py:111
+#: views.py:120
 #, python-format
 msgid "Rejected by %s"
 msgstr ""
 
-#: views.py:115 tests/views.py:127
+#: views.py:124 tests/views.py:127
 msgid "Thank you for your message."
 msgstr ""
 
-#: views.py:124 tests/views.py:115 tests/views.py:125
+#: views.py:133 tests/views.py:115 tests/views.py:125
 msgid "There was en error in the contact form."
 msgstr ""
 
-#: templates/envelope/contact.html:7 tests/templates/contact.html:8
+#: templates/envelope/contact.html:7 templates/envelope/thanks.html:6
+#: tests/templates/contact.html:8
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -96,4 +97,8 @@ msgstr ""
 
 #: templates/envelope/email_body.txt:11
 msgid "message sent with envelope - a contact form app for Django"
+msgstr ""
+
+#: templates/envelope/thanks.html:7
+msgid "Thanks"
 msgstr ""

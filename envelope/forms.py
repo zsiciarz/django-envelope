@@ -46,8 +46,8 @@ class BaseContactForm(forms.Form):
         ``envelope/email_body.txt``.
 
     """
-    sender = forms.CharField(label=_("From"))
-    email = forms.EmailField(label=_("Email"))
+    sender = forms.CharField(label=_("From"), initial='')
+    email = forms.EmailField(label=_("Email"), initial='')
     subject = forms.CharField(label=_("Subject"))
     message = forms.CharField(label=_("Message"), widget=forms.Textarea())
 
