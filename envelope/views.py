@@ -19,7 +19,7 @@ from django.conf import settings
 from envelope import signals, settings as envelope_settings
 from envelope.forms import ContactForm
 
-import importlib
+from django.utils.importlib import import_module
 
 logger = logging.getLogger('envelope.views')
 
@@ -99,7 +99,7 @@ class ContactView(FormView):
     def get_form_class(self):
         if envelope_settings.FORM_CLASS is not None:
             module_name, class_name = envelope_settings.FORM_CLASS.rsplit(".", 1)
-            module = importlib.import_module(module_name)
+            module = import_module(module_name)
             return getattr(module, class_name, self.form_class)
         return self.form_class
 
