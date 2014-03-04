@@ -101,4 +101,4 @@ msgstr ""
 
 #: templates/envelope/thanks.html:7
 msgid "Thanks"
-msgstr ""
+msgstr "Ihre Nachricht wurde an AutoPrivat24 erfolgreich weitergeleitet"
