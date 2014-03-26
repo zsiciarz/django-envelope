@@ -54,11 +54,18 @@ class ContactView(FormView):
         URL of the page with some kind of a "thank you
         for your feedback", displayed after the form is successfully
         submitted. If left unset, the view redirects to itself.
+
+    ``messages``
+        A tuple of message strings (invalid_message, valid_message) that should
+        be sent when a request is processed. To disable a message, replace it
+        with boolean False or empty string
     """
     form_class = ContactForm
     form_kwargs = {}
     template_name = 'envelope/contact.html'
     success_url = None
+    messages = (_("There was an error in the contact form."),
+                _("Thank you for your message."))
 
     def get_success_url(self):
         """
@@ -104,18 +111,20 @@ class ContactView(FormView):
                 error_message = _("Rejected by %s") % receiver.__name__
                 return HttpResponseBadRequest(error_message)
         form.save()
-        messages.info(self.request,
-                      _("Thank you for your message."),
-                      fail_silently=True)
+        if self.messages[1]:
+            messages.info(self.request,
+                          self.messages[1],
+                          fail_silently=True)
         return redirect(self.get_success_url())
 
     def form_invalid(self, form):
         """
         When the form has errors, display it again.
         """
-        messages.error(self.request,
-                       _("There was en error in the contact form."),
-                       fail_silently=True)
+        if self.messages[0]:
+            messages.error(self.request,
+                           self.messages[0],
+                           fail_silently=True)
         return self.render_to_response(self.get_context_data(form=form))
 
 
