@@ -57,7 +57,7 @@ class BaseContactForm(forms.Form):
     template_name = 'envelope/email_body.txt'
 
     def __init__(self, *args, **kwargs):
-        for kwarg in list(kwargs):
+        for kwarg in kwargs:
             if hasattr(self, kwarg):
                 setattr(self, kwarg, kwargs.pop(kwarg))
         super(BaseContactForm, self).__init__(*args, **kwargs)
