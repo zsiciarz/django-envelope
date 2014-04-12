@@ -1,4 +1,5 @@
 1.0.0
+ - support for custom User model
  - dropped Django 1.4 compatibility
 
 0.7.0
