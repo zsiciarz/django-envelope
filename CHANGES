@@ -1,5 +1,10 @@
 1.0.0
  - support for custom User model
+
+Backwards incompatible changes:
+ - removed category field from ContactForm
+ - BaseContactForm no longer exists; to customize form processing, subclass
+   ContactForm directly
  - dropped Django 1.4 compatibility
 
 0.7.0
