@@ -21,7 +21,7 @@ from envelope.signals import after_send
 logger = logging.getLogger('envelope.forms')
 
 
-class BaseContactForm(forms.Form):
+class ContactForm(forms.Form):
     """
     Base contact form class.
 
@@ -60,7 +60,7 @@ class BaseContactForm(forms.Form):
         for kwarg in list(kwargs):
             if hasattr(self, kwarg):
                 setattr(self, kwarg, kwargs.pop(kwarg))
-        super(BaseContactForm, self).__init__(*args, **kwargs)
+        super(ContactForm, self).__init__(*args, **kwargs)
 
     def save(self):
         """
