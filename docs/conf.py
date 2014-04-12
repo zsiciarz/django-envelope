@@ -12,6 +12,15 @@
 # serve to show the default.
 
 import sys, os
+import pkg_resources
+
+try:
+    release = pkg_resources.get_distribution('django-envelope').version
+except pkg_resources.DistributionNotFound:
+    sys.exit(1)
+del pkg_resources
+
+version = '.'.join(release.split('.')[:2])
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -43,15 +52,6 @@ master_doc = 'index'
 # General information about the project.
 project = u'django-envelope'
 copyright = u'2011-2014, Zbigniew Siciarz'
-
-# The version info for the project you're documenting, acts as replacement for
-# |version| and |release|, also used in various other places throughout the
-# built documents.
-#
-# The short X.Y version.
-version = '0.7.0'
-# The full version, including alpha/beta/rc tags.
-release = '0.7.0'
 
 intersphinx_mapping = {
     'django': ('https://docs.djangoproject.com/en/dev/', 'http://docs.djangoproject.com/en/dev/_objects/')
