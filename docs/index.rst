@@ -24,6 +24,7 @@ Contents
    usage
    configuration
    customization
+   cookbook
    development
    reference
 
