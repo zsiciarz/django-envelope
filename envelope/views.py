@@ -11,12 +11,15 @@ import logging
 from django.contrib import messages
 from django.http import HttpResponseBadRequest
 from django.shortcuts import redirect
+from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import FormView
+from django.views.generic import FormView, TemplateView
+from django.conf import settings
 
-from envelope import signals
+from envelope import signals, settings as envelope_settings
 from envelope.forms import ContactForm
 
+from django.utils.importlib import import_module
 
 logger = logging.getLogger('envelope.views')
 
@@ -58,7 +61,12 @@ class ContactView(FormView):
     form_class = ContactForm
     form_kwargs = {}
     template_name = 'envelope/contact.html'
-    success_url = None
+    success_url = reverse_lazy(envelope_settings.SUCCESS_URL) if envelope_settings.SUCCESS_URL is not None else None
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ContactView, self).get_context_data(*args, **kwargs)
+        context["base_template"] = envelope_settings.BASE_TEMPLATE
+        return context
 
     def get_success_url(self):
         """
@@ -77,15 +85,23 @@ class ContactView(FormView):
         user = self.request.user
         if user.is_authenticated():
             # the user might not have a full name set in the model
+            username = user.get_username() if getattr(settings, 'AUTH_USER_MODEL', None) is not None else user.username
             if user.get_full_name():
-                sender = '%s (%s)' % (user.username, user.get_full_name())
+                sender = '%s (%s)' % (username, user.get_full_name())
             else:
-                sender = user.username
+                sender = username
             initial.update({
                 'sender': sender,
                 'email': user.email,
             })
         return initial
+
+    def get_form_class(self):
+        if envelope_settings.FORM_CLASS is not None:
+            module_name, class_name = envelope_settings.FORM_CLASS.rsplit(".", 1)
+            module = import_module(module_name)
+            return getattr(module, class_name, self.form_class)
+        return self.form_class
 
     def get_form_kwargs(self):
         kwargs = super(ContactView, self).get_form_kwargs()
@@ -117,6 +133,14 @@ class ContactView(FormView):
                        _("There was en error in the contact form."),
                        fail_silently=True)
         return self.render_to_response(self.get_context_data(form=form))
+
+class ThanksView(TemplateView):
+    template_name = "envelope/thanks.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ThanksView, self).get_context_data(*args, **kwargs)
+        context["base_template"] = envelope_settings.BASE_TEMPLATE
+        return context
 
 
 def filter_spam(sender, request, form, **kwargs):

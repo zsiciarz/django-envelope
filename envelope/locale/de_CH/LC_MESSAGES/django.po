@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-02 12:40+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: forms.py:49
+msgid "From"
+msgstr ""
+
+#: forms.py:50
+msgid "Email"
+msgstr ""
+
+#: forms.py:51
+msgid "Subject"
+msgstr ""
+
+#: forms.py:52
+msgid "Message"
+msgstr ""
+
+#: forms.py:86
+#, python-format
+msgid "Contact form submitted and sent (from: %s)"
+msgstr ""
+
+#: forms.py:89
+msgid "An error occured while sending the email"
+msgstr ""
+
+#: forms.py:157 templates/envelope/email_body.txt:4
+msgid "Category"
+msgstr ""
+
+#: settings.py:14
+msgid "Choose"
+msgstr ""
+
+#: settings.py:15
+msgid "A general question regarding the website"
+msgstr ""
+
+#: settings.py:16 tests/forms.py:165
+msgid "Other"
+msgstr ""
+
+#: settings.py:28
+msgid "Message from contact form: "
+msgstr ""
+
+#: views.py:120
+#, python-format
+msgid "Rejected by %s"
+msgstr ""
+
+#: views.py:124 tests/views.py:127
+msgid "Thank you for your message."
+msgstr ""
+
+#: views.py:133 tests/views.py:115 tests/views.py:125
+msgid "There was en error in the contact form."
+msgstr ""
+
+#: templates/envelope/contact.html:7 templates/envelope/thanks.html:6
+#: tests/templates/contact.html:8
+msgid "Contact"
+msgstr "Kontakt"
+
+#: templates/envelope/contact_form.html:15 tests/templates/contact.html:19
+msgid "Send!"
+msgstr ""
+
+#: templates/envelope/email_body.txt:2
+msgid "Message from the contact form"
+msgstr ""
+
+#: templates/envelope/email_body.txt:3
+msgid "Sender"
+msgstr ""
+
+#: templates/envelope/email_body.txt:5
+msgid "The message follows."
+msgstr ""
+
+#: templates/envelope/email_body.txt:11
+msgid "message sent with envelope - a contact form app for Django"
+msgstr ""
+
+#: templates/envelope/thanks.html:7
+msgid "Thanks"
+msgstr "Ihre Nachricht wurde an AutoPrivat24 erfolgreich weitergeleitet"
