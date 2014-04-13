@@ -7,6 +7,7 @@ Backwards incompatible changes:
  - BaseContactForm no longer exists; to customize form processing, subclass
    ContactForm directly
  - dropped Django 1.4 compatibility
+ - dropped Python 2.6 compatibility; use 2.7 or 3.3+
 
 0.7.0
  - added {% render_contact_form %} template tag
