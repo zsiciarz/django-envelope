@@ -6,6 +6,8 @@ Backwards incompatible changes:
  - removed category field from ContactForm
  - BaseContactForm no longer exists; to customize form processing, subclass
    ContactForm directly
+ - ContactView does not create any flash messages; use FormMessagesMixin from
+   django-braces (see the cookbook in the docs for an example)
  - dropped Django 1.4 compatibility
  - dropped Python 2.6 compatibility; use 2.7 or 3.3+
 
