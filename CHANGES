@@ -1,4 +1,5 @@
 1.0.0
+ - subject field is optional by default
  - support for custom User model
 
 Backwards incompatible changes:
