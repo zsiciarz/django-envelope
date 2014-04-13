@@ -48,7 +48,7 @@ class ContactForm(forms.Form):
     """
     sender = forms.CharField(label=_("From"))
     email = forms.EmailField(label=_("Email"))
-    subject = forms.CharField(label=_("Subject"))
+    subject = forms.CharField(label=_("Subject"), required=False)
     message = forms.CharField(label=_("Message"), widget=forms.Textarea())
 
     subject_intro = settings.SUBJECT_INTRO
