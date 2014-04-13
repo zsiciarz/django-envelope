@@ -17,6 +17,8 @@ Example::
         url(r'^contact/', ContactView.as_view()),
     )
 
+.. _subclassing-contact-view:
+
 If you want some more fine-grained control over the contact form, you can
 customize the view class. You can inherit from :class:`envelope.views.ContactView`
 and set class attributes in your derived view class, or simply pass

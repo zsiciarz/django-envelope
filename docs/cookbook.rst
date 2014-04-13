@@ -26,6 +26,9 @@ The following example shows how to add the mixin to ``ContactView``::
         form_invalid_message = _(u"There was en error in the contact form.")
         form_valid_message = _(u"Thank you for your message.")
 
+See the :ref:`customization section <subclassing-contact-view>` on how to plug
+the subclassed view into your URLconf.
+
 Categorized contact form
 ------------------------
 
