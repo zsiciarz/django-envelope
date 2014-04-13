@@ -14,7 +14,6 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.utils import override_settings
 from django.utils import unittest
-from django.utils.translation import ugettext_lazy as _
 
 try:
     import honeypot
@@ -112,8 +111,6 @@ class ContactViewTestCase(TestCase):
         self.form_data.update({'sender': ''})
         response = self.client.post(self.url, self.form_data)
         self.assertEqual(response.status_code, 200)
-        flash_error_message = _("There was en error in the contact form.")
-        self.assertContains(response, flash_error_message)
 
     def test_form_successful(self):
         """
@@ -122,10 +119,6 @@ class ContactViewTestCase(TestCase):
         response = self.client.post(self.url, self.form_data, follow=True)
         self.assertRedirects(response, self.url)
         self.assertEqual(len(response.redirect_chain), 1)
-        flash_error_message = _("There was en error in the contact form.")
-        self.assertNotContains(response, flash_error_message)
-        flash_success_message = _("Thank you for your message.")
-        self.assertContains(response, flash_success_message)
 
     def test_signal_before_send(self):
         """

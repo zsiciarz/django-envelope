@@ -8,7 +8,6 @@ Views used to process the contact form.
 
 import logging
 
-from django.contrib import messages
 from django.http import HttpResponseBadRequest
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
@@ -104,18 +103,12 @@ class ContactView(FormView):
                 error_message = _("Rejected by %s") % receiver.__name__
                 return HttpResponseBadRequest(error_message)
         form.save()
-        messages.info(self.request,
-                      _("Thank you for your message."),
-                      fail_silently=True)
         return redirect(self.get_success_url())
 
     def form_invalid(self, form):
         """
         When the form has errors, display it again.
         """
-        messages.error(self.request,
-                       _("There was en error in the contact form."),
-                       fail_silently=True)
         return self.render_to_response(self.get_context_data(form=form))
 
 
