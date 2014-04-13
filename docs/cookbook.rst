@@ -2,6 +2,30 @@
 Cookbook
 ========
 
+Success and error messages
+--------------------------
+
+Starting from release 1.0, :class:`envelope.views.ContactView` does not set any
+`messages`_ since these were customized by most users anyway. We encourage
+you to use the excellent `django-braces`_ app which provides a
+`FormMessagesMixin`_ designed specifically for this purpose.
+
+.. _`messages`: https://docs.djangoproject.com/en/dev/ref/contrib/messages/
+.. _`django-braces`: https://github.com/brack3t/django-braces
+.. _`FormMessagesMixin`: http://django-braces.readthedocs.org/en/latest/form.html#formmessagesmixin
+
+The following example shows how to add the mixin to ``ContactView``::
+
+    from braces.views import FormMessagesMixin
+    from envelope.views import ContactView
+
+    from django.utils.translation import ugettext_lazy as _
+
+
+    class MyContactView(FormMessagesMixin, ContactView):
+        form_invalid_message = _(u"There was en error in the contact form.")
+        form_valid_message = _(u"Thank you for your message.")
+
 Categorized contact form
 ------------------------
 
