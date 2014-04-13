@@ -15,8 +15,6 @@ These values defined in ``settings.py`` affect the application:
   receive the message. For backwards compatibility reasons, the default value
   is a list where the only element is ``DEFAULT_FROM_EMAIL``.
 
-  .. versionadded:: 0.3.1
-
 * ``ENVELOPE_SUBJECT_INTRO``: The prefix for subject line of the email message.
   This is different than ``EMAIL_SUBJECT_PREFIX`` which is global for the whole
   project. ``ENVELOPE_SUBJECT_INTRO`` goes after the global prefix and is

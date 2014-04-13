@@ -67,12 +67,11 @@ The following options (as well as those already in Django's `FormView`_) are rec
   "thank you for your feedback", displayed after the form is successfully
   submitted. If left unset, the view redirects to itself.
 
-* ``form_kwargs``: Additional kwargs to be used in the creation of the form. Use with :class:`envelope.forms.BaseContactForm` form arguments for dynamic customization of the form.
+* ``form_kwargs``: Additional kwargs to be used in the creation of the form. Use with :class:`envelope.forms.ContactForm` form arguments for dynamic customization of the form.
 
-You can also subclass :class:`envelope.forms.BaseContactForm` or
-:class:`envelope.forms.ContactForm` to further customize your form processing.
-Either set the following options as keyword arguments to ``__init__``, or override
-class attributes.
+You can also subclass :class:`envelope.forms.ContactForm` to further customize
+your form processing. Either set the following options as keyword arguments to
+``__init__``, or override class attributes.
 
 * ``subject_intro``: Prefix used to create the subject line. Default is ``settings.ENVELOPE_SUBJECT_INTRO``.
 

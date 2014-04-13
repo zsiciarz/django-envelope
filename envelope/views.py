@@ -43,7 +43,7 @@ class ContactView(FormView):
 
     ``form_kwargs``
         Additional kwargs to be used in the creation of the form. Use
-        with :class:`envelope.forms.BaseContactForm` form arguments for
+        with :class:`envelope.forms.ContactForm` form arguments for
         dynamic customization of the form.
 
     ``template_name``
