@@ -39,17 +39,20 @@ class ContactFormTestCase(unittest.TestCase):
         """
         self._test_required_field('email')
 
-    def test_subject_field(self):
-        """
-        Subject field is required.
-        """
-        self._test_required_field('subject')
-
     def test_message_field(self):
         """
         Message field is required.
         """
         self._test_required_field('message')
+
+    def test_subject_field(self):
+        """
+        Subject field is optional.
+        """
+        del self.form_data['subject']
+        form = ContactForm(self.form_data)
+        self.assertTrue(form.is_valid())
+        self.assertFalse('subject' in form.errors)
 
     def test_all_fields_valid(self):
         """
