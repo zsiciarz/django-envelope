@@ -52,7 +52,7 @@ class ContactFormTestCase(unittest.TestCase):
         del self.form_data['subject']
         form = ContactForm(self.form_data)
         self.assertTrue(form.is_valid())
-        self.assertFalse('subject' in form.errors)
+        self.assertNotIn('subject', form.errors)
 
     def test_all_fields_valid(self):
         """
@@ -69,7 +69,7 @@ class ContactFormTestCase(unittest.TestCase):
         self.assertTrue(form.is_valid())
         context = form.get_context()
         self.assertEqual(context, form.cleaned_data)
-        self.assertFalse(context is form.cleaned_data)
+        self.assertIsNot(context, form.cleaned_data)
 
     def test_save(self):
         """
@@ -82,7 +82,7 @@ class ContactFormTestCase(unittest.TestCase):
             result = form.save()
             self.assertTrue(result)
             args, kwargs = mock_message.call_args
-            self.assertTrue(self.form_data['subject'] in kwargs['subject'])
+            self.assertIn(self.form_data['subject'], kwargs['subject'])
 
     def test_init_attr_override(self):
         """
@@ -99,9 +99,9 @@ class ContactFormTestCase(unittest.TestCase):
             mock_message.return_value.send.return_value = True
             form.save()
             args, kwargs = mock_message.call_args
-            self.assertTrue(overrides['subject_intro'] in kwargs['subject'])
-            self.assertTrue(overrides['from_email'] in kwargs['from_email'])
-            self.assertTrue(overrides['email_recipients'][0] in kwargs['to'])
+            self.assertIn(overrides['subject_intro'], kwargs['subject'])
+            self.assertIn(overrides['from_email'], kwargs['from_email'])
+            self.assertIn(overrides['email_recipients'][0], kwargs['to'])
 
     def test_save_smtp_error(self):
         """
@@ -121,4 +121,4 @@ class ContactFormTestCase(unittest.TestCase):
         del self.form_data[field_name]
         form = ContactForm(self.form_data)
         self.assertFalse(form.is_valid())
-        self.assertTrue(field_name in form.errors)
+        self.assertIn(field_name, form.errors)
