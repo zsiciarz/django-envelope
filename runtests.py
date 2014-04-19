@@ -29,6 +29,9 @@ if not settings.configured:
         SITE_ID = 1,
         ROOT_URLCONF = 'envelope.tests.urls',
         HONEYPOT_FIELD_NAME = 'email2',
+        PASSWORD_HASHERS = {
+            'django.contrib.auth.hashers.MD5PasswordHasher',
+        },
     )
 
 
