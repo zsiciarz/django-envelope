@@ -43,7 +43,6 @@ class ContactViewTestCase(TestCase):
         self.form_data = {
             'sender': 'zbyszek',
             'email': 'test@example.com',
-            'category': 10,
             'subject': 'A subject',
             'message': 'Hello there!',
             self.honeypot: '',
