@@ -1,4 +1,9 @@
+=========
+Changelog
+=========
+
 1.0.0
+-----
  - subject field is optional by default
  - support for custom User model
 
@@ -12,21 +17,26 @@ Backwards incompatible changes:
  - dropped Python 2.6 compatibility; use 2.7 or 3.3+
 
 0.7.0
+-----
  - added {% render_contact_form %} template tag
  - Django 1.6 compatibility
  - settled on 3.3 as the minimum supported Python 3 version
  - moved to Travis CI as the continuous integration solution
 
 0.6.1
+-----
  - fixed NameError in example project
 
 0.6.0
+-----
  - Python 3 compatibility!
 
 0.5.1
+-----
  - fixed template loading in tests
 
 0.5.0
+-----
  - contact form class is more customizable
  - the Reply-To header in the message is set to whatever the submitted email was
  - added after_send signal
@@ -34,9 +44,11 @@ Backwards incompatible changes:
  - example_project is no longer incorrectly distributed with the application
 
 0.4.1
+-----
  - security bugfix regarding initial form values
 
 0.4.0
+-----
  - removed the function-based view
  - removed ContactForm.send() method
  - application signals (before_send)
@@ -45,39 +57,49 @@ Backwards incompatible changes:
  - Continous Integration server, thanks to ShiningPanda
 
 0.3.2
+-----
  - omit the brackets if the user doesn't have a full name
  - honeypot is mentioned in the usage docs
 
 0.3.1
+-----
  - configurable recipients
  - better logging hierarchy
  - the code is more PEP-8 compliant
 
 0.3.0
+-----
  - introduced a class-based envelope.views.ContactView (requires Django >= 1.3)
  - deprecated the function-based view envelope.views.contact
  - improved test coverage
  - more and better documentation (also hosted on Read The Docs)
 
 0.2.1
+-----
  - French translation added
 
 0.2.0
+-----
  - deprecated the ContactForm.send() method, use save() instead for more
    consistency with Django coding style
  - localization support
 
 0.1.4
+-----
  - added a more descriptive README file
 
 0.1.3
+-----
  - added the redirect_to optional argument to view function
 
 0.1.2
+-----
  - added the extra_context argument to view function
 
 0.1.1
+-----
  - improved setup script, added dependencies
 
 0.1.0
+-----
  - initial version

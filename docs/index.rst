@@ -27,6 +27,7 @@ Contents
    cookbook
    development
    reference
+   changes
 
 
 License
