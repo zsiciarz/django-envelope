@@ -34,7 +34,6 @@ class ContactViewTestCase(TestCase):
     """
     Unit tests for contact form view.
     """
-    urls = 'envelope.tests.urls'
 
     def setUp(self):
         self.url = reverse('envelope-contact')
