@@ -1,7 +1,11 @@
+import os
+
 try:
     import honeypot
 except ImportError:
     honeypot = None
+
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = 'thisisntactuallysecretatall'
 
@@ -26,6 +30,10 @@ DATABASES = {
         'NAME': ':memory:',
     }
 }
+
+TEMPLATE_DIRS = [
+    os.path.join(BASE_DIR, 'tests', 'templates'),
+]
 
 SITE_ID = 1
 
