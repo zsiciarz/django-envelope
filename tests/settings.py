@@ -31,6 +31,8 @@ SITE_ID = 1
 
 ROOT_URLCONF = 'tests.urls'
 
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+
 HONEYPOT_FIELD_NAME = 'email2'
 
 PASSWORD_HASHERS = {
