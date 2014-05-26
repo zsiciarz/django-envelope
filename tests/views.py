@@ -6,13 +6,10 @@ from __future__ import unicode_literals
 Unit tests for ``django-envelope`` views.
 """
 
-import os
-
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-from django.test.utils import override_settings
 from django.utils import unittest
 
 try:
@@ -23,13 +20,6 @@ except ImportError:
 from envelope import signals
 
 
-test_templates = (
-    os.path.join(os.path.dirname(__file__), 'templates'),
-    os.path.join(os.path.dirname(__file__), '../templates'),
-)
-
-
-@override_settings(TEMPLATE_DIRS=test_templates)
 class ContactViewTestCase(TestCase):
     """
     Unit tests for contact form view.
