@@ -36,14 +36,14 @@ To get the tests up and running, follow these commands::
     cd django-envelope
     python setup.py develop
     pip install -r requirements.txt
-    python runtests.py
+    make test
 
 .. note::
    First three steps can be simplified by using virtualenvwrapper_.
 
 To get a coverage report, replace the last command with::
 
-    coverage run runtests.py && coverage html
+    make coverage
 
 
 CI Server
