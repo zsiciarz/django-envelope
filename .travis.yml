@@ -9,6 +9,7 @@ install:
 script:
   - pwd
   - ls -la
+  - export PYTHONPATH=$PYTHONPATH:`pwd`
   - make coverage
 after_success:
   - coveralls
