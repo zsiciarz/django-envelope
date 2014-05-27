@@ -6,8 +6,6 @@ from __future__ import unicode_literals, print_function
 Unit tests for ``django-envelope`` views.
 """
 
-import os.path
-
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -148,8 +146,6 @@ class ContactViewTestCase(TestCase):
         """
         The view redirects to a custom success_url when the form is valid.
         """
-        print(settings.TEMPLATE_DIRS)
-        print([os.path.exists(os.path.join(t, 'contact.html')) for t in settings.TEMPLATE_DIRS])
         response = self.client.post(self.customized_url, self.form_data)
         self.assertRedirects(response, self.customized_url)
 
