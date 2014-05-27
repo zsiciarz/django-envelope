@@ -150,7 +150,6 @@ class ContactViewTestCase(TestCase):
         """
         print(settings.TEMPLATE_DIRS)
         print([os.path.exists(os.path.join(t, 'contact.html')) for t in settings.TEMPLATE_DIRS])
-        raise hell
         response = self.client.post(self.customized_url, self.form_data)
         self.assertRedirects(response, self.customized_url)
 
