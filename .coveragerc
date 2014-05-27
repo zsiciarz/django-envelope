@@ -5,5 +5,4 @@ omit =
     ../src/*
     ../lib/*
     */test*
-    runtests.py
     /home/travis/virtualenv/*
