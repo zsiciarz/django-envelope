@@ -16,7 +16,7 @@ setup(
     url='http://github.com/zsiciarz/django-envelope',
     download_url='http://pypi.python.org/pypi/django-envelope',
     license='MIT',
-    install_requires=['Django>=1.4'],
+    install_requires=['Django>=1.5'],
     packages=find_packages(exclude=['example_project', 'tests']),
     include_package_data=True,
     classifiers=[
