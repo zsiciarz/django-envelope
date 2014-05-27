@@ -17,7 +17,7 @@ setup(
     download_url='http://pypi.python.org/pypi/django-envelope',
     license='MIT',
     install_requires=['Django>=1.4'],
-    packages=find_packages(exclude=['example_project']),
+    packages=find_packages(exclude=['example_project', 'tests']),
     include_package_data=True,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
