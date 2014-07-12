@@ -4,8 +4,11 @@ Changelog
 
 1.0.0
 -----
+
+Improvements and fixes:
  - subject field is optional by default
  - support for `custom User model`_
+ - docs: added :doc:`cookbook`
 
 Backwards incompatible changes:
  - removed category field from :class:`~envelope.forms.ContactForm`
