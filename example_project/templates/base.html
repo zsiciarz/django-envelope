@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Contact me!</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="page-header">
+            <h1>Contact me! <small>(a <a href="http://django-envelope.readthedocs.org">django-envelope</a> example)</small></h1>
+        </header>
+        <ul class="nav nav-pills">
+            <li class="{% block default-active %}{% endblock %}"><a href="{% url 'envelope-contact' %}">Default</a></li>
+            <li class="{% block crispy-active %}{% endblock %}"><a href="{% url 'crispy-contact' %}">With crispy-forms</a></li>
+        </ul>
+        <div clas="row">
+            <div class="col-sm-9 col-sm-offset-3">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        <footer>
+            &copy; Copyright 2010-2014 <a href="http://siciarz.net">Zbigniew Siciarz</a>.
+        </footer>
+    </div>
+</body>
+</html>

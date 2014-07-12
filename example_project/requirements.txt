@@ -1,1 +1,2 @@
-django-honeypot
+django-honeypot>=0.4
+django-crispy-forms>=1.1

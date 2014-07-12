@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load envelope_tags %}
+{% load crispy_forms_tags %}
+
+{% block crispy-active %}active{% endblock %}
+
+{% block content %}
+    <form action="{% url 'crispy-contact' %}" method="post">
+        {% csrf_token %}
+        {% antispam_fields %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-lg btn-primary">Send!</button>
+    </form>
+{% endblock %}

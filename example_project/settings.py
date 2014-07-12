@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'envelope',
     'honeypot',
+    'crispy_forms',
 )
 
 HONEYPOT_FIELD_NAME = 'email2'
