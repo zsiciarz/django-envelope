@@ -4,26 +4,18 @@
 <head>
   <meta charset="utf-8" />
   <title>Contact me!</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 </head>
 
 <body>
-  <div>
-    <header>
-      <h1>Contact me!</h1>
-      <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-      </ul>
-    </header>
-    <div>
-        <section id="contact">
+    <div class="container">
+        <header class="page-header">
+            <h1>Contact me! <small>(a <a href="http://django-envelope.readthedocs.org">django-envelope</a> example)</small></h1>
+        </header>
         {% render_contact_form %}
-        </section>
+        <footer>
+            <div class="container">&copy; Copyright 2010-2014 Zbigniew Siciarz.</div>
+        </footer>
     </div>
-    <footer>
-     <p>&copy; Copyright 2010-2014 Zbigniew Siciarz.</p>
-    </footer>
-  </div>
 </body>
 </html>
