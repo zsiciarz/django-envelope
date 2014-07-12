@@ -3,19 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. include:: ../README.rst
 
-===============
-django-envelope
-===============
+Gittip
+------
 
-``django-envelope`` is a simple contact form app for Django web framework.
+Like this project? You can support it via `Gittip`_!
 
-The application provides a simple contact form and a Django view to handle
-form submission.
+.. _`Gittip`: https://www.gittip.com/zsiciarz
 
-
-Contents
-========
+Documentation
+-------------
 
 .. toctree::
    :maxdepth: 2
@@ -28,26 +26,6 @@ Contents
    development
    reference
    changes
-
-
-License
-=======
-django-envelope is free software, licensed under the MIT/X11 License. A copy of
-the license is provided with the application in the LICENSE file.
-
-
-Gittip
-======
-
-Like this project? You can support it via `Gittip`_!
-
-.. _`Gittip`: https://www.gittip.com/zsiciarz
-
-
-Author
-======
-
-`Zbigniew Siciarz <http://siciarz.net>`_
 
 
 Indices and tables
