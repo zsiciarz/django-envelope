@@ -29,6 +29,34 @@ The following example shows how to add the mixin to ``ContactView``::
 See the :ref:`customization section <subclassing-contact-view>` on how to plug
 the subclassed view into your URLconf.
 
+Bootstrap integration
+---------------------
+
+From our personal experience with `Bootstrap`_-powered websites, the easiest
+way to embed the contact form is to use `django-crispy-forms`_. Install it
+with::
+
+    pip install django-crispy-forms
+
+and add ``crispy_forms`` to ``INSTALLED_APPS``. From there it's as simple as
+adding a ``crispy`` template filter to the form. For example:
+
+.. code-block:: html+django
+
+    {% load envelope_tags crispy_forms_tags %}
+
+    ...
+
+    <form action="{% url 'envelope-contact' %}" method="post">
+        {% csrf_token %}
+        {% antispam_fields %}
+        {{ form|crispy }}
+        <button type="submit">Send!</button>
+    </form>
+
+.. _`Bootstrap`: http://getbootstrap.com/
+.. _`django-crispy-forms`: https://github.com/maraujop/django-crispy-forms
+
 Categorized contact form
 ------------------------
 
