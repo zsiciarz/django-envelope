@@ -10,7 +10,6 @@ import logging
 
 from django.http import HttpResponseBadRequest
 from django.shortcuts import redirect
-from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 
 from envelope import signals
@@ -100,8 +99,8 @@ class ContactView(FormView):
                                              form=form)
         for (receiver, response) in responses:
             if not response:
-                error_message = _("Rejected by %s") % receiver.__name__
-                return HttpResponseBadRequest(error_message)
+                logger.warning("Rejected by %s", receiver.__name__)
+                return HttpResponseBadRequest()
         form.save()
         return redirect(self.get_success_url())
 
