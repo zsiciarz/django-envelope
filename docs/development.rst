@@ -29,12 +29,11 @@ specified in the file ``requirements.txt``.
 
 To get the tests up and running, follow these commands::
 
-    virtualenv --no-site-packages envelope
+    virtualenv envelope
     cd envelope
     source bin/activate
     git clone https://github.com/zsiciarz/django-envelope.git
     cd django-envelope
-    python setup.py develop
     pip install -r requirements.txt
     make test
 
