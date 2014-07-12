@@ -13,6 +13,7 @@
         </header>
         <ul class="nav nav-pills">
             <li class="{% block default-active %}{% endblock %}"><a href="{% url 'envelope-contact' %}">Default</a></li>
+            <li class="{% block messages-active %}{% endblock %}"><a href="{% url 'messages-contact' %}">With messages</a></li>
             <li class="{% block crispy-active %}{% endblock %}"><a href="{% url 'crispy-contact' %}">With crispy-forms</a></li>
         </ul>
         <div clas="row">
