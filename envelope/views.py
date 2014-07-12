@@ -93,7 +93,7 @@ class ContactView(FormView):
 
     def form_valid(self, form):
         """
-        Sends the message and redirects the user somewhere.
+        Sends the message and redirects the user to ``success_url``.
         """
         responses = signals.before_send.send(sender=self.__class__,
                                              request=self.request,
