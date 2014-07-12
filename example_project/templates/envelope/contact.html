@@ -12,9 +12,13 @@
         <header class="page-header">
             <h1>Contact me! <small>(a <a href="http://django-envelope.readthedocs.org">django-envelope</a> example)</small></h1>
         </header>
-        {% render_contact_form %}
+        <div clas="row">
+            <div class="col-sm-9 col-sm-offset-3">
+                {% render_contact_form %}
+            </div>
+        </div>
         <footer>
-            <div class="container">&copy; Copyright 2010-2014 Zbigniew Siciarz.</div>
+            &copy; Copyright 2010-2014 <a href="http://siciarz.net">Zbigniew Siciarz</a>.
         </footer>
     </div>
 </body>
