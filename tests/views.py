@@ -140,7 +140,7 @@ class ContactViewTestCase(TestCase):
         You can change the default template used to render the form.
         """
         response = self.client.get(self.customized_url)
-        self.assertTemplateUsed(response, "contact.html")
+        self.assertTemplateUsed(response, "customized_contact.html")
 
     def test_custom_success_url(self):
         """
