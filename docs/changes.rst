@@ -21,6 +21,8 @@ Backwards incompatible changes:
  - dropped Python 2.6 compatibility; use 2.7 or 3.3+
  - message rejection reason from signal handlers isn't sent to the user in
    HTTP 400 response's body
+ - the default ``envelope/contact.html`` template is removed; one must create
+   the template explicitly
 
 .. _`custom User model`: https://docs.djangoproject.com/en/dev/topics/auth/customizing/#substituting-a-custom-user-model
 .. _`FormMessagesMixin`: http://django-braces.readthedocs.org/en/latest/form.html#formmessagesmixin
