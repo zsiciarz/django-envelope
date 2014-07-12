@@ -32,7 +32,7 @@ To get the tests up and running, follow these commands::
     virtualenv --no-site-packages envelope
     cd envelope
     source bin/activate
-    git clone git://github.com/zsiciarz/django-envelope.git
+    git clone https://github.com/zsiciarz/django-envelope.git
     cd django-envelope
     python setup.py develop
     pip install -r requirements.txt
