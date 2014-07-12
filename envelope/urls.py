@@ -4,7 +4,7 @@ try:
     # Django 1.6+
     from django.conf.urls import patterns, url
 except ImportError:  # pragma: no cover
-    # Django 1.4 and 1.5
+    # Django 1.5
     from django.conf.urls.defaults import patterns, url
 
 from envelope.views import ContactView
