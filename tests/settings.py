@@ -15,7 +15,6 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django_nose',
     'envelope',
@@ -43,8 +42,6 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_DIRS = [
     os.path.join(BASE_DIR, 'tests', 'templates'),
 ]
-
-SITE_ID = 1
 
 ROOT_URLCONF = 'tests.urls'
 
