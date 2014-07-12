@@ -6,10 +6,6 @@ Make sure you have Django installed. Then install the package from PyPI::
 
     pip install django-envelope
 
-or::
-
-    easy_install django-envelope
-
 If you like living on the edge, grab the development version from Github_::
 
     git clone git://github.com/zsiciarz/django-envelope.git
