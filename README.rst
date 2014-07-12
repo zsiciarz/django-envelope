@@ -22,12 +22,13 @@ django-envelope
 Basic usage
 -----------
 
-1. Add ``envelope`` to your ``INSTALLED_APPS``.
-2. Create a template ``envelope/contact.html`` that contains somewhere
+1. Install with ``pip install django-envelope``.
+2. Add ``envelope`` to your ``INSTALLED_APPS``.
+3. Create a template ``envelope/contact.html`` that contains somewhere
    a call to ``{% render_contact_form %}`` template tag. This tag can be
    imported by placing ``{% load envelope_tags %}`` at the top of your
    template.
-3. Hook the app's URLconf in your ``urls.py`` like this::
+4. Hook the app's URLconf in your ``urls.py`` like this::
 
     urlpatterns = patterns('',
         #...
