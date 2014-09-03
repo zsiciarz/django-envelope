@@ -1,7 +1,7 @@
 Django>=1.5
 Jinja2==2.7.3
 Pygments==1.6
-Sphinx==1.2.2
+Sphinx==1.2.3
 coverage==3.7.1
 django-honeypot==0.4.0
 django-nose==1.2
