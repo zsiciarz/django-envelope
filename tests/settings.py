@@ -1,3 +1,4 @@
+import logging
 import os
 
 try:
@@ -52,3 +53,4 @@ PASSWORD_HASHERS = {
     'django.contrib.auth.hashers.MD5PasswordHasher',
 }
 
+logging.getLogger('envelope').addHandler(logging.NullHandler())
