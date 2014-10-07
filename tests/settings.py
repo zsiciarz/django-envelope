@@ -16,7 +16,6 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django_nose',
     'envelope',
 )
 
@@ -53,4 +52,3 @@ PASSWORD_HASHERS = {
     'django.contrib.auth.hashers.MD5PasswordHasher',
 }
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
