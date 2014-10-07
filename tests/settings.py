@@ -1,6 +1,8 @@
 import logging
 import os
 
+import django
+
 try:
     import honeypot
 except ImportError:
@@ -52,5 +54,8 @@ HONEYPOT_FIELD_NAME = 'email2'
 PASSWORD_HASHERS = {
     'django.contrib.auth.hashers.MD5PasswordHasher',
 }
+
+if django.VERSION[:2] < (1, 6):
+    TEST_RUNNER = 'discover_runner.DiscoverRunner'
 
 logging.getLogger('envelope').addHandler(logging.NullHandler())
