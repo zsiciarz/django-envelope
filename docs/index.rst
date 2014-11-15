@@ -5,12 +5,12 @@
 
 .. include:: ../README.rst
 
-Gittip
-------
+Gratipay
+--------
 
-Like this project? You can support it via `Gittip`_!
+Like this project? You can support it via `Gratipay`_!
 
-.. _`Gittip`: https://www.gittip.com/zsiciarz
+.. _`Gratipay`: https://www.gratipay.com/zsiciarz
 
 Documentation
 -------------
