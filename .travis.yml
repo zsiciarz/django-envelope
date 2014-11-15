@@ -10,8 +10,12 @@ env:
   - TOXENV=py33-dj18
   - TOXENV=py34-dj17
   - TOXENV=py34-dj18
+  - TOXENV=coverage
 install:
   - pip install tox
+  - if [ "$TOXENV" = "coverage" ]; then pip install coveralls; fi
 script:
   - export PYTHONPATH=$PYTHONPATH:`pwd`
   - tox
+after_success:
+  - if [ "$TOXENV" = "coverage" ]; then coveralls; fi
