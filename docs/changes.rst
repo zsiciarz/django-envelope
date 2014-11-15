@@ -6,6 +6,7 @@ Changelog
 -----
 
 Improvements and fixes:
+ - HTML email support
  - subject field is optional by default
  - support for `custom User model`_
  - docs: added :doc:`cookbook`
