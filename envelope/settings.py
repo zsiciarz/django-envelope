@@ -17,3 +17,5 @@ EMAIL_RECIPIENTS = getattr(settings, 'ENVELOPE_EMAIL_RECIPIENTS',
 
 SUBJECT_INTRO = getattr(settings, 'ENVELOPE_SUBJECT_INTRO',
                         _("Message from contact form: "))
+
+USE_HTML_EMAIL = getattr(settings, 'ENVELOPE_USE_HTML_EMAIL', True)

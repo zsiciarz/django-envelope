@@ -21,3 +21,6 @@ These values defined in ``settings.py`` affect the application:
   followed by the actual subject entered in the form by website's user.
 
   Default value: *Message from contact form:*
+
+* ``ENVELOPE_USE_HTML_EMAIL``: Whether to send an HTML email along with the
+  plaintext one. Defaults to ``True``.

@@ -86,8 +86,9 @@ class ContactForm(forms.Form):
                     'Reply-To': self.cleaned_data['email']
                 }
             )
-            html_body = render_to_string(self.html_template_name, context)
-            message.attach_alternative(html_body, "text/html")
+            if settings.USE_HTML_EMAIL:
+                html_body = render_to_string(self.html_template_name, context)
+                message.attach_alternative(html_body, "text/html")
             message.send()
             after_send.send(sender=self.__class__, message=message, form=self)
             logger.info(_("Contact form submitted and sent (from: %s)") %
