@@ -1,4 +1,4 @@
-include CHANGES
+include APACHE_LICENSE
 include LICENSE
 include README.rst
 include MANIFEST.in
