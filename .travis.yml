@@ -1,13 +1,9 @@
 language: python
-python:
-  - "2.7"
-  - "3.3"
-  - "3.4"
+env:
+  - TOXENV=py27-dj17
+  - TOXENV=py33-dj17
+  - TOXENV=py34-dj17
 install:
-  - pip install -r requirements.txt
-  - pip install coveralls
+  - pip install tox
 script:
-  - export PYTHONPATH=$PYTHONPATH:`pwd`
-  - make coverage
-after_success:
-  - coveralls
+  - tox
