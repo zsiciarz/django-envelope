@@ -10,6 +10,14 @@ django-envelope
     :target: https://crate.io/packages/django-envelope/
     :alt: Number of PyPI downloads
 
+.. image:: https://pypip.in/py_versions/django-envelope/badge.svg
+    :target: https://pypi.python.org/pypi/django-envelope/
+    :alt: Supported Python versions
+
+.. image:: https://pypip.in/wheel/django-envelope/badge.svg
+    :target: https://pypi.python.org/pypi/django-envelope/
+    :alt: Wheel Status
+
 .. image:: https://travis-ci.org/zsiciarz/django-envelope.png?branch=develop
     :target: https://travis-ci.org/zsiciarz/django-envelope
 
