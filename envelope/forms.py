@@ -55,6 +55,7 @@ class ContactForm(forms.Form):
     from_email = settings.FROM_EMAIL
     email_recipients = settings.EMAIL_RECIPIENTS
     template_name = 'envelope/email_body.txt'
+    html_template_name = 'envelope/email_body.html'
 
     def __init__(self, *args, **kwargs):
         for kwarg in list(kwargs):
@@ -81,6 +82,8 @@ class ContactForm(forms.Form):
                     'Reply-To': self.cleaned_data['email']
                 }
             )
+            html_body = render_to_string(self.html_template_name, context)
+            message.attach_alternative(html_body, "text/html")
             message.send()
             after_send.send(sender=self.__class__, message=message, form=self)
             logger.info(_("Contact form submitted and sent (from: %s)") %
