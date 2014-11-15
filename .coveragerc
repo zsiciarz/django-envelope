@@ -5,4 +5,5 @@ omit =
     ../src/*
     ../lib/*
     */test*
+    */lib/python*
     /home/travis/virtualenv/*
