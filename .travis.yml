@@ -6,4 +6,5 @@ env:
 install:
   - pip install tox
 script:
+  - export PYTHONPATH=$PYTHONPATH:`pwd`
   - tox
