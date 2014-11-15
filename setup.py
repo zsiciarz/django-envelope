@@ -12,7 +12,7 @@ setup(
     description='A contact form app for Django',
     long_description=read('README.rst'),
     author='Zbigniew Siciarz',
-    author_email='antyqjon@gmail.com',
+    author_email='zbigniew@siciarz.net',
     url='http://github.com/zsiciarz/django-envelope',
     download_url='http://pypi.python.org/pypi/django-envelope',
     license='MIT',
