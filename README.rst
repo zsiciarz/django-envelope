@@ -57,3 +57,8 @@ License
 
 This work is released under the MIT license. A copy of the license is provided
 in the LICENSE file.
+
+The HTML template comes from
+`Open Source Template Project <https://github.com/sendwithus/templates>` by
+sendwithus.com, distributed under the Apache 2.0 license (see the APACHE_LICENSE
+file for the full text).
