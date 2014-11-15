@@ -87,6 +87,16 @@ class ContactFormTestCase(unittest.TestCase):
             args, kwargs = mock_message.call_args
             self.assertIn(self.form_data['subject'], kwargs['subject'])
 
+    def test_html_message_alternative_part(self):
+        """
+        A HTML message is attached by default.
+        """
+        form = ContactForm(self.form_data)
+        self.assertTrue(form.is_valid())
+        with patch('django.core.mail.EmailMultiAlternatives') as mock_message:
+            form.save()
+            self.assertTrue(mock_message.return_value.attach_alternative.called)
+
     def test_init_attr_override(self):
         """
         Attributes can be overridden on __init__()
