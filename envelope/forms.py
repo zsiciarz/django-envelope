@@ -72,7 +72,7 @@ class ContactForm(forms.Form):
         context = self.get_context()
         message_body = render_to_string(self.get_template_names(), context)
         try:
-            message = mail.EmailMessage(
+            message = mail.EmailMultiAlternatives(
                 subject=subject,
                 body=message_body,
                 from_email=from_email,

@@ -80,7 +80,7 @@ class ContactFormTestCase(unittest.TestCase):
         """
         form = ContactForm(self.form_data)
         self.assertTrue(form.is_valid())
-        with patch('django.core.mail.EmailMessage') as mock_message:
+        with patch('django.core.mail.EmailMultiAlternatives') as mock_message:
             mock_message.return_value.send.return_value = True
             result = form.save()
             self.assertTrue(result)
@@ -98,7 +98,7 @@ class ContactFormTestCase(unittest.TestCase):
         }
         form = ContactForm(self.form_data, **overrides)
         form.is_valid()
-        with patch('django.core.mail.EmailMessage') as mock_message:
+        with patch('django.core.mail.EmailMultiAlternatives') as mock_message:
             mock_message.return_value.send.return_value = True
             form.save()
             args, kwargs = mock_message.call_args
@@ -112,7 +112,7 @@ class ContactFormTestCase(unittest.TestCase):
         """
         form = ContactForm(self.form_data)
         self.assertTrue(form.is_valid())
-        with patch('django.core.mail.EmailMessage') as mock_message:
+        with patch('django.core.mail.EmailMultiAlternatives') as mock_message:
             mock_message.return_value.send.side_effect = SMTPException
             result = form.save()
             self.assertFalse(result)
