@@ -81,7 +81,9 @@ your form processing. Either set the following options as keyword arguments to
 
 * ``email_recipients``: List of email addresses to send the email to. Defaults to ``settings.ENVELOPE_EMAIL_RECIPIENTS``.
 
-* ``template_name``: Template used to render the email message. Defaults to ``envelope/email_body.txt``. You can use any of the form field names as template variables.
+* ``template_name``: Template used to render the plaintext email message. Defaults to ``envelope/email_body.txt``. You can use any of the form field names as template variables.
+
+* ``html_template_name``: Template used to render the HTML email message. Defaults to ``envelope/email_body.html``.
 
 Example of a custom form::
 
@@ -90,7 +92,8 @@ Example of a custom form::
 
     class MyContactForm(ContactForm):
         subject_intro = "URGENT: "
-        template_name = "contact_email.html"
+        template_name = "plaintext_email.txt"
+        html_template_name = "contact_email.html"
 
     # urls.py
     from django.conf.urls import patterns, url
