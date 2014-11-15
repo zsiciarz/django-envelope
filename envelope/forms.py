@@ -42,8 +42,12 @@ class ContactForm(forms.Form):
         ``settings.ENVELOPE_EMAIL_RECIPIENTS``.
 
     ``template_name``
-        Template used to render the email message. Defaults to
+        Template used to render the (plaintext) email message. Defaults to
         ``envelope/email_body.txt``.
+
+    ``html_template_name``
+        Template used to render the HTML email message. Defaults to
+        ``envelope/email_body.html``.
 
     """
     sender = forms.CharField(label=_("From"))
