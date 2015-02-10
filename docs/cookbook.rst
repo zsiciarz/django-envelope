@@ -3,7 +3,7 @@ Cookbook
 ========
 
 Success and error messages
---------------------------
+==========================
 
 Starting from release 1.0, :class:`envelope.views.ContactView` does not set any
 `messages`_ since these were customized by most users anyway. We encourage
@@ -23,14 +23,21 @@ The following example shows how to add the mixin to ``ContactView``::
 
 
     class MyContactView(FormMessagesMixin, ContactView):
-        form_invalid_message = _(u"There was en error in the contact form.")
         form_valid_message = _(u"Thank you for your message.")
+        form_invalid_message = _(u"There was en error in the contact form.")
 
 See the :ref:`customization section <subclassing-contact-view>` on how to plug
 the subclassed view into your URLconf.
 
+Check out `Django messages documentation`_ to make sure messages are enabled in your project.
+
+.. _`Django messages documentation`: https://docs.djangoproject.com/en/dev/ref/contrib/messages/#enabling-messages
+
 Bootstrap integration
----------------------
+=====================
+
+Embedding the contact form
+--------------------------
 
 From our personal experience with `Bootstrap`_-powered websites, the easiest
 way to embed the contact form is to use `django-crispy-forms`_. Install it
@@ -50,15 +57,93 @@ adding a ``crispy`` template filter to the form. For example:
     <form action="{% url 'envelope-contact' %}" method="post">
         {% csrf_token %}
         {% antispam_fields %}
-        {{ form|crispy }}
-        <button type="submit">Send!</button>
+        {{ crispy form }}
     </form>
 
 .. _`Bootstrap`: http://getbootstrap.com/
 .. _`django-crispy-forms`: https://github.com/maraujop/django-crispy-forms
 
+To add a submit button, create a custom form using ``django-crispy-forms`` helper:
+
+# forms.py
+    from envelope.forms import ContactForm
+    from crispy_forms.helper import FormHelper
+    from crispy_forms.layout import Submit
+
+
+    class MyContactForm(ContactForm):
+        def __init__(self, *args, **kwargs):
+            super(MyContactForm, self).__init__(*args, **kwargs)
+            self.helper = FormHelper()
+            self.helper.add_input(Submit('submit', 'Submit', css_class='btn-lg'))
+
+And finally link this form to your view:
+
+# views.py
+    from braces.views import FormMessagesMixin
+    from envelope.views import ContactView
+
+    from django.utils.translation import ugettext_lazy as _
+
+    from .forms import MyContactForm
+
+
+    class MyContactView(FormMessagesMixin, ContactView):
+        form_invalid_message = _(u"There was en error in the contact form.")
+        form_valid_message = _(u"Thank you for your message.")
+        form_class = MyContactForm
+
+or just use it in your urls.py if you directly reference :method:``envelope.views.ContactView.as_view`` :
+
+# urls.py
+    from django.conf.urls import patterns, url
+    from envelope.views import ContactView
+
+    from .forms import MyContactForm
+
+
+    urlpatterns = patterns('',
+        url(r'^contact/', ContactView.as_view(form_class=MyContactForm)),
+    )
+
+Displaying form messages nicely
+-------------------------------
+
+GETting the contact form page after POSTing it will give you access to either a success message (form_valid_message)
+or an error message (form_invalid_message) thanks to django-braces' :class:``FormMessagesMixin``. These messages use
+`Django messages tag level`_ so you can use the right Bootstrap class.
+
+.. _`Django messages tag level`: https://docs.djangoproject.com/en/dev/ref/contrib/messages/#message-tags
+
+We recommend you first override Django's default message tags as following:
+
+# settings.py
+    MESSAGE_TAGS = {
+        messages.DEBUG: 'debug',
+        messages.INFO: 'info',
+        messages.SUCCESS: 'success',
+        messages.WARNING: 'warning',
+        messages.ERROR: 'danger' # 'error' by default
+    }
+
+Then you can use `Django's tip`_ to display messages with Bootstrap CSS classes such as text-info or alert-warning:
+
+.. _`Django's tip`: https://docs.djangoproject.com/en/dev/ref/contrib/messages/#displaying-messages
+
+.. code-block:: html+django
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="text-{{ message.tags }}"{% endif %}>
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
 Categorized contact form
-------------------------
+========================
 
 Although the ``category`` field was removed from the default form class in
 1.0, you can bring it back to your form using the following subclass::
