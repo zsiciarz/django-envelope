@@ -24,7 +24,7 @@ The following example shows how to add the mixin to ``ContactView``::
 
     class MyContactView(FormMessagesMixin, ContactView):
         form_valid_message = _(u"Thank you for your message.")
-        form_invalid_message = _(u"There was en error in the contact form.")
+        form_invalid_message = _(u"There was an error in the contact form.")
 
 See the :ref:`customization section <subclassing-contact-view>` on how to plug
 the subclassed view into your URLconf.
@@ -46,7 +46,7 @@ with::
     pip install django-crispy-forms
 
 and add ``crispy_forms`` to ``INSTALLED_APPS``. From there it's as simple as
-adding a ``crispy`` template filter to the form. For example:
+adding a ``crispy`` template tag to display the form. For example:
 
 .. code-block:: html+django
 
@@ -63,9 +63,9 @@ adding a ``crispy`` template filter to the form. For example:
 .. _`Bootstrap`: http://getbootstrap.com/
 .. _`django-crispy-forms`: https://github.com/maraujop/django-crispy-forms
 
-To add a submit button, create a custom form using ``django-crispy-forms`` helper:
+To add a submit button, create a custom form using ``django-crispy-forms`` helper::
 
-# forms.py
+    # forms.py
     from envelope.forms import ContactForm
     from crispy_forms.helper import FormHelper
     from crispy_forms.layout import Submit
@@ -77,9 +77,9 @@ To add a submit button, create a custom form using ``django-crispy-forms`` helpe
             self.helper = FormHelper()
             self.helper.add_input(Submit('submit', 'Submit', css_class='btn-lg'))
 
-And finally link this form to your view:
+And finally link this form to your view::
 
-# views.py
+    # views.py
     from braces.views import FormMessagesMixin
     from envelope.views import ContactView
 
@@ -93,9 +93,9 @@ And finally link this form to your view:
         form_valid_message = _(u"Thank you for your message.")
         form_class = MyContactForm
 
-or just use it in your urls.py if you directly reference :method:``envelope.views.ContactView.as_view`` :
+or just use it in your urls.py if you directly reference :method:``envelope.views.ContactView.as_view`` ::
 
-# urls.py
+    # urls.py
     from django.conf.urls import patterns, url
     from envelope.views import ContactView
 
@@ -110,14 +110,14 @@ Displaying form messages nicely
 -------------------------------
 
 GETting the contact form page after POSTing it will give you access to either a success message (form_valid_message)
-or an error message (form_invalid_message) thanks to django-braces' :class:``FormMessagesMixin``. These messages use
+or an error message (form_invalid_message) thanks to django-braces' ``FormMessagesMixin``. These messages use
 `Django messages tag level`_ so you can use the right Bootstrap class.
 
 .. _`Django messages tag level`: https://docs.djangoproject.com/en/dev/ref/contrib/messages/#message-tags
 
-We recommend you first override Django's default message tags as following:
+We recommend you first override Django's default message tags as following::
 
-# settings.py
+    # settings.py
     MESSAGE_TAGS = {
         messages.DEBUG: 'debug',
         messages.INFO: 'info',
