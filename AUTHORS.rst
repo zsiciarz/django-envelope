@@ -17,3 +17,4 @@ Contributors
 * Vitaly Babiy
 * Jacek Tomaszewski
 * Anders Petersson
+* Quentin Caron
