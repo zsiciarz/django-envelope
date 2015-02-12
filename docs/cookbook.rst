@@ -57,7 +57,7 @@ adding a ``crispy`` template tag to display the form. For example:
     <form action="{% url 'envelope-contact' %}" method="post">
         {% csrf_token %}
         {% antispam_fields %}
-        {{ crispy form }}
+        {% crispy form %}
     </form>
 
 .. _`Bootstrap`: http://getbootstrap.com/
@@ -89,11 +89,11 @@ And finally link this form to your view::
 
 
     class MyContactView(FormMessagesMixin, ContactView):
-        form_invalid_message = _(u"There was en error in the contact form.")
+        form_invalid_message = _(u"There was an error in the contact form.")
         form_valid_message = _(u"Thank you for your message.")
         form_class = MyContactForm
 
-or just use it in your urls.py if you directly reference :method:``envelope.views.ContactView.as_view`` ::
+or just use it in your urls.py if you directly reference :class:`~envelope.views.ContactView` ``as_view()`` method::
 
     # urls.py
     from django.conf.urls import patterns, url
