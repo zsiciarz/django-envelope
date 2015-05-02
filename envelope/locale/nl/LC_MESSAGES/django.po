@@ -1,0 +1,72 @@
+# Dutch translation for django-envelope.
+# Copyright (C) 2015 Antti Kaihola (original author) and contributors
+# This file is distributed under the same license as the PACKAGE package.
+# Jan Pieter Waagmeester <jieter@jieter.nl>, 2015.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: django-envelope 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-30 22:56+0200\n"
+"PO-Revision-Date: 2O15-04-30 22:56+0200\n"
+"Last-Translator: Jan Pieter Waagmeester <jieter@jieter.nl>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: envelope/forms.py:53
+msgid "From"
+msgstr "Afzender"
+
+#: envelope/forms.py:54
+msgid "Email"
+msgstr "Email"
+
+#: envelope/forms.py:55
+msgid "Subject"
+msgstr "Onderwerp"
+
+#: envelope/forms.py:56
+msgid "Message"
+msgstr "Bericht"
+
+#: envelope/forms.py:94
+#, python-format
+msgid "Contact form submitted and sent (from: %s)"
+msgstr "Contactformulier ingediend en verzonden (van: %s)"
+
+#: envelope/forms.py:97
+msgid "An error occured while sending the email"
+msgstr "Er ging iets mis tijdens het verzenden van de email"
+
+#: envelope/settings.py:19
+msgid "Message from contact form: "
+msgstr "Bericht van het contactformulier: "
+
+#: envelope/templates/envelope/contact_form.html:14
+msgid "Send!"
+msgstr "Verzenden!"
+
+#: envelope/templates/envelope/email_body.html:6
+#: envelope/templates/envelope/email_body.html:34
+#: envelope/templates/envelope/email_body.txt:2
+msgid "Message from the contact form"
+msgstr "Bericht van het contactformulier"
+
+#: envelope/templates/envelope/email_body.html:78
+#: envelope/templates/envelope/email_body.txt:3
+msgid "Sender"
+msgstr "Afzender"
+
+#: envelope/templates/envelope/email_body.html:103
+#: envelope/templates/envelope/email_body.txt:10
+msgid "message sent with envelope - a contact form app for Django"
+msgstr "bericht verzonden met envelope - een contactformulier-app voor Django"
+
+#: envelope/templates/envelope/email_body.txt:4
+msgid "The message follows."
+msgstr "Het bericht volgt."
