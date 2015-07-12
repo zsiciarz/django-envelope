@@ -2,19 +2,19 @@
 django-envelope
 ===============
 
-.. image:: https://pypip.in/v/django-envelope/badge.png
-    :target: https://crate.io/packages/django-envelope/
+.. image:: https://img.shields.io/pypi/v/django-envelope.svg
+    :target: https://pypi.python.org/pypi/django-envelope/
     :alt: Latest PyPI version
 
-.. image:: https://pypip.in/d/django-envelope/badge.png
-    :target: https://crate.io/packages/django-envelope/
+.. image:: https://img.shields.io/pypi/dm/django-envelope.svg
+    :target: https://pypi.python.org/pypi/django-envelope/
     :alt: Number of PyPI downloads
 
-.. image:: https://pypip.in/py_versions/django-envelope/badge.svg
+.. image:: https://img.shields.io/pypi/pyversions/django-envelope.svg
     :target: https://pypi.python.org/pypi/django-envelope/
     :alt: Supported Python versions
 
-.. image:: https://pypip.in/wheel/django-envelope/badge.svg
+.. image:: https://img.shields.io/pypi/wheel/django-envelope.svg
     :target: https://pypi.python.org/pypi/django-envelope/
     :alt: Wheel Status
 
