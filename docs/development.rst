@@ -27,6 +27,11 @@ Running tests
 All dependencies required for running tests are specified in the file
 ``test_requirements.txt``.
 
+.. note::
+   If you get errors such as `ImportError: No module named mock` while
+   running tests, you're probably on Python 2 (Python 3 has `mock` in
+   standard library). To fix that, run `pip install mock`.
+
 To get the tests up and running, follow these commands::
 
     virtualenv envelope
