@@ -2,6 +2,13 @@
 Changelog
 =========
 
+1.1.0
+-----
+
+ - added Brazilian Portuguese translation, thanks aleprovencio!
+ - Python 3.5 and Django 1.9 compatibility
+
+
 1.0.0
 -----
 
