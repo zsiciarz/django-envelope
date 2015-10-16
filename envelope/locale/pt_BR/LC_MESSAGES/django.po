@@ -1,0 +1,69 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Alexandre Provencio <alexandreprovencio@gmail.com>, 2015.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: django-envelope==1.0 \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-08 16:25-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Alexandre Provencio <alexandreprovencio@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: forms.py:53
+msgid "From"
+msgstr "De"
+
+#: forms.py:54
+msgid "Email"
+msgstr "Email"
+
+#: forms.py:55
+msgid "Subject"
+msgstr "Assunto"
+
+#: forms.py:56
+msgid "Message"
+msgstr "Mensagem"
+
+#: forms.py:94
+#, python-format
+msgid "Contact form submitted and sent (from: %s)"
+msgstr "Formulário de contato submetido e enviado (de: %s)"
+
+#: forms.py:97
+msgid "An error occured while sending the email"
+msgstr "Um erro ocorreu ao enviar o email"
+
+#: settings.py:19
+msgid "Message from contact form: "
+msgstr "Mensagem do formulário de contato: "
+
+#: templates/envelope/contact_form.html:14
+msgid "Send!"
+msgstr "Enviar!"
+
+#: templates/envelope/email_body.html:6 templates/envelope/email_body.html:34
+#: templates/envelope/email_body.txt:2
+msgid "Message from the contact form"
+msgstr "Mensagem do formulário de contato"
+
+#: templates/envelope/email_body.html:78 templates/envelope/email_body.txt:3
+msgid "Sender"
+msgstr "Remetente"
+
+#: templates/envelope/email_body.html:103 templates/envelope/email_body.txt:10
+msgid "message sent with envelope - a contact form app for Django"
+msgstr "mensagem enviada com envelope - uma app de formulário de contato para Django"
+
+#: templates/envelope/email_body.txt:4
+msgid "The message follows."
+msgstr "A mensagem segue."
