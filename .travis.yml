@@ -1,5 +1,7 @@
 sudo: false
 language: python
+python:
+    - "3.5"
 env:
   - TOXENV=py27-dj15
   - TOXENV=py27-dj16
