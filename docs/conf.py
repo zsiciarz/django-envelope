@@ -51,7 +51,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'django-envelope'
-copyright = u'2011-2015, Zbigniew Siciarz'
+copyright = u'2011-2016, Zbigniew Siciarz'
 
 intersphinx_mapping = {
     'django': ('https://docs.djangoproject.com/en/dev/', 'http://docs.djangoproject.com/en/dev/_objects/')
