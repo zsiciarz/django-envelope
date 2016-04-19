@@ -29,7 +29,7 @@ msgstr "E-mail"
 
 #: forms.py:55
 msgid "Subject"
-msgstr "Предмет"
+msgstr "Тема"
 
 #: forms.py:56
 msgid "Message"
