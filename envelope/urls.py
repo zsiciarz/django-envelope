@@ -10,6 +10,6 @@ except ImportError:  # pragma: no cover
 from envelope.views import ContactView
 
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^$', ContactView.as_view(), name='envelope-contact'),
-)
+]
