@@ -1,12 +1,6 @@
 from __future__ import unicode_literals
 
-try:
-    # Django 1.6+
-    from django.conf.urls import patterns, include, url
-except ImportError:
-    # Django 1.5
-    from django.conf.urls.defaults import patterns, include, url
-
+from django.conf.urls import include, url
 
 from braces.views import FormMessagesMixin
 
@@ -19,8 +13,8 @@ class MessagesContactView(FormMessagesMixin, ContactView):
     template_name = "envelope/messages_contact.html"
 
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'', include('envelope.urls')),
     url(r'^crispy/', ContactView.as_view(template_name='envelope/crispy_contact.html'), name='crispy-contact'),
     url(r'^messages/', MessagesContactView.as_view(), name='messages-contact'),
-)
+]
