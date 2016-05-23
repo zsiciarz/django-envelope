@@ -3,16 +3,8 @@ language: python
 python:
     - "3.5"
 env:
-  - TOXENV=py27-dj15
-  - TOXENV=py27-dj16
-  - TOXENV=py27-dj17
   - TOXENV=py27-dj18
   - TOXENV=py27-dj19
-  - TOXENV=py33-dj15
-  - TOXENV=py33-dj16
-  - TOXENV=py33-dj17
-  - TOXENV=py33-dj18
-  - TOXENV=py34-dj17
   - TOXENV=py34-dj18
   - TOXENV=py34-dj19
   - TOXENV=py35-dj19
