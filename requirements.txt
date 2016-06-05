@@ -1,2 +1,2 @@
-Django>=1.5
+Django>=1.8
 django-honeypot==0.5.0
