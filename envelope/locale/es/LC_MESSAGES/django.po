@@ -24,7 +24,7 @@ msgstr "De"
 
 #: forms.py:54
 msgid "Email"
-msgstr "E-mail"
+msgstr "Correo electrónico"
 
 #: forms.py:55
 msgid "Subject"
