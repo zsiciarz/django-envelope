@@ -2,6 +2,12 @@
 Changelog
 =========
 
+1.2.0
+-----
+
+ - added Latvian and Russian translations, thanks wildd!
+ - added Spanish translations, thanks javipalanca!
+
 1.1.0
 -----
 
