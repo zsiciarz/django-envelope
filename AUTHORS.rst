@@ -19,4 +19,5 @@ Contributors
 * Jacek Tomaszewski
 * Anders Petersson
 * Quentin Caron
+* Kristaps K
 * Javi Palanca
