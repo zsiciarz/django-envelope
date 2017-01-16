@@ -19,3 +19,4 @@ Contributors
 * Jacek Tomaszewski
 * Anders Petersson
 * Quentin Caron
+* Javi Palanca
