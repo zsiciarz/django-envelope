@@ -44,7 +44,7 @@ msgstr "Υπήρξε λάθος κατά την αποστολή του email"
 
 #: envelope/settings.py:19
 msgid "Message from contact form: "
-msgstr "Μήνυμα από τη Φόρμα Επικοινωνίας"
+msgstr "Μήνυμα από τη Φόρμα Επικοινωνίας: "
 
 #: envelope/templates/envelope/contact_form.html:14
 msgid "Send!"
