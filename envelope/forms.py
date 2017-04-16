@@ -62,7 +62,7 @@ class ContactForm(forms.Form):
     html_template_name = 'envelope/email_body.html'
 
     def __init__(self, *args, **kwargs):
-        for kwarg in list(kwargs):
+        for kwarg in kwargs:
             if hasattr(self, kwarg):
                 setattr(self, kwarg, kwargs.pop(kwarg))
         super(ContactForm, self).__init__(*args, **kwargs)
