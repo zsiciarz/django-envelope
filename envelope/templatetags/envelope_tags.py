@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+from django.utils.safestring import mark_safe
 
 """
 Template tags related to the contact form.
@@ -44,4 +45,4 @@ def antispam_fields():
     if honeypot:
         t = template.Template('{% load honeypot %}{% render_honeypot_field %}')
         content += t.render(template.Context({}))
-    return content
+    return mark_safe(content)
