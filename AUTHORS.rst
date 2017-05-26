@@ -21,3 +21,4 @@ Contributors
 * Quentin Caron
 * Kristaps K
 * Javi Palanca
+* George Tantiras
