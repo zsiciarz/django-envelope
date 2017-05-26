@@ -2,6 +2,12 @@
 Changelog
 =========
 
+1.3.0
+-----
+
+ - added Greek translation, thanks raratiru!
+ - Python 3.6 and Django 1.11 compatibility
+
 1.2.0
 -----
 
