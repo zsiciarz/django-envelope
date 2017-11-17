@@ -73,7 +73,7 @@ class ContactView(FormView):
         """
         initial = super(ContactView, self).get_initial().copy()
         user = self.request.user
-        if user.is_authenticated():
+        if user.is_authenticated:
             # the user might not have a full name set in the model
             if user.get_full_name():
                 sender = '%s (%s)' % (user.get_username(), user.get_full_name())
