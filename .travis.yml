@@ -4,15 +4,10 @@ python:
     - "3.5"
     - "3.6"
 env:
-  - TOXENV=py27-dj18
-  - TOXENV=py27-dj19
   - TOXENV=py27-dj110
   - TOXENV=py27-dj111
-  - TOXENV=py34-dj18
-  - TOXENV=py34-dj19
   - TOXENV=py34-dj110
   - TOXENV=py34-dj111
-  - TOXENV=py35-dj19
   - TOXENV=py35-dj110
   - TOXENV=py35-dj111
   - TOXENV=py36-dj111
@@ -22,23 +17,13 @@ matrix:
     - python: "3.5"
       env: TOXENV=py36-dj111
     - python: "3.6"
-      env: TOXENV=py27-dj18
-    - python: "3.6"
-      env: TOXENV=py27-dj19
-    - python: "3.6"
       env: TOXENV=py27-dj110
     - python: "3.6"
       env: TOXENV=py27-dj111
     - python: "3.6"
-      env: TOXENV=py34-dj18
-    - python: "3.6"
-      env: TOXENV=py34-dj19
-    - python: "3.6"
       env: TOXENV=py34-dj110
     - python: "3.6"
       env: TOXENV=py34-dj111
-    - python: "3.6"
-      env: TOXENV=py35-dj19
     - python: "3.6"
       env: TOXENV=py35-dj110
     - python: "3.6"
