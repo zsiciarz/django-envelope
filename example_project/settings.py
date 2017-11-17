@@ -33,9 +33,8 @@ USE_L10N = True
 
 SECRET_KEY = 'n5)bgcx7xwk^fhnv+w&qaap)lryz8in*a293=!d=*!%js7^mdr'
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
