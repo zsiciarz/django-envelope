@@ -2,6 +2,11 @@
 Changelog
 =========
 
+trunk
+-----
+
+ - Django 1.10 compatibility (Django 2.0 depreciation)
+
 1.3.0
 -----
 
