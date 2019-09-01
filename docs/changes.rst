@@ -5,7 +5,7 @@ Changelog
 trunk
 -----
 
- - Django 2.0 compatibility
+ - Django 2.1 compatibility
 
 1.3.0
 -----
