@@ -45,12 +45,12 @@ msgstr "Message"
 
 #: .\forms.py:43
 msgid "Message from contact form: "
-msgstr "Message du formulaire de contact"
+msgstr "Message du formulaire de contact : "
 
 #: .\forms.py:51
 #, python-format
 msgid "Contact form submitted and sent (from: %s)"
-msgstr "Formulaire de contact sumis et envoyé (de %s)"
+msgstr "Formulaire de contact soumis et envoyé (de %s)"
 
 #: .\forms.py:53
 #, python-format
@@ -59,7 +59,8 @@ msgstr "Message d'erreur du formulaire (%s)"
 
 #: .\forms.py:62
 msgid "ContactForm.send() is deprecated, use save() instead"
-msgstr "ContactForm.send())est obsolète, utilisez sauvegarde plutôt "
+msgstr "ContactForm.send() est obsolète, utilisez plutôt save()"
+
 
 #: .\forms.py:88
 msgid "Category"
@@ -67,11 +68,11 @@ msgstr "Catégorie"
 
 #: .\views.py:54
 msgid "Thank you for your message."
-msgstr "Merci pour votre message"
+msgstr "Merci pour votre message."
 
 #: .\views.py:59
 msgid "There was en error in the contact form."
-msgstr "Il y avait une erreur dans le formulaire de contact"
+msgstr "Il y a une erreur dans le formulaire de contact."
 
 #: .\templates\envelope\contact.html.py:7
 msgid "Contact"
@@ -79,5 +80,4 @@ msgstr "Contact"
 
 #: .\templates\envelope\contact.html.py:18
 msgid "Send!"
-msgstr "Envoyez!"
-
+msgstr "Envoyer !"
