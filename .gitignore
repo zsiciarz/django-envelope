@@ -3,6 +3,7 @@
 *.pyc
 .project
 .pydevproject
+.idea/
 .settings
 dist/
 build/
