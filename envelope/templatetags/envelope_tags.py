@@ -1,20 +1,24 @@
 # -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
 """
 Template tags related to the contact form.
 """
 
+from __future__ import unicode_literals
+
 from django import template
+
+register = template.Library()
 
 try:
     import honeypot
+
+    # Register antispam_fields as an inclusion tag
+    t = template.Template('{% load honeypot %}{% render_honeypot_field %}')
+    register.inclusion_tag(t, name='antispam_fields')(lambda: {})
+
 except ImportError:  # pragma: no cover
-    honeypot = None
-
-
-register = template.Library()
+    # Register antispam_fields as an empty tag
+    register.simple_tag(name='antispam_fields')(lambda: '')
 
 
 @register.inclusion_tag('envelope/contact_form.html', takes_context=True)
@@ -33,15 +37,3 @@ def render_contact_form(context):
     return {
         'form': form,
     }
-
-
-@register.simple_tag
-def antispam_fields():
-    """
-    Returns the HTML for any spam filters available.
-    """
-    content = ''
-    if honeypot:
-        t = template.Template('{% load honeypot %}{% render_honeypot_field %}')
-        content += t.render(template.Context({}))
-    return content
