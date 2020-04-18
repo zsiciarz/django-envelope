@@ -1,58 +1,46 @@
-sudo: false
 language: python
-python:
-    - "3.5"
-    - "3.6"
-env:
-  - TOXENV=py27-dj18
-  - TOXENV=py27-dj19
-  - TOXENV=py27-dj110
-  - TOXENV=py27-dj111
-  - TOXENV=py34-dj18
-  - TOXENV=py34-dj19
-  - TOXENV=py34-dj110
-  - TOXENV=py34-dj111
-  - TOXENV=py34-dj20
-  - TOXENV=py35-dj19
-  - TOXENV=py35-dj110
-  - TOXENV=py35-dj111
-  - TOXENV=py35-dj20
-  - TOXENV=py36-dj111
-  - TOXENV=py36-dj20
-  - TOXENV=coverage
+
 matrix:
-  exclude:
-    - python: "3.5"
-      env: TOXENV=py36-dj111
-    - python: "3.6"
-      env: TOXENV=py27-dj18
-    - python: "3.6"
-      env: TOXENV=py27-dj19
-    - python: "3.6"
-      env: TOXENV=py27-dj110
-    - python: "3.6"
-      env: TOXENV=py27-dj111
-    - python: "3.6"
-      env: TOXENV=py34-dj18
-    - python: "3.6"
-      env: TOXENV=py34-dj19
-    - python: "3.6"
-      env: TOXENV=py34-dj110
-    - python: "3.6"
-      env: TOXENV=py34-dj111
-    - python: "3.6"
-      env: TOXENV=py35-dj19
-    - python: "3.6"
-      env: TOXENV=py35-dj110
-    - python: "3.6"
-      env: TOXENV=py35-dj111
-    - python: "3.6"
-      env: TOXENV=coverage
+  fast_finish: true
+  allow_failures:
+    - env: DJANGO=master
+  include:
+    - python: 2.7
+      env: DJANGO=1.11
+
+    - python: 3.5
+      env: DJANGO=1.11
+    - python: 3.5
+      env: DJANGO=2.2
+
+    - python: 3.6
+      env: DJANGO=1.11
+    - python: 3.6
+      env: DJANGO=2.2
+    - python: 3.6
+      env: DJANGO=3.0
+    - python: 3.6
+      env: DJANGO=master
+
+    - python: 3.7
+      env: DJANGO=2.2
+    - python: 3.7
+      env: DJANGO=3.0
+    - python: 3.7
+      env: DJANGO=master
+
+
+    - python: 3.8
+      env: DJANGO=2.2
+    - python: 3.8
+      env: DJANGO=3.0
+    - python: 3.8
+      env: DJANGO=master
+
 install:
-  - pip install tox
-  - if [ "$TOXENV" = "coverage" ]; then pip install coveralls; fi
+  - pip install tox tox-travis
 script:
-  - export PYTHONPATH=$PYTHONPATH:`pwd`
   - tox
 after_success:
-  - if [ "$TOXENV" = "coverage" ]; then coveralls; fi
+  - pip install coveralls
+  - coveralls
