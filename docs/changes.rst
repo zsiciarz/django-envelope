@@ -2,10 +2,11 @@
 Changelog
 =========
 
-trunk
+1.4.0
 -----
 
- - Django 2.1, 2.2 compatibility
+ - fixed french translation
+ - Python 3.7, 3.8 and Django 2.2, 3.0 compatibility
 
 1.3.0
 -----

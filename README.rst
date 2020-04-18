@@ -57,7 +57,8 @@ Resources
 Authors
 -------
 
-django-envelope is maintained by `Zbigniew Siciarz <http://siciarz.net>`_.
+django-envelope was created by `Zbigniew Siciarz <http://siciarz.net>`_ and is
+now maintained by `SebCorbin <https://github.com/SebCorbin>`_.
 See AUTHORS.rst for a full list of contributors.
 
 License

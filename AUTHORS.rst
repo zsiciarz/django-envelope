@@ -1,10 +1,15 @@
 AUTHORS
 =======
 
-Project Lead
-------------
+Project created by
+------------------
 
 * Zbigniew Siciarz (zbigniew at siciarz dot net)
+
+Project maintained by
+---------------------
+
+* SebCorbin
 
 Contributors
 ------------
@@ -22,3 +27,4 @@ Contributors
 * Kristaps K
 * Javi Palanca
 * George Tantiras
+* Richard Barran

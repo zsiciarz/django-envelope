@@ -1,2 +1,1 @@
 Django>=1.11
-django-honeypot==0.7
