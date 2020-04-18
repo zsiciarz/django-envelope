@@ -59,7 +59,8 @@ msgstr "Message d'erreur du formulaire (%s)"
 
 #: .\forms.py:62
 msgid "ContactForm.send() is deprecated, use save() instead"
-msgstr "ContactForm.send()) est obsolète, utilisez plutôt save()"
+msgstr "ContactForm.send() est obsolète, utilisez plutôt save()"
+
 
 #: .\forms.py:88
 msgid "Category"
@@ -80,4 +81,3 @@ msgstr "Contact"
 #: .\templates\envelope\contact.html.py:18
 msgid "Send!"
 msgstr "Envoyer !"
-
