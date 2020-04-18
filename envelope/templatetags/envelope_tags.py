@@ -30,10 +30,8 @@ def render_contact_form(context):
     template rendered by :class:`~envelope.views.ContactView`. The template
     tag will then render a sub-template ``envelope/contact_form.html``.
     """
-    try:
-        form = context['form']
-    except KeyError:
-        raise template.TemplateSyntaxError("There is no 'form' variable in the template context.")
-    return {
-        'form': form,
-    }
+    if 'form' not in context:
+        raise template.TemplateSyntaxError(
+            "There is no 'form' variable in the template context."
+        )
+    return context
