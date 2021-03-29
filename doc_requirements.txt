@@ -1,5 +1,5 @@
 -r requirements.txt
 Jinja2==2.9.5
-Pygments==2.2.0
+Pygments==2.7.4
 Sphinx==1.5.2
 docutils==0.13.1
