@@ -18,11 +18,12 @@ django-envelope
     :target: https://pypi.python.org/pypi/django-envelope/
     :alt: Wheel Status
 
-.. image:: https://travis-ci.org/zsiciarz/django-envelope.png?branch=develop
-    :target: https://travis-ci.org/zsiciarz/django-envelope
+.. image:: https://github.com/richardbarran/django-envelope/workflows/CI/badge.svg?branch=github-actions
+     :target: https://github.com/richardbarran/django-envelope/actions?workflow=CI
+     :alt: CI Status
 
-.. image:: https://coveralls.io/repos/zsiciarz/django-envelope/badge.png
-    :target: https://coveralls.io/r/zsiciarz/django-envelope
+.. image:: https://codecov.io/gh/richardbarran/django-envelope/branch/github-actions/graph/badge.svg?token=wRYvRp4xQL
+    :target: https://codecov.io/gh/richardbarran/django-envelope
 
 
 ``django-envelope`` is a simple contact form app for Django web framework.
@@ -52,7 +53,6 @@ Resources
 
  * `Documentation <http://django-envelope.rtfd.org>`_
  * `Issue tracker <https://github.com/zsiciarz/django-envelope/issues>`_
- * `CI server <https://travis-ci.org/zsiciarz/django-envelope>`_
 
 Authors
 -------
